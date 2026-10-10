@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-// Backend API URL
-const API_URL = "http://localhost:5000/api/contact";
+// Use the CRA proxy in development (see package.json "proxy")
+const API_URL = "/api/contact";
+const INBOX_EMAIL = "prathampanchal1515@gmail.com";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -25,25 +26,48 @@ function Contact() {
     setError("");
 
     try {
-      const response = await fetch(API_URL, {
+      const mailResponse = await fetch(
+        `https://formsubmit.co/ajax/${INBOX_EMAIL}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            _replyto: formData.email,
+            _subject: `New portfolio message from ${formData.name}: ${formData.subject}`,
+            _captcha: "false",
+            _template: "box",
+          }),
+        }
+      );
+
+      const mailData = await mailResponse.json().catch(() => ({}));
+      const mailOk = mailResponse.ok && String(mailData.success) !== "false";
+
+      fetch(API_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      });
+      }).catch(() => {});
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (mailOk) {
         setSubmitted(true);
       } else {
-        setError(data.error || "Failed to send message. Please try again.");
+        setError(
+          mailData.message ||
+            "Could not send email. If this is your first submission, please check prathampanchal1515@gmail.com (including Spam/Junk) to activate FormSubmit."
+        );
       }
     } catch (err) {
       console.error("Error sending message:", err);
       setError(
-        "Failed to send message. Please try again later or contact directly at pratham.panchal0626@gmail.com"
+        "Failed to send message. Please check your network connection or email directly at prathampanchal1515@gmail.com"
       );
     } finally {
       setLoading(false);
@@ -62,7 +86,7 @@ function Contact() {
       <div className="contact-wrapper">
         {/* Left: Info */}
         <div className="contact-info">
-          <h3>Let's talk about your project 🚀</h3>
+          <h3>Let's talk about your project</h3>
           <p>
             I'm currently available for freelance work and open to full-time
             opportunities. Feel free to reach out — I'd love to hear from you!
@@ -70,30 +94,30 @@ function Contact() {
 
           <div className="contact-details">
             <div className="contact-item">
-              <div className="contact-item-icon">📧</div>
+              <div className="contact-item-icon">@</div>
               <div>
-                <strong style={{ color: "#f1f5f9", display: "block", marginBottom: "2px" }}>Email</strong>
-                pratham@email.com
+                <strong>Email</strong>
+                prathampanchal1515@gmail.com
               </div>
             </div>
             <div className="contact-item">
-              <div className="contact-item-icon">📱</div>
+              <div className="contact-item-icon">#</div>
               <div>
-                <strong style={{ color: "#f1f5f9", display: "block", marginBottom: "2px" }}>Phone</strong>
-                +91 XXXXX XXXXX
+                <strong>Phone</strong>
+                +91 9638561264
               </div>
             </div>
             <div className="contact-item">
-              <div className="contact-item-icon">📍</div>
+              <div className="contact-item-icon">◌</div>
               <div>
-                <strong style={{ color: "#f1f5f9", display: "block", marginBottom: "2px" }}>Location</strong>
+                <strong>Location</strong>
                 India
               </div>
             </div>
             <div className="contact-item">
-              <div className="contact-item-icon">⏰</div>
+              <div className="contact-item-icon">⏱</div>
               <div>
-                <strong style={{ color: "#f1f5f9", display: "block", marginBottom: "2px" }}>Response Time</strong>
+                <strong>Response Time</strong>
                 Within 24 hours
               </div>
             </div>
@@ -134,12 +158,11 @@ function Contact() {
         <div className="contact-form">
           {submitted ? (
             <div className="form-success">
-              <span className="success-icon">✅</span>
+              <span className="success-icon">✓</span>
               <h3>Message Sent!</h3>
               <p>
                 Thanks for reaching out, <strong>{formData.name}</strong>!
-                I'll get back to you within 24 hours. Check your inbox for a
-                confirmation email.
+                I'll get back to you within 24 hours.
               </p>
             </div>
           ) : (
@@ -199,19 +222,8 @@ function Contact() {
 
               {/* Error Message */}
               {error && (
-                <div
-                  style={{
-                    background: "rgba(239, 68, 68, 0.1)",
-                    border: "1px solid rgba(239, 68, 68, 0.3)",
-                    borderRadius: "8px",
-                    padding: "12px 16px",
-                    marginBottom: "16px",
-                    color: "#fca5a5",
-                    fontSize: "0.88rem",
-                    lineHeight: "1.5",
-                  }}
-                >
-                  ⚠️ {error}
+                <div className="form-error">
+                  {error}
                 </div>
               )}
 
@@ -220,7 +232,7 @@ function Contact() {
                 className="btn-submit"
                 disabled={loading}
               >
-                {loading ? "Sending... ⏳" : "Send Message 🚀"}
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           )}

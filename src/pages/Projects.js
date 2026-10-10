@@ -38,15 +38,6 @@ const projects = [
     live: "#",
   },
   {
-    emoji: "📝",
-    title: "Task Manager App",
-    description:
-      "A productivity app to manage daily tasks with drag-and-drop support, priority labels, and local storage persistence.",
-    tags: ["React", "CSS", "LocalStorage"],
-    github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/src",
-    live: "#",
-  },
-  {
     emoji: "🌦️",
     title: "Weather Dashboard",
     description:
@@ -55,35 +46,6 @@ const projects = [
     github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/src",
     live: "#",
   },
-  // MERN Stack Projects
-  {
-    emoji: "✅",
-    title: "MERN Todo App",
-    description:
-      "A full-stack todo application with MongoDB, Express, React, and Node.js. Features include user authentication, CRUD operations, and persistent storage.",
-    tags: ["MongoDB", "Express", "React", "Node.js"],
-    github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/projects/mern-todo-app",
-    live: "#",
-  },
-  {
-    emoji: "📰",
-    title: "MERN Blog Application",
-    description:
-      "A full-stack blog platform with user authentication, article creation, editing, and deletion. Includes rich text editor and comment system.",
-    tags: ["MongoDB", "Express", "React", "Node.js"],
-    github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/projects",
-    live: "#",
-  },
-  {
-    emoji: "🎯",
-    title: "MERN Quiz App",
-    description:
-      "An interactive quiz application with multiple categories, timer, score tracking, and admin panel for managing questions.",
-    tags: ["MongoDB", "Express", "React", "Node.js"],
-    github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/projects",
-    live: "#",
-  },
-  // HTML/CSS Projects
   {
     emoji: "👤",
     title: "Personal Portfolio",
@@ -91,15 +53,6 @@ const projects = [
       "A clean and modern personal portfolio template built with HTML5 and CSS3. Fully responsive with smooth animations.",
     tags: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/projects/html-personal-portfolio",
-    live: "#",
-  },
-  {
-    emoji: "🚀",
-    title: "Product Landing Page",
-    description:
-      "A responsive product landing page with hero section, features, testimonials, and contact form. Built with HTML, CSS, and minimal JS.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/PrathamPanchal26/my-portfolio/tree/master/projects/html-landing-page",
     live: "#",
   },
 ];
@@ -115,9 +68,12 @@ function Projects() {
       </div>
 
       <div className="projects-grid">
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <div className="project-card" key={project.title}>
-            <div className="project-emoji">{project.emoji}</div>
+            <div className="project-card-top">
+              <div className="project-emoji">{project.emoji}</div>
+              <span className="project-index">0{index + 1}</span>
+            </div>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
             <div className="project-tags">
@@ -134,7 +90,7 @@ function Projects() {
                 rel="noreferrer"
                 className="project-link"
               >
-                🐙 GitHub
+                GitHub
               </a>
               <a
                 href={project.live}
@@ -142,7 +98,7 @@ function Projects() {
                 rel="noreferrer"
                 className="project-link"
               >
-                🚀 Live Demo
+                Live Demo
               </a>
             </div>
           </div>

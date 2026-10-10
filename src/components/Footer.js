@@ -7,7 +7,9 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-logo">Pratham.dev</div>
+        <div className="footer-logo">
+          Pratham<span>.dev</span>
+        </div>
         <div className="footer-links">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
@@ -16,7 +18,7 @@ function Footer() {
           <Link to="/contact">Contact</Link>
         </div>
         <p className="footer-copy">
-          © {year} Pratham. Crafted with ❤️ using React.
+          © {year} Pratham. Designed and built with React.
         </p>
       </div>
     </footer>
