@@ -1,0 +1,24 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #121212; color: #ffffff; }
+.spotify-layout { display: flex; height: calc(100vh - 80px); }
+.sidebar { width: 240px; background: #000000; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.logo { font-size: 1.2rem; }
+.nav a { display: block; color: #b3b3b3; text-decoration: none; padding: 8px 0; font-weight: 600; font-size: 0.9rem; }
+.nav a.active, .nav a:hover { color: #ffffff; }
+.section-label { font-size: 0.75rem; color: #666; margin: 16px 0 8px; font-weight: 700; }
+.playlist-item { color: #a7a7a7; font-size: 0.85rem; padding: 6px 0; cursor: pointer; }
+.playlist-item:hover { color: #1ed760; }
+.content { flex: 1; padding: 24px; overflow-y: auto; background: linear-gradient(180deg, #2b1f14 0%, #121212 300px); }
+.topbar input { width: 340px; padding: 8px 16px; background: #242424; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; color: #fff; outline: none; }
+.hero-banner { display: flex; align-items: flex-end; gap: 20px; margin: 24px 0 32px; }
+.hero-banner img { width: 140px; height: 140px; border-radius: 8px; object-fit: cover; }
+.tag { font-size: 0.75rem; color: #b3b3b3; font-weight: 700; }
+.hero-banner h1 { font-size: 2.2rem; margin: 4px 0; }
+.hero-banner p { color: #b3b3b3; font-size: 0.9rem; }
+.song-list { display: flex; flex-direction: column; gap: 8px; }
+.song-row { display: grid; grid-template-columns: 30px 1.5fr 1fr 60px; padding: 10px 14px; border-radius: 6px; cursor: pointer; color: #b3b3b3; font-size: 0.9rem; }
+.song-row:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.player { height: 80px; background: #181818; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+.controls { display: flex; align-items: center; gap: 14px; }
+.controls button { background: none; border: none; color: #b3b3b3; font-size: 1.2rem; cursor: pointer; }
+.play-btn { width: 34px; height: 34px; border-radius: 50%; background: #ffffff !important; color: #000000 !important; font-size: 1rem !important; }

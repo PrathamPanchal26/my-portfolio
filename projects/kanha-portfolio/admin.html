@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Restricted Access | KANHA Construction &amp; Interior</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <div class="login-container" id="loginContainer">
+    <div class="login-card">
+      <div style="text-align: center;">
+        <div class="login-brand">
+          <div class="logo-icon">K</div>
+          <div style="text-align: left;">
+            <span class="logo-name">KANHA</span>
+            <span class="logo-sub">ADMIN PORTAL</span>
+          </div>
+        </div>
+
+        <span class="security-badge">
+          🛡️ Authorized Personnel Only
+        </span>
+
+        <h2>Sign In to Dashboard</h2>
+        <p>Customer and public access is restricted. Enter your administrator credentials to proceed.</p>
+      </div>
+
+      <form id="serverLoginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>👤 Admin Username</label>
+          <input type="text" id="adminUser" placeholder="Enter username (admin)" value="admin" required>
+        </div>
+
+        <div class="form-group">
+          <label>🔑 Admin Password / PIN</label>
+          <input type="password" id="adminPass" placeholder="Enter Password or PIN (1234)" value="1234" required>
+        </div>
+
+        <div id="loginErrorMsg" class="error-msg" style="display: none;">
+          Invalid credentials. Access denied.
+        </div>
+
+        <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          Authenticate &amp; Enter ➔
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="index.html" style="color: #64748b; font-size: 0.85rem; text-decoration: none;">
+          ← Return to Main Website
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authenticated CMS view -->
+  <div id="adminDashboard" style="display: none; padding: 24px;">
+    <header class="navbar" style="border-radius: 12px; margin-bottom: 24px;">
+      <div class="container nav-container">
+        <div class="logo-brand">
+          <div class="logo-icon">K</div>
+          <div class="logo-text">
+            <span class="logo-name">KANHA</span>
+            <span class="logo-sub">ADMIN CMS DASHBOARD</span>
+          </div>
+        </div>
+        <div>
+          <a href="index.html" class="btn btn-secondary" style="margin-right: 12px;">View Live Site ↗</a>
+          <button onclick="logout()" class="btn btn-primary" style="background: #ef4444;">Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="stats-grid" style="margin-bottom: 30px;">
+        <div class="stat-item"><h3>6</h3><p>Active Projects</p></div>
+        <div class="stat-item"><h3>14</h3><p>Client Inquiries</p></div>
+        <div class="stat-item"><h3>65,000+</h3><p>Total Executed Sq. Ft.</p></div>
+        <div class="stat-item"><h3>Active</h3><p>Server Status</p></div>
+      </div>
+
+      <div style="background: #0b2530; border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2>Project CMS Manager</h2>
+          <button class="btn btn-primary" onclick="alert('Project registration dialog opened.')">+ Add New Project</button>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #38bdf8;">
+              <th style="padding: 12px;">Project</th>
+              <th style="padding: 12px;">Category</th>
+              <th style="padding: 12px;">Location</th>
+              <th style="padding: 12px;">Area</th>
+              <th style="padding: 12px;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px;"><strong>Rajdeep Villa Residential</strong></td>
+              <td style="padding: 12px;">Residential</td>
+              <td style="padding: 12px;">Nikol, Ahmedabad</td>
+              <td style="padding: 12px;">5,000 SQ. FT.</td>
+              <td style="padding: 12px; color: #34d399;">● Published</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px;"><strong>S.P. Ring Road Commercial Hub</strong></td>
+              <td style="padding: 12px;">Commercial</td>
+              <td style="padding: 12px;">S.P. Ring Road</td>
+              <td style="padding: 12px;">24,000 SQ. FT.</td>
+              <td style="padding: 12px; color: #34d399;">● Published</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px;"><strong>Naroda Industrial Warehouse</strong></td>
+              <td style="padding: 12px;">Industrial</td>
+              <td style="padding: 12px;">Naroda GIDC</td>
+              <td style="padding: 12px;">15,000 SQ. FT.</td>
+              <td style="padding: 12px; color: #34d399;">● Published</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px;"><strong>Lifecare Hospital Interior Suite</strong></td>
+              <td style="padding: 12px;">Hospital</td>
+              <td style="padding: 12px;">Naroda</td>
+              <td style="padding: 12px;">8,500 SQ. FT.</td>
+              <td style="padding: 12px; color: #34d399;">● Published</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('adminUser').value;
+      const pass = document.getElementById('adminPass').value;
+      if (user.trim().toLowerCase() === 'admin' && pass.length > 0) {
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('adminDashboard').style.display = 'block';
+      } else {
+        document.getElementById('loginErrorMsg').style.display = 'block';
+      }
+    }
+    function logout() {
+      document.getElementById('loginContainer').style.display = 'flex';
+      document.getElementById('adminDashboard').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

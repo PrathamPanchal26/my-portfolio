@@ -38,7 +38,7 @@ function About() {
               <span className="stat-label">Years Exp.</span>
             </div>
             <div className="stat-card">
-              <span className="stat-number">6+</span>
+              <span className="stat-number">8+</span>
               <span className="stat-label">Projects</span>
             </div>
             <div className="stat-card">

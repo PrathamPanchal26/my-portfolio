@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Bollywood Music Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="spotify-layout">
+        <aside class="sidebar">
+            <div class="logo">🟢 <strong>Spotify</strong> Bollywood</div>
+            <nav class="nav">
+                <a href="#" class="active">🏠 Home</a>
+                <a href="#">🔍 Search</a>
+                <a href="#">📚 Library</a>
+            </nav>
+            <div class="playlist-list">
+                <p class="section-label">PLAYLISTS</p>
+                <div class="playlist-item">❤️ Arijit Singh Hits</div>
+                <div class="playlist-item">💃 Bollywood Party 2025</div>
+                <div class="playlist-item">🌙 Late Night Lo-Fi</div>
+            </div>
+        </aside>
+        <main class="content">
+            <header class="topbar">
+                <input type="text" placeholder="Search Hindi tracks, artists...">
+            </header>
+            <section class="hero-banner">
+                <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=300&q=80" alt="Cover">
+                <div>
+                    <span class="tag">PLAYLIST</span>
+                    <h1>Bollywood Top Hits 2025</h1>
+                    <p>Featuring Kesariya, Tum Hi Ho, Apna Bana Le, Raataan Lambiyan</p>
+                </div>
+            </section>
+            <div class="song-list">
+                <div class="song-row">
+                    <span>1</span>
+                    <div><strong>Kesariya</strong> - Brahmāstra</div>
+                    <span>Arijit Singh</span>
+                    <span>4:28</span>
+                </div>
+                <div class="song-row">
+                    <span>2</span>
+                    <div><strong>Tum Hi Ho</strong> - Aashiqui 2</div>
+                    <span>Arijit Singh</span>
+                    <span>4:22</span>
+                </div>
+                <div class="song-row">
+                    <span>3</span>
+                    <div><strong>Apna Bana Le</strong> - Bhediya</div>
+                    <span>Arijit Singh, Sachin-Jigar</span>
+                    <span>4:21</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="player">
+        <div class="now-playing">
+            <strong>Kesariya</strong> • Arijit Singh
+        </div>
+        <div class="controls">
+            <button>⏮</button>
+            <button class="play-btn">▶</button>
+            <button>⏭</button>
+        </div>
+        <div class="volume">
+            <span>🔊 75%</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
