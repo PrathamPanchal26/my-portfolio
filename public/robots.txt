@@ -1,3 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Googlebot specific rules
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://kanha-portfolio-eta.vercel.app/sitemap.xml

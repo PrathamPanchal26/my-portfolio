@@ -107,6 +107,8 @@ export default function KanhaPortfolioDemo() {
     ? initialKanhaProjects
     : initialKanhaProjects.filter(p => p.category === activeCategory);
 
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
   const handleContactSubmit = (e) => {
     e.preventDefault();
     setContactSubmitted(true);
@@ -116,12 +118,14 @@ export default function KanhaPortfolioDemo() {
     }, 4000);
   };
 
+  const closeMobileNav = () => setMobileNavOpen(false);
+
   return (
     <div className="kanha-eta-site">
       {/* Top Banner / Navbar */}
       <header className="kanha-eta-navbar">
         <div className="kanha-eta-container nav-inner">
-          <a href="#home" className="kanha-eta-brand">
+          <a href="#home" className="kanha-eta-brand" onClick={closeMobileNav}>
             <div className="kanha-eta-logo-icon">K</div>
             <div className="kanha-eta-logo-text">
               <span className="kanha-eta-logo-name">KANHA</span>
@@ -129,15 +133,38 @@ export default function KanhaPortfolioDemo() {
             </div>
           </a>
 
-          <nav className="kanha-eta-nav-menu">
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#services">Services</a>
-            <a href="#projects">Our Projects</a>
-            <a href="#contact">Contact</a>
-            <Link to="/demos/kanha-admin" className="kanha-eta-admin-pill" title="Access Administrator Portal">
+          <button
+            type="button"
+            className="kanha-eta-hamburger"
+            onClick={() => setMobileNavOpen(!mobileNavOpen)}
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileNavOpen ? "✕" : "☰"}
+          </button>
+
+          <nav className={`kanha-eta-nav-menu ${mobileNavOpen ? "open" : ""}`}>
+            <a href="#home" onClick={closeMobileNav}>Home</a>
+            <a href="#about" onClick={closeMobileNav}>About Us</a>
+            <a href="#services" onClick={closeMobileNav}>Services</a>
+            <a href="#projects" onClick={closeMobileNav}>Our Projects</a>
+            <a href="#contact" onClick={closeMobileNav}>Contact</a>
+            <Link to="/demos/kanha-admin" className="kanha-eta-admin-pill" title="Access Administrator Portal" onClick={closeMobileNav}>
               🔐 Admin Portal
             </Link>
+            <div className="kanha-eta-nav-actions-mobile">
+              <a href="tel:+919898749575" className="kanha-eta-call-btn" onClick={closeMobileNav}>
+                📞 +91 9898749575
+              </a>
+              <a
+                href="https://wa.me/919898749575?text=Hello%20Kanha%20Team,%20I%20am%20interested%20in%20your%20services."
+                target="_blank"
+                rel="noreferrer"
+                className="kanha-eta-wa-btn"
+                onClick={closeMobileNav}
+              >
+                💬 WhatsApp
+              </a>
+            </div>
           </nav>
 
           <div className="kanha-eta-nav-actions">

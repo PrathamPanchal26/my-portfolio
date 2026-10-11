@@ -105,36 +105,18 @@ function Projects() {
       </div>
 
       {/* Filter Tabs */}
-      <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginBottom: "32px" }}>
+      <div className="projects-filter-bar">
         <button
+          type="button"
           onClick={() => setFilter("all")}
-          style={{
-            padding: "8px 18px",
-            borderRadius: "999px",
-            border: "1px solid var(--border)",
-            background: filter === "all" ? "var(--accent)" : "var(--bg-elevated)",
-            color: filter === "all" ? "#ffffff" : "var(--text)",
-            fontWeight: "600",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.2s",
-          }}
+          className={`projects-filter-btn ${filter === "all" ? "active" : ""}`}
         >
           All Projects ({projects.length})
         </button>
         <button
+          type="button"
           onClick={() => setFilter("featured")}
-          style={{
-            padding: "8px 18px",
-            borderRadius: "999px",
-            border: "1px solid var(--border)",
-            background: filter === "featured" ? "var(--accent)" : "var(--bg-elevated)",
-            color: filter === "featured" ? "#ffffff" : "var(--text)",
-            fontWeight: "600",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.2s",
-          }}
+          className={`projects-filter-btn ${filter === "featured" ? "active" : ""}`}
         >
           ⭐ New &amp; Featured ({projects.filter(p => p.featured).length})
         </button>
