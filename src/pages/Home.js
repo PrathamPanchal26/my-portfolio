@@ -9,7 +9,7 @@ function Home() {
           <div className="hero-badge">Available for freelance work</div>
 
           <h1>
-            Hi, I'm <span className="name-highlight">Pratham</span>
+            Hi, I'm <span className="name-highlight">Pratham Panchal</span>
           </h1>
 
           <p className="hero-subtitle">
