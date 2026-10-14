@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-// Use the CRA proxy in development (see package.json "proxy")
 const API_URL = "/api/contact";
 const INBOX_EMAIL = "prathampanchal1515@gmail.com";
+const PHONE_NUMBER = "+919638561264";
+const WHATSAPP_URL = "https://wa.me/919638561264?text=Hi%20Pratham,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -14,10 +15,29 @@ function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [copiedField, setCopiedField] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (error) setError("");
+  };
+
+  const handleCopy = (text, fieldName) => {
+    try {
+      navigator.clipboard.writeText(text);
+      setCopiedField(fieldName);
+      setTimeout(() => setCopiedField(""), 2200);
+    } catch (err) {
+      console.error("Clipboard copy failed:", err);
+    }
+  };
+
+  const handleQuickTemplate = (topic) => {
+    setFormData((prev) => ({
+      ...prev,
+      subject: topic,
+      message: `Hi Pratham,\n\nI am reaching out regarding ${topic}. I'd love to discuss scope, timeline, and how we might work together.\n\nBest regards,`,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -61,7 +81,7 @@ function Contact() {
       } else {
         setError(
           mailData.message ||
-            "Could not send email. If this is your first submission, please check prathampanchal1515@gmail.com (including Spam/Junk) to activate FormSubmit."
+            "Could not send email automatically. Please feel free to email directly at prathampanchal1515@gmail.com or message via WhatsApp."
         );
       }
     } catch (err) {
@@ -79,48 +99,96 @@ function Contact() {
       <div className="section-header">
         <div className="section-tag">Get In Touch</div>
         <h2>Contact Me</h2>
-        <p>Have a project in mind? Let's work together and build something great.</p>
+        <p>Have a project in mind? Let's work together and build something exceptional.</p>
         <div className="divider"></div>
       </div>
 
       <div className="contact-wrapper">
         {/* Left: Info */}
         <div className="contact-info">
+          <div className="contact-status-badge">
+            <span className="pulse-dot-green"></span> Available for new client projects &amp; full-time roles
+          </div>
+
           <h3>Let's talk about your project</h3>
           <p>
-            I'm currently available for freelance work and open to full-time
-            opportunities. Feel free to reach out — I'd love to hear from you!
+            Whether you need a high-performance React application, a turnkey client
+            website, or modern UI/UX design, I’m ready to collaborate. Reach out directly
+            via email, phone, or instant WhatsApp chat!
           </p>
 
           <div className="contact-details">
+            {/* Email item with Copy */}
             <div className="contact-item">
               <div className="contact-item-icon">@</div>
-              <div>
-                <strong>Email</strong>
-                prathampanchal1515@gmail.com
+              <div className="contact-item-text">
+                <div className="contact-item-header">
+                  <strong>Email</strong>
+                  <button
+                    type="button"
+                    className="copy-btn"
+                    onClick={() => handleCopy(INBOX_EMAIL, "email")}
+                    title="Copy Email Address"
+                  >
+                    {copiedField === "email" ? "Copied! ✓" : "Copy"}
+                  </button>
+                </div>
+                <a href={`mailto:${INBOX_EMAIL}`} className="contact-val-link">
+                  {INBOX_EMAIL}
+                </a>
               </div>
             </div>
+
+            {/* Phone item with Copy */}
             <div className="contact-item">
               <div className="contact-item-icon">#</div>
-              <div>
-                <strong>Phone</strong>
-                +91 9638561264
+              <div className="contact-item-text">
+                <div className="contact-item-header">
+                  <strong>Phone / Mobile</strong>
+                  <button
+                    type="button"
+                    className="copy-btn"
+                    onClick={() => handleCopy("+91 9638561264", "phone")}
+                    title="Copy Phone Number"
+                  >
+                    {copiedField === "phone" ? "Copied! ✓" : "Copy"}
+                  </button>
+                </div>
+                <a href={`tel:${PHONE_NUMBER}`} className="contact-val-link">
+                  +91 9638561264
+                </a>
               </div>
             </div>
+
+            {/* Location */}
             <div className="contact-item">
-              <div className="contact-item-icon">◌</div>
-              <div>
+              <div className="contact-item-icon">📍</div>
+              <div className="contact-item-text">
                 <strong>Location</strong>
-                Ahmedabad, Gujarat, India
+                <span>Ahmedabad, Gujarat, India (IST / UTC+5:30)</span>
               </div>
             </div>
+
+            {/* Response Time */}
             <div className="contact-item">
               <div className="contact-item-icon">⏱</div>
-              <div>
+              <div className="contact-item-text">
                 <strong>Response Time</strong>
-                Within 24 hours
+                <span>Within 24 hours guaranteed</span>
               </div>
             </div>
+          </div>
+
+          {/* Quick WhatsApp Action Button */}
+          <div className="whatsapp-action-box">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-whatsapp"
+            >
+              <span className="wa-icon">💬</span> Chat Directly on WhatsApp
+            </a>
           </div>
 
           <div className="contact-socials">
@@ -129,64 +197,101 @@ function Contact() {
               target="_blank"
               rel="noreferrer"
               className="social-link"
-              title="GitHub"
+              title="GitHub Profile"
             >
-              🐙
+              GH
             </a>
             <a
               href="https://linkedin.com/in/pratham"
               target="_blank"
               rel="noreferrer"
               className="social-link"
-              title="LinkedIn"
+              title="LinkedIn Profile"
             >
-              💼
+              in
             </a>
             <a
               href="https://twitter.com/pratham"
               target="_blank"
               rel="noreferrer"
               className="social-link"
-              title="Twitter"
+              title="Twitter / X"
             >
-              🐦
+              X
             </a>
           </div>
         </div>
 
         {/* Right: Form */}
         <div className="contact-form">
+          {/* Quick Subject Starters */}
+          <div className="form-starter-chips">
+            <span className="starter-label">Quick topics:</span>
+            <button
+              type="button"
+              className="starter-chip"
+              onClick={() => handleQuickTemplate("New Website / Web App Project")}
+            >
+              🚀 Web App Project
+            </button>
+            <button
+              type="button"
+              className="starter-chip"
+              onClick={() => handleQuickTemplate("Frontend React Contract / Freelance")}
+            >
+              💼 Freelance Contract
+            </button>
+            <button
+              type="button"
+              className="starter-chip"
+              onClick={() => handleQuickTemplate("UI/UX Redesign & Optimization")}
+            >
+              🎨 UI/UX Redesign
+            </button>
+          </div>
+
           {submitted ? (
             <div className="form-success">
               <span className="success-icon">✓</span>
-              <h3>Message Sent!</h3>
+              <h3>Message Sent Successfully!</h3>
               <p>
                 Thanks for reaching out, <strong>{formData.name}</strong>!
-                I'll get back to you within 24 hours.
+                Your message has been received, and I'll get back to you within 24 hours.
               </p>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ marginTop: "18px" }}
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({ name: "", email: "", subject: "", message: "" });
+                }}
+              >
+                Send Another Message
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="name">Your Name</label>
+                  <label htmlFor="name">Your Name *</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="John Doe"
+                    placeholder="e.g. Rahul Sharma"
                     value={formData.name}
                     onChange={handleChange}
                     required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="email">Email Address *</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="john@example.com"
+                    placeholder="e.g. rahul@example.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -195,12 +300,12 @@ function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="subject">Subject</label>
+                <label htmlFor="subject">Subject *</label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  placeholder="Project Inquiry / Freelance Work"
+                  placeholder="e.g. Project Inquiry / React Development"
                   value={formData.subject}
                   onChange={handleChange}
                   required
@@ -208,12 +313,12 @@ function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message">Message *</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="5"
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your project goals, timeline, and requirements..."
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -232,7 +337,7 @@ function Contact() {
                 className="btn-submit"
                 disabled={loading}
               >
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? "Sending Message..." : "Send Message ✉️"}
               </button>
             </form>
           )}

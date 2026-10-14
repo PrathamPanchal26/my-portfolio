@@ -9,6 +9,7 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import DemoViewer from "./demos/DemoViewer";
+import ScrollToTop from "./components/ScrollToTop";
 import "./App.css";
 
 const ROUTE_META = {
@@ -76,6 +77,7 @@ function AppContent() {
         </Routes>
       </main>
       {!isDemoRoute && <Footer />}
+      <ScrollToTop />
     </div>
   );
 }

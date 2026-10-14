@@ -8,9 +8,17 @@ import TravelWebsiteDemo from "./TravelWebsiteDemo";
 import CurrencyConverterDemo from "./CurrencyConverterDemo";
 import EcommerceUiDemo from "./EcommerceUiDemo";
 import WeatherDashboardDemo from "./WeatherDashboardDemo";
+import TaskMasterDemo from "./TaskMasterDemo";
 import "./demos.css";
 
 const demoDirectory = {
+  "taskmaster-pro": {
+    title: "TaskMaster Pro Productivity Suite",
+    category: "Full-Stack & Productivity",
+    emoji: "📝",
+    component: TaskMasterDemo,
+    github: "https://github.com/PrathamPanchal26/my-portfolio",
+  },
   "kanha-portfolio": {
     title: "Kanha Construction & Interior",
     category: "Architecture & Construction",
@@ -109,6 +117,7 @@ export default function DemoViewer() {
             value={currentKey}
             onChange={handleSwitchDemo}
           >
+            <option value="taskmaster-pro">📝 TaskMaster Pro</option>
             <option value="kanha-portfolio">🏛️ Kanha Construction</option>
             <option value="kanha-admin">🔐 Kanha Admin Portal</option>
             <option value="spotify-bollywood">🎵 Spotify Bollywood</option>
