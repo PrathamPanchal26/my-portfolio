@@ -111,7 +111,7 @@ function Contact() {
               <div className="contact-item-icon">◌</div>
               <div>
                 <strong>Location</strong>
-                India
+                Ahmedabad, Gujarat, India
               </div>
             </div>
             <div className="contact-item">
@@ -125,7 +125,7 @@ function Contact() {
 
           <div className="contact-socials">
             <a
-              href="https://github.com/pratham"
+              href="https://github.com/PrathamPanchal26"
               target="_blank"
               rel="noreferrer"
               className="social-link"

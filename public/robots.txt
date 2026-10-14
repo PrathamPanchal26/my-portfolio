@@ -5,4 +5,14 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+Host: https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app
 Sitemap: https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/sitemap.xml

@@ -18,7 +18,7 @@ function Footer() {
           <Link to="/contact">Contact</Link>
         </div>
         <p className="footer-copy">
-          © {year} Pratham. Designed and built with React.
+          © {year} Pratham Panchal — Frontend Developer &amp; React Specialist · Ahmedabad, India.
         </p>
       </div>
     </footer>

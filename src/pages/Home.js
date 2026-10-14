@@ -15,15 +15,18 @@ function Home() {
           <p className="hero-subtitle">
             <span className="role">Frontend Developer</span>
             <span className="dot">·</span>
-            React
+            React Specialist
             <span className="dot">·</span>
             Web Designer
+            <span className="dot">·</span>
+            Ahmedabad, India
           </p>
 
           <p className="hero-description">
-            I craft clean, responsive web experiences — pairing thoughtful UI
-            with modern frontend engineering. Let's turn an idea into a site
-            that feels considered, fast, and a little bit distinctive.
+            Welcome to the official portfolio of Pratham Panchal. I craft clean,
+            responsive, and high-performance web experiences — pairing thoughtful UI
+            design with modern React engineering. Let's turn an idea into a site
+            that feels considered, fast, and distinctive.
           </p>
 
           <div className="hero-buttons">
@@ -41,7 +44,7 @@ function Home() {
 
           <div className="social-links">
             <a
-              href="https://github.com/pratham"
+              href="https://github.com/PrathamPanchal26"
               target="_blank"
               rel="noreferrer"
               className="social-link"

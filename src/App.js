@@ -11,12 +11,27 @@ import Contact from "./pages/Contact";
 import DemoViewer from "./demos/DemoViewer";
 import "./App.css";
 
-const ROUTE_TITLES = {
-  "/": "Pratham Panchal — Frontend Developer & React Specialist | Official Portfolio",
-  "/about": "About Pratham Panchal | Frontend Developer & Web Designer",
-  "/skills": "Skills & Technologies — Pratham Panchal | React & Frontend Stack",
-  "/projects": "Projects & Portfolio Work — Pratham Panchal | React Applications",
-  "/contact": "Contact Pratham Panchal | Hire Frontend Developer & Web Designer",
+const ROUTE_META = {
+  "/": {
+    title: "Pratham Panchal — Frontend Developer & React Specialist | Official Portfolio",
+    description: "Official portfolio of Pratham Panchal, Frontend Developer & React Specialist based in Ahmedabad, India. Explore high-performance React web applications, modern UI/UX design, and interactive frontend engineering."
+  },
+  "/about": {
+    title: "About Pratham Panchal | Frontend Developer & React Engineer Ahmedabad",
+    description: "Learn about Pratham Panchal, a Frontend Developer and React Specialist based in Ahmedabad, Gujarat, India with expertise in modern UI engineering and responsive design."
+  },
+  "/skills": {
+    title: "Technical Skills — Pratham Panchal | React.js, JavaScript, Tailwind CSS",
+    description: "Explore technical skills of Pratham Panchal: React.js, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Bootstrap, Git, GitHub, Vercel, and UI/UX design."
+  },
+  "/projects": {
+    title: "Projects & Applications — Pratham Panchal | React Portfolio Work",
+    description: "Explore live projects by Pratham Panchal, including Kanha Construction studio, Kanha Admin Portal, Spotify Bollywood Player, and Inventory Management System."
+  },
+  "/contact": {
+    title: "Contact Pratham Panchal | Hire Frontend Developer & React Specialist",
+    description: "Get in touch with Pratham Panchal for freelance web development, React contracts, UI design, or full-time frontend roles. Based in Ahmedabad, Gujarat, India."
+  },
 };
 
 function AppContent() {
@@ -32,9 +47,14 @@ function AppContent() {
         .join(" ");
       document.title = `${formatted} Demo | Pratham Panchal Portfolio`;
     } else {
-      document.title =
-        ROUTE_TITLES[location.pathname] ||
-        "Pratham Panchal — Frontend Developer & React Specialist";
+      const meta = ROUTE_META[location.pathname];
+      if (meta) {
+        document.title = meta.title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute("content", meta.description);
+      } else {
+        document.title = "Pratham Panchal — Frontend Developer & React Specialist";
+      }
     }
 
     try {
