@@ -104,9 +104,6 @@ function About() {
       <div className="about-grid">
         <div className="about-image-wrapper">
           <div className="about-avatar">PP</div>
-          <div className="about-badge-status">
-            <span className="pulse-dot-green"></span> Available for Hire
-          </div>
         </div>
 
         <div className="about-content">
