@@ -1879,6 +1879,9 @@ body::before {
   background: var(--accent) !important;
   color: #ffffff !important;
   border-color: var(--accent) !important;
+  flex: 1;
+  text-align: center;
+  padding: 8px 14px;
 }
 
 /* Project Modal */

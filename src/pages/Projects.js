@@ -340,15 +340,6 @@ function Projects() {
 
                 <div className="project-links">
                   <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-link"
-                    title="View Source on GitHub"
-                  >
-                    GitHub
-                  </a>
-                  <a
                     href={project.live}
                     target="_blank"
                     rel="noreferrer"
@@ -434,14 +425,6 @@ function Projects() {
                 className="btn btn-primary"
               >
                 Launch Live Demo ↗
-              </a>
-              <a
-                href={selectedModalProject.github}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-secondary"
-              >
-                View GitHub Code ↗
               </a>
             </div>
           </div>

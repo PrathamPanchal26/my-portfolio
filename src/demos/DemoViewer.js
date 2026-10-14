@@ -127,15 +127,6 @@ export default function DemoViewer() {
             <option value="currency-converter">💱 Currency Converter</option>
             <option value="travel-website">✈️ Travel Website</option>
           </select>
-
-          <a
-            href={demoMeta.github}
-            target="_blank"
-            rel="noreferrer"
-            className="demo-source-btn"
-          >
-            GitHub Code ↗
-          </a>
         </div>
       </header>
 
