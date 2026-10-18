@@ -10,6 +10,7 @@ import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import DemoViewer from "./demos/DemoViewer";
 import ScrollToTop from "./components/ScrollToTop";
+import DevTerminal from "./components/DevTerminal";
 import "./App.css";
 
 const ROUTE_META = {
@@ -78,6 +79,7 @@ function AppContent() {
       </main>
       {!isDemoRoute && <Footer />}
       <ScrollToTop />
+      {!isDemoRoute && <DevTerminal />}
     </div>
   );
 }

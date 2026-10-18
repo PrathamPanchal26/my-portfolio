@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ProjectEstimator from "../components/ProjectEstimator";
+import FAQSection from "../components/FAQSection";
 
 const SERVICES = [
   {
@@ -234,6 +236,12 @@ function Home() {
           <span className="metric-caption">Lighthouse Score Target</span>
         </div>
       </section>
+
+      {/* Interactive Project Cost & Timeline Calculator */}
+      <ProjectEstimator />
+
+      {/* Interactive FAQ Knowledge Section */}
+      <FAQSection />
     </div>
   );
 }
