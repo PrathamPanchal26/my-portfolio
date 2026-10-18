@@ -2768,8 +2768,8 @@ body::before {
    ========================================================================== */
 .dev-terminal-toggle-btn {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  left: 28px;
   z-index: 990;
   display: flex;
   align-items: center;
@@ -2777,7 +2777,7 @@ body::before {
   background: #101010;
   border: 1px solid rgba(224, 122, 61, 0.4);
   color: #f4efe6;
-  padding: 8px 16px;
+  padding: 9px 18px;
   border-radius: 999px;
   font-family: monospace;
   font-size: 0.86rem;
@@ -2785,6 +2785,15 @@ body::before {
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .dev-terminal-toggle-btn {
+    bottom: 20px;
+    left: 18px;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+  }
 }
 
 .dev-terminal-toggle-btn:hover {
