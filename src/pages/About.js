@@ -260,6 +260,13 @@ function About() {
           <Link to="/contact" className="btn btn-primary">
             Get in Touch →
           </Link>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-resume-modal"))}
+          >
+            📄 View Full Resume
+          </button>
           <Link to="/projects" className="btn btn-secondary">
             Explore Projects
           </Link>

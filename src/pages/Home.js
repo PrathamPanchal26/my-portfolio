@@ -57,6 +57,51 @@ const FEATURED_HIGHLIGHTS = [
   },
 ];
 
+const TESTIMONIALS = [
+  {
+    quote:
+      "Pratham built our official Kanha Construction & Interior platform and restricted Admin CMS. The design elegance, lightning performance, and intuitive leads management gave our studio immense authority in Ahmedabad.",
+    author: "Kanha Construction & Interior",
+    role: "Architecture & Turnkey Studio",
+    location: "Nikol, Ahmedabad, India",
+    stars: "★★★★★",
+    tag: "Commercial Turnkey Platform",
+  },
+  {
+    quote:
+      "Exceptional frontend engineer. Pratham turns complex ideas into clean React components with remarkable speed. His code structure is clean, responsive across every screen, and Google SEO-friendly.",
+    author: "Client Collaboration",
+    role: "Web Application Project Lead",
+    location: "Remote / Hybrid",
+    stars: "★★★★★",
+    tag: "React Web Application",
+  },
+  {
+    quote:
+      "Pratham engineered an interactive audio streaming experience using Web Audio API that blew us away. His attention to detail, smooth UI micro-animations, and dark mode are top notch.",
+    author: "Creative Media Client",
+    role: "Spotify Bollywood Interactive Project",
+    location: "Gujarat, India",
+    stars: "★★★★★",
+    tag: "Web Audio & UI Design",
+  },
+];
+
+const SEO_TOPICS = [
+  "Pratham Panchal",
+  "Frontend Developer Ahmedabad",
+  "React Developer Gujarat",
+  "Kanha Construction Website",
+  "Web Designer Ahmedabad",
+  "Spotify Bollywood React",
+  "TaskMaster Pro Suite",
+  "Cloth Inventory System",
+  "Hire React Specialist India",
+  "Turnkey Web Solutions",
+  "Modern UI/UX Design",
+  "Sub-Second Core Web Vitals",
+];
+
 function Home() {
   return (
     <div className="page hero-page">
@@ -89,13 +134,14 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-            <a
-              href="/Resum.JPG"
-              download="Resum.JPG"
+            <button
+              type="button"
               className="btn btn-primary"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-resume-modal"))}
+              title="View & Download Pratham's Resume"
             >
-              Download Resume
-            </a>
+              📄 View Resume
+            </button>
             <Link to="/contact" className="btn btn-secondary">
               Let's Talk
             </Link>
@@ -108,6 +154,14 @@ function Home() {
             >
               <span>💬</span> WhatsApp
             </a>
+            <button
+              type="button"
+              className="btn btn-search-hero"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-site-search"))}
+              title="Search all website (Ctrl + K)"
+            >
+              <span>🔍</span> Search Site <kbd>Ctrl+K</kbd>
+            </button>
           </div>
 
           <div className="social-links">
@@ -217,6 +271,29 @@ function Home() {
         </div>
       </section>
 
+      {/* Quick Search Website Omnibox Strip */}
+      <section className="home-search-banner">
+        <div className="search-banner-inner">
+          <div className="search-banner-text">
+            <span className="section-tag-sm">Quick Search Everything</span>
+            <h3>Looking for a specific skill, demo, or question?</h3>
+            <p>
+              Search all 9 applications, React architecture, pricing estimates, resume, and contact details instantly.
+            </p>
+          </div>
+          <button
+            type="button"
+            className="search-banner-trigger-btn"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-site-search"))}
+            title="Open Site Search"
+          >
+            <span className="banner-btn-icon">🔍</span>
+            <span className="banner-btn-text">Search all the website...</span>
+            <kbd className="banner-kbd">Ctrl + K</kbd>
+          </button>
+        </div>
+      </section>
+
       {/* Quick Stats Strip */}
       <section className="home-metrics-strip">
         <div className="metric-box">
@@ -237,11 +314,68 @@ function Home() {
         </div>
       </section>
 
+      {/* Client Recommendations & Social Proof Section */}
+      <section className="home-testimonials-section">
+        <div className="section-header-compact">
+          <span className="section-tag-sm">Social Proof &amp; Reviews</span>
+          <h3>Client Recommendations &amp; Proven Track Record</h3>
+          <p className="testimonials-subtitle">
+            Rated <strong>5.0 / 5.0</strong> by client collaborators and businesses in Ahmedabad, India.
+          </p>
+        </div>
+
+        <div className="testimonials-grid">
+          {TESTIMONIALS.map((t, index) => (
+            <div className="home-testimonial-card" key={index}>
+              <div className="testimonial-top">
+                <span className="testimonial-stars" aria-label="5 out of 5 stars">{t.stars}</span>
+                <span className="testimonial-tag">{t.tag}</span>
+              </div>
+              <p className="testimonial-quote">"{t.quote}"</p>
+              <div className="testimonial-author-block">
+                <div className="author-avatar">{t.author.charAt(0)}</div>
+                <div>
+                  <h4 className="author-name">{t.author}</h4>
+                  <p className="author-role">{t.role}</p>
+                  <span className="author-loc">📍 {t.location}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Interactive Project Cost & Timeline Calculator */}
       <ProjectEstimator />
 
       {/* Interactive FAQ Knowledge Section */}
       <FAQSection />
+
+      {/* SEO Regional & Core Keyword Authority Section */}
+      <section className="home-seo-keywords-strip">
+        <div className="seo-strip-header">
+          <span className="pulse-dot-green"></span>
+          <h4>Popular Search Keywords &amp; Regional Specializations</h4>
+        </div>
+        <p className="seo-strip-desc">
+          Official engineering portfolio of <strong>Pratham Panchal</strong>, Frontend Developer and React Specialist based in <strong>Ahmedabad, Gujarat, India</strong>. Specialized in turnkey platforms, custom React web apps, modern UI/UX design, and SEO-optimized architecture.
+        </p>
+        <div className="seo-keywords-cloud">
+          {SEO_TOPICS.map((topic, i) => (
+            <button
+              key={i}
+              type="button"
+              className="seo-keyword-tag"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("open-site-search"));
+              }}
+              title={`Search for "${topic}" in site`}
+            >
+              #{topic}
+            </button>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

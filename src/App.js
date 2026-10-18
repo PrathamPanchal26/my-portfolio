@@ -11,28 +11,30 @@ import Contact from "./pages/Contact";
 import DemoViewer from "./demos/DemoViewer";
 import ScrollToTop from "./components/ScrollToTop";
 import DevTerminal from "./components/DevTerminal";
+import GlobalSearch from "./components/GlobalSearch";
+import ResumeModal from "./components/ResumeModal";
 import "./App.css";
 
 const ROUTE_META = {
   "/": {
-    title: "Pratham Panchal — Frontend Developer & React Specialist | Official Portfolio",
-    description: "Official portfolio of Pratham Panchal, Frontend Developer & React Specialist based in Ahmedabad, India. Explore high-performance React web applications, modern UI/UX design, and interactive frontend engineering."
+    title: "Pratham Panchal — Frontend Developer & React Specialist | Official Portfolio Ahmedabad",
+    description: "Official portfolio of Pratham Panchal, Frontend Developer & React Specialist based in Ahmedabad, Gujarat, India. Discover high-performance React web applications, modern UI/UX design, interactive demos, and client portals."
   },
   "/about": {
-    title: "About Pratham Panchal | Frontend Developer & React Engineer Ahmedabad",
-    description: "Learn about Pratham Panchal, a Frontend Developer and React Specialist based in Ahmedabad, Gujarat, India with expertise in modern UI engineering and responsive design."
+    title: "About Pratham Panchal | Frontend Developer & React Engineer Ahmedabad India",
+    description: "Learn about Pratham Panchal: professional background, IT engineering diploma, frontend skills, client testimonials, and web engineering experience in Ahmedabad, Gujarat."
   },
   "/skills": {
-    title: "Technical Skills — Pratham Panchal | React.js, JavaScript, Tailwind CSS",
-    description: "Explore technical skills of Pratham Panchal: React.js, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Bootstrap, Git, GitHub, Vercel, and UI/UX design."
+    title: "Technical Skills — Pratham Panchal | React.js, JavaScript (ES6+), Tailwind CSS",
+    description: "Comprehensive technical competencies of Pratham Panchal: React.js, JavaScript, Tailwind CSS, Bootstrap, Web Audio API, LocalStorage, Git, Vercel, and UI/UX design."
   },
   "/projects": {
-    title: "Projects & Applications — Pratham Panchal | React Portfolio Work",
-    description: "Explore live projects by Pratham Panchal, including Kanha Construction studio, Kanha Admin Portal, Spotify Bollywood Player, and Inventory Management System."
+    title: "Projects & Live Applications — Pratham Panchal | React Portfolio Ahmedabad",
+    description: "Explore 9 interactive in-browser applications built by Pratham Panchal: Kanha Construction & Interior, Kanha Admin Portal, Spotify Bollywood, TaskMaster Pro, and Inventory System."
   },
   "/contact": {
-    title: "Contact Pratham Panchal | Hire Frontend Developer & React Specialist",
-    description: "Get in touch with Pratham Panchal for freelance web development, React contracts, UI design, or full-time frontend roles. Based in Ahmedabad, Gujarat, India."
+    title: "Contact & Hire Pratham Panchal | Frontend Developer in Ahmedabad, India",
+    description: "Contact Pratham Panchal for freelance contracts, React development, UI design, or full-time roles. Call/WhatsApp +91 9638561264 or email prathampanchal1515@gmail.com."
   },
 };
 
@@ -80,6 +82,8 @@ function AppContent() {
       {!isDemoRoute && <Footer />}
       <ScrollToTop />
       {!isDemoRoute && <DevTerminal />}
+      <GlobalSearch />
+      <ResumeModal />
     </div>
   );
 }

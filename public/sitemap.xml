@@ -34,6 +34,12 @@
 
   <!-- Interactive Project Demos -->
   <url>
+    <loc>https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/demos/taskmaster-pro</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/demos/kanha-portfolio</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
