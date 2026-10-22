@@ -1,92 +1,740 @@
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const skillCategories = [
+const SKILL_CATEGORIES = [
+  "All Skills",
+  "Frontend & React Ecosystem",
+  "Web APIs & Architecture",
+  "Developer Tools & Cloud",
+  "UI/UX & Creative Design",
+];
+
+const SKILLS_DATA = [
+  // --- Frontend & React ---
   {
+    name: "React.js (18 & 19)",
+    icon: "⚛️",
     category: "Frontend & React Ecosystem",
-    skills: [
-      { name: "React.js (18 & 19)", icon: "⚛️" },
-      { name: "JavaScript (ES6+)", icon: "⚡" },
-      { name: "HTML5 Semantic", icon: "🌐" },
-      { name: "CSS3 & Custom Properties", icon: "🎨" },
-      { name: "Tailwind CSS", icon: "💨" },
-      { name: "Bootstrap 5", icon: "🅱️" },
-      { name: "Single Page Apps (SPA)", icon: "📄" },
-      { name: "Custom React Hooks", icon: "🪝" },
+    proficiency: 95,
+    level: "Expert Specialist",
+    experience: "3+ Years",
+    summary: "Single-page apps, custom hooks, concurrent rendering, state machines, and component architecture.",
+    usedIn: [
+      { name: "TaskMaster Pro", url: "/demos/taskmaster-pro" },
+      { name: "Kanha Construction", url: "/demos/kanha-portfolio" },
+      { name: "Spotify Bollywood", url: "/demos/spotify-bollywood" },
     ],
   },
   {
+    name: "JavaScript (ES6+)",
+    icon: "⚡",
+    category: "Frontend & React Ecosystem",
+    proficiency: 94,
+    level: "Advanced",
+    experience: "3+ Years",
+    summary: "Modern asynchronous JS, Promises, Closures, DOM optimization, Web Storage, and audio nodes.",
+    usedIn: [
+      { name: "Spotify Bollywood", url: "/demos/spotify-bollywood" },
+      { name: "Inventory System", url: "/demos/inventory-system" },
+    ],
+  },
+  {
+    name: "HTML5 Semantic & SEO",
+    icon: "🌐",
+    category: "Frontend & React Ecosystem",
+    proficiency: 98,
+    level: "Master",
+    experience: "3+ Years",
+    summary: "Accessible landmark tags, Schema.org microdata, OpenGraph tags, and crawler optimization.",
+    usedIn: [
+      { name: "Kanha Construction", url: "/demos/kanha-portfolio" },
+      { name: "Official Portfolio", url: "/" },
+    ],
+  },
+  {
+    name: "CSS3 & Custom Tokens",
+    icon: "🎨",
+    category: "Frontend & React Ecosystem",
+    proficiency: 95,
+    level: "Expert",
+    experience: "3+ Years",
+    summary: "CSS Variables, Flexbox, Grid, fluid typography clamps, keyframe animations, and glassmorphism.",
+    usedIn: [
+      { name: "TaskMaster Pro", url: "/demos/taskmaster-pro" },
+      { name: "Ecommerce UI", url: "/demos/ecommerce-ui" },
+    ],
+  },
+  {
+    name: "Tailwind CSS",
+    icon: "💨",
+    category: "Frontend & React Ecosystem",
+    proficiency: 90,
+    level: "Advanced",
+    experience: "2+ Years",
+    summary: "Utility-first rapid prototyping, responsive breakpoints, dark mode variants, and custom plugin extensions.",
+    usedIn: [
+      { name: "TaskMaster Pro", url: "/demos/taskmaster-pro" },
+    ],
+  },
+  {
+    name: "Bootstrap 5",
+    icon: "🅱️",
+    category: "Frontend & React Ecosystem",
+    proficiency: 92,
+    level: "Advanced",
+    experience: "3+ Years",
+    summary: "Grid layouts, interactive modal dialogues, dropdowns, and turnkey admin dashboard interfaces.",
+    usedIn: [
+      { name: "Kanha Admin Portal", url: "/demos/kanha-admin" },
+    ],
+  },
+  {
+    name: "Custom React Hooks",
+    icon: "🪝",
+    category: "Frontend & React Ecosystem",
+    proficiency: 93,
+    level: "Advanced",
+    experience: "2+ Years",
+    summary: "Reusable state hooks (useLocalStorage, useDebounce, useMediaQuery, useAudioSynth).",
+    usedIn: [
+      { name: "Spotify Bollywood", url: "/demos/spotify-bollywood" },
+      { name: "TaskMaster Pro", url: "/demos/taskmaster-pro" },
+    ],
+  },
+
+  // --- Web APIs & Architecture ---
+  {
+    name: "Web Audio API",
+    icon: "🎵",
     category: "Web APIs & Architecture",
-    skills: [
-      { name: "RESTful APIs & Fetch", icon: "🔌" },
-      { name: "Web Audio API", icon: "🎵" },
-      { name: "LocalStorage API", icon: "💾" },
-      { name: "Core Web Vitals Optimization", icon: "🚀" },
-      { name: "Responsive Fluid Design", icon: "📱" },
-      { name: "Cross-Browser Compatibility", icon: "🌐" },
+    proficiency: 90,
+    level: "Specialist",
+    experience: "2+ Years",
+    summary: "Real-time harmonic synthesizer, OscillatorNode, GainNode envelope, and synchronized audio playback.",
+    usedIn: [
+      { name: "Spotify Bollywood", url: "/demos/spotify-bollywood" },
     ],
   },
   {
-    category: "Developer Tools & Cloud Deployment",
-    skills: [
-      { name: "Git & GitHub", icon: "🐙" },
-      { name: "Vercel Cloud Hosting", icon: "▲" },
-      { name: "VS Code & Debugging", icon: "💻" },
-      { name: "npm / package ecosystem", icon: "📦" },
-      { name: "WordPress CMS", icon: "📝" },
-      { name: "Chrome DevTools", icon: "🛠️" },
+    name: "RESTful APIs & Fetch",
+    icon: "🔌",
+    category: "Web APIs & Architecture",
+    proficiency: 92,
+    level: "Advanced",
+    experience: "2+ Years",
+    summary: "JSON data consumption, async/await pipelines, error handling boundaries, and caching layers.",
+    usedIn: [
+      { name: "Weather Dashboard", url: "/demos/weather-dashboard" },
+      { name: "Currency Converter", url: "/demos/currency-converter" },
     ],
   },
   {
+    name: "LocalStorage API",
+    icon: "💾",
+    category: "Web APIs & Architecture",
+    proficiency: 96,
+    level: "Expert",
+    experience: "3+ Years",
+    summary: "Client-side relational persistence, schema serialization, JSON backups, and multi-tab sync.",
+    usedIn: [
+      { name: "TaskMaster Pro", url: "/demos/taskmaster-pro" },
+      { name: "Inventory System", url: "/demos/inventory-system" },
+    ],
+  },
+  {
+    name: "Core Web Vitals & Perf",
+    icon: "🚀",
+    category: "Web APIs & Architecture",
+    proficiency: 94,
+    level: "Specialist",
+    experience: "2+ Years",
+    summary: "FCP/LCP/CLS tuning, preloading, asset compression, tree-shaking, and Lighthouse 95+ score delivery.",
+    usedIn: [
+      { name: "Official Portfolio", url: "/" },
+      { name: "Kanha Construction", url: "/demos/kanha-portfolio" },
+    ],
+  },
+  {
+    name: "Responsive Fluid Design",
+    icon: "📱",
+    category: "Web APIs & Architecture",
+    proficiency: 98,
+    level: "Master",
+    experience: "3+ Years",
+    summary: "Mobile-first layouts tested across Safari iOS, Android Chrome, tablet foldables, and ultra-wide screens.",
+    usedIn: [
+      { name: "Kanha Construction", url: "/demos/kanha-portfolio" },
+      { name: "Travel Website", url: "/demos/travel-website" },
+    ],
+  },
+
+  // --- Developer Tools & Cloud ---
+  {
+    name: "Git & GitHub Versioning",
+    icon: "🐙",
+    category: "Developer Tools & Cloud",
+    proficiency: 92,
+    level: "Advanced",
+    experience: "3+ Years",
+    summary: "Branching strategies, atomic commits, pull request workflows, and repository management.",
+    usedIn: [
+      { name: "GitHub Repository", url: "https://github.com/PrathamPanchal26" },
+    ],
+  },
+  {
+    name: "Vercel Cloud Deployment",
+    icon: "▲",
+    category: "Developer Tools & Cloud",
+    proficiency: 94,
+    level: "Advanced",
+    experience: "2+ Years",
+    summary: "Continuous deployment (CI/CD), rewrite rules, cache control headers, and zero-downtime rollouts.",
+    usedIn: [
+      { name: "Production Deployment", url: "/" },
+    ],
+  },
+  {
+    name: "Chrome DevTools & Debugging",
+    icon: "🛠️",
+    category: "Developer Tools & Cloud",
+    proficiency: 90,
+    level: "Advanced",
+    experience: "3+ Years",
+    summary: "Performance profiling, memory leak tracking, network waterfall inspection, and CSS grid inspectors.",
+    usedIn: [
+      { name: "Portfolio & Demos", url: "/projects" },
+    ],
+  },
+  {
+    name: "WordPress & Headless CMS",
+    icon: "📝",
+    category: "Developer Tools & Cloud",
+    proficiency: 88,
+    level: "Proficient",
+    experience: "2+ Years",
+    summary: "Custom themes, plugins, content workflows, and headless REST endpoints for corporate clients.",
+    usedIn: [
+      { name: "Client CMS Work", url: "/contact" },
+    ],
+  },
+
+  // --- UI/UX & Creative ---
+  {
+    name: "UI/UX Architecture & Flow",
+    icon: "🎯",
     category: "UI/UX & Creative Design",
-    skills: [
-      { name: "UI/UX Engineering", icon: "🎯" },
-      { name: "Figma Prototyping", icon: "🖼️" },
-      { name: "Graphic Design", icon: "✏️" },
-      { name: "Adobe Photoshop", icon: "🖌️" },
-      { name: "Canva Design Suite", icon: "🟦" },
-      { name: "Technical SEO & Schema", icon: "🔍" },
+    proficiency: 94,
+    level: "Expert",
+    experience: "3+ Years",
+    summary: "Design systems, typography scale, micro-interactions, accessibility (WCAG), and visual hierarchy.",
+    usedIn: [
+      { name: "Kanha Construction", url: "/demos/kanha-portfolio" },
+      { name: "Portfolio Redesign", url: "/" },
+    ],
+  },
+  {
+    name: "Figma Prototyping",
+    icon: "🖼️",
+    category: "UI/UX & Creative Design",
+    proficiency: 88,
+    level: "Advanced",
+    experience: "2+ Years",
+    summary: "Wireframes, high-fidelity prototypes, component design variants, and client presentations.",
+    usedIn: [
+      { name: "Kanha Construction", url: "/demos/kanha-portfolio" },
+    ],
+  },
+  {
+    name: "Technical SEO & Schema",
+    icon: "🔍",
+    category: "UI/UX & Creative Design",
+    proficiency: 96,
+    level: "Master",
+    experience: "3+ Years",
+    summary: "JSON-LD structured data, Google Knowledge Graph, FAQPage snippets, sitemaps, and local Ahmedabad SEO.",
+    usedIn: [
+      { name: "Official Portfolio", url: "/" },
+      { name: "Insights Guide", url: "/insights" },
     ],
   },
 ];
 
+// Interactive Code Snippet Lab Demos
+const CODE_SNIPPETS = {
+  storage: {
+    id: "storage",
+    title: "1. useSyncedStorage (Custom React Hook)",
+    desc: "A production-grade hook that wraps localStorage with type safety, error boundaries, and reactive cross-tab sync.",
+    code: `function useSyncedStorage(key, initialValue) {
+  const [val, setVal] = useState(() => {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
+
+  const update = (newVal) => {
+    setVal(newVal);
+    localStorage.setItem(key, JSON.stringify(newVal));
+  };
+
+  return [val, update];
+}`,
+  },
+  synth: {
+    id: "synth",
+    title: "2. WebAudio Harmonic Synth (AudioNodes)",
+    desc: "Synthesize pleasant polyphonic chords in real-time without hosting audio MP3 files, as engineered in Spotify Bollywood.",
+    code: `const playChord = () => {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const gain = ctx.createGain();
+  gain.connect(ctx.destination);
+  gain.gain.setValueAtTime(0.18, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+  // C Major Chord: 261.6Hz (C4), 329.6Hz (E4), 392.0Hz (G4)
+  [261.63, 329.63, 392.00].forEach(freq => {
+    const osc = ctx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    osc.connect(gain);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.6);
+  });
+};`,
+  },
+  debounce: {
+    id: "debounce",
+    title: "3. useDebounce Search Optimizer",
+    desc: "Prevents excessive re-renders and API hits when users type quickly into search inputs and filtering widgets.",
+    code: `function useDebounce(value, delay = 300) {
+  const [debounced, setDebounced] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debounced;
+}`,
+  },
+  clamp: {
+    id: "clamp",
+    title: "4. Responsive CSS Fluid Clamp System",
+    desc: "Calculates perfect fluid typography without media-query bloat across mobile, tablet, and 4K displays.",
+    code: `/* Fluid Typography Token */
+:root {
+  --fluid-h1: clamp(2rem, 1.2rem + 3.8vw, 4rem);
+  --fluid-body: clamp(0.95rem, 0.88rem + 0.35vw, 1.15rem);
+  --fluid-card-pad: clamp(1rem, 0.8rem + 1vw, 2rem);
+}`,
+  },
+};
+
 function Skills() {
+  const [selectedCategory, setSelectedCategory] = useState("All Skills");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeSnippetKey, setActiveSnippetKey] = useState("storage");
+  const [copiedSnippet, setCopiedSnippet] = useState(false);
+
+  // Interactive Live Playground State
+  const [demoStorageValue, setDemoStorageValue] = useState("Ahmedabad Developer");
+  const [savedStorageDisplay, setSavedStorageDisplay] = useState("Ahmedabad Developer");
+  const [debounceInput, setDebounceInput] = useState("");
+  const [debouncedDisplay, setDebouncedDisplay] = useState("");
+  const [viewportSlider, setViewportSlider] = useState(768);
+  const [audioStatus, setAudioStatus] = useState("Click to hear browser synthesizer");
+
+  // Debounce interactive simulator
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedDisplay(debounceInput);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [debounceInput]);
+
+  const filteredSkills = useMemo(() => {
+    return SKILLS_DATA.filter((skill) => {
+      const matchCat =
+        selectedCategory === "All Skills" || skill.category === selectedCategory;
+      const q = searchQuery.toLowerCase().trim();
+      const matchQuery =
+        !q ||
+        skill.name.toLowerCase().includes(q) ||
+        skill.summary.toLowerCase().includes(q) ||
+        skill.category.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Audio Synth Player Trigger
+  const handleTestAudioSynth = () => {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) {
+        setAudioStatus("Web Audio API not supported in this browser.");
+        return;
+      }
+      const ctx = new AudioContext();
+      const gain = ctx.createGain();
+      gain.connect(ctx.destination);
+      gain.gain.setValueAtTime(0.18, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+      // C Major Triad
+      [261.63, 329.63, 392.0].forEach((freq) => {
+        const osc = ctx.createOscillator();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.connect(gain);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.6);
+      });
+      setAudioStatus("🎵 Playing C-Major synthesized triad via Web Audio API!");
+      setTimeout(() => setAudioStatus("Click to hear browser synthesizer"), 2000);
+    } catch (e) {
+      setAudioStatus("AudioContext gesture locked. Click again!");
+    }
+  };
+
+  const handleCopySnippet = (code) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+      setCopiedSnippet(true);
+      setTimeout(() => setCopiedSnippet(false), 2000);
+    }
+  };
+
   return (
-    <div className="page">
+    <div className="page skills-page">
+      {/* Page Header */}
       <div className="section-header">
-        <div className="section-tag">Technical Competencies</div>
-        <h2>Frontend &amp; Engineering Skills</h2>
+        <div className="section-tag">Interactive Technical Competencies</div>
+        <h2>Engineering Stack &amp; Skill Matrix</h2>
         <p>
           Technologies, frameworks, and modern tools engineered by <strong>Pratham Panchal</strong> in Ahmedabad, India.
+          Filter by category, inspect live code snippets, and explore real implementations.
         </p>
         <div className="divider"></div>
       </div>
 
-      {/* Quick Search Skills Trigger */}
-      <div className="skills-search-strip">
-        <button
-          type="button"
-          className="skills-search-trigger"
-          onClick={() => window.dispatchEvent(new CustomEvent("open-site-search"))}
-        >
-          <span>🔍</span> Search across all technologies &amp; project implementations... <kbd>Ctrl+K</kbd>
-        </button>
+      {/* Stats Bar */}
+      <div className="skills-overview-stats">
+        <div className="skill-stat-box">
+          <span className="stat-num">19+</span>
+          <span className="stat-lbl">Core Competencies</span>
+        </div>
+        <div className="skill-stat-box">
+          <span className="stat-num">95%</span>
+          <span className="stat-lbl">Avg Proficiency</span>
+        </div>
+        <div className="skill-stat-box">
+          <span className="stat-num">9+</span>
+          <span className="stat-lbl">Live React Apps</span>
+        </div>
+        <div className="skill-stat-box">
+          <span className="stat-num">100%</span>
+          <span className="stat-lbl">Lighthouse Best Practices</span>
+        </div>
       </div>
 
-      <div className="skills-container">
-        {skillCategories.map((cat) => (
-          <div className="skills-category" key={cat.category}>
-            <h3>{cat.category}</h3>
-            <div className="skills-grid">
-              {cat.skills.map((skill) => (
-                <div className="skill-card" key={skill.name}>
-                  <span className="skill-icon">{skill.icon}</span>
-                  <span className="skill-name">{skill.name}</span>
+      {/* Filter and Search Bar */}
+      <div className="skills-filter-toolbar">
+        <div className="skills-cat-tabs">
+          {SKILL_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              className={`skills-tab-btn ${selectedCategory === cat ? "active" : ""}`}
+              onClick={() => setSelectedCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className="skills-search-bar">
+          <span className="search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="search"
+            className="skills-input-field"
+            placeholder="Search skills, tools, hooks, APIs..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Filter skills list"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              className="skills-clear-btn"
+              onClick={() => setSearchQuery("")}
+              aria-label="Clear skill search"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Skills Matrix Grid */}
+      <div className="skills-matrix-grid">
+        {filteredSkills.length === 0 ? (
+          <div className="skills-empty-notice">
+            <span>🔍</span>
+            <h4>No skills found matching "{searchQuery}"</h4>
+            <p>Try searching for "React", "CSS", "Audio", "API", or select a category tab.</p>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => {
+                setSelectedCategory("All Skills");
+                setSearchQuery("");
+              }}
+            >
+              View All Skills
+            </button>
+          </div>
+        ) : (
+          filteredSkills.map((skill) => (
+            <div className="skill-matrix-card" key={skill.name}>
+              <div className="skill-card-top">
+                <span className="skill-avatar">{skill.icon}</span>
+                <div className="skill-title-block">
+                  <h3 className="skill-title-name">{skill.name}</h3>
+                  <span className="skill-category-tag">{skill.category}</span>
                 </div>
-              ))}
+                <div className="skill-badge-level">{skill.level}</div>
+              </div>
+
+              {/* Animated Proficiency Bar */}
+              <div className="skill-progress-wrap">
+                <div className="skill-progress-meta">
+                  <span className="progress-label">Proficiency</span>
+                  <span className="progress-percent">{skill.proficiency}%</span>
+                </div>
+                <div className="skill-progress-track">
+                  <div
+                    className="skill-progress-bar"
+                    style={{ width: `${skill.proficiency}%` }}
+                    role="progressbar"
+                    aria-valuenow={skill.proficiency}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+              </div>
+
+              <p className="skill-summary-text">{skill.summary}</p>
+
+              {/* Used In Project Pills */}
+              {skill.usedIn && skill.usedIn.length > 0 && (
+                <div className="skill-used-in">
+                  <span className="used-label">Implemented in:</span>
+                  <div className="used-pills">
+                    {skill.usedIn.map((proj, pIdx) => (
+                      proj.url.startsWith("http") ? (
+                        <a
+                          key={pIdx}
+                          href={proj.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="used-project-pill"
+                        >
+                          {proj.name} ↗
+                        </a>
+                      ) : (
+                        <Link
+                          key={pIdx}
+                          to={proj.url}
+                          className="used-project-pill"
+                        >
+                          {proj.name} →
+                        </Link>
+                      )
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* ========================================================
+          INTERACTIVE CODE SNIPPET PLAYGROUND & RUNNER
+      ======================================================== */}
+      <section className="code-playground-section" aria-label="Interactive Code Lab">
+        <div className="playground-header">
+          <div className="playground-badge">⚡ Interactive Lab</div>
+          <h3>Live Frontend Patterns &amp; React Snippet Lab</h3>
+          <p>
+            Inspect and test live code architectures engineered by Pratham. Select a pattern, test its execution in real-time, or copy to your clipboard.
+          </p>
+        </div>
+
+        {/* Snippet Selection Tabs */}
+        <div className="playground-tabs-bar">
+          {Object.keys(CODE_SNIPPETS).map((key) => {
+            const snip = CODE_SNIPPETS[key];
+            return (
+              <button
+                key={key}
+                type="button"
+                className={`playground-tab-btn ${activeSnippetKey === key ? "active" : ""}`}
+                onClick={() => setActiveSnippetKey(key)}
+              >
+                {snip.title}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Playground Container */}
+        <div className="playground-workbench">
+          {/* Code Viewer Column */}
+          <div className="playground-code-col">
+            <div className="workbench-bar">
+              <span className="workbench-title">{CODE_SNIPPETS[activeSnippetKey].title}</span>
+              <button
+                type="button"
+                className="btn-copy-code"
+                onClick={() => handleCopySnippet(CODE_SNIPPETS[activeSnippetKey].code)}
+              >
+                {copiedSnippet ? "✓ Copied!" : "📋 Copy Code"}
+              </button>
+            </div>
+            <pre className="playground-pre">
+              <code>{CODE_SNIPPETS[activeSnippetKey].code}</code>
+            </pre>
+            <p className="workbench-desc">{CODE_SNIPPETS[activeSnippetKey].desc}</p>
+          </div>
+
+          {/* Live Interactive Simulator Column */}
+          <div className="playground-live-col">
+            <div className="workbench-bar">
+              <span className="workbench-title">⚡ Live Browser Execution Test</span>
+              <span className="workbench-tag">Client Runtime</span>
+            </div>
+
+            <div className="workbench-interactive-card">
+              {activeSnippetKey === "storage" && (
+                <div className="simulator-box">
+                  <h4>Test LocalStorage Wrapper</h4>
+                  <p>Type a value to simulate saving and reading from browser storage:</p>
+                  <div className="simulator-input-row">
+                    <input
+                      type="text"
+                      className="sim-input"
+                      value={demoStorageValue}
+                      onChange={(e) => setDemoStorageValue(e.target.value)}
+                      placeholder="Enter test value..."
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm"
+                      onClick={() => setSavedStorageDisplay(demoStorageValue)}
+                    >
+                      Commit to Storage
+                    </button>
+                  </div>
+                  <div className="sim-output-box">
+                    <span className="sim-output-label">localStorage.getItem('pratham_demo_key'):</span>
+                    <code>"{savedStorageDisplay}"</code>
+                  </div>
+                </div>
+              )}
+
+              {activeSnippetKey === "synth" && (
+                <div className="simulator-box">
+                  <h4>Test Web Audio API Synthesizer</h4>
+                  <p>Click below to generate real polyphonic harmonic frequencies natively in your browser with zero audio files:</p>
+                  <div className="simulator-btn-row">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleTestAudioSynth}
+                    >
+                      ▶ Play C-Major Harmonic Chord
+                    </button>
+                  </div>
+                  <div className="sim-audio-status">
+                    <span>Status:</span> {audioStatus}
+                  </div>
+                  <p className="sim-subtext">
+                    Engineered for the Spotify Bollywood web player at <Link to="/demos/spotify-bollywood">Spotify Bollywood Demo</Link>.
+                  </p>
+                </div>
+              )}
+
+              {activeSnippetKey === "debounce" && (
+                <div className="simulator-box">
+                  <h4>Test useDebounce Optimization</h4>
+                  <p>Type rapidly below to see the debouncer delay updates by 350ms:</p>
+                  <input
+                    type="text"
+                    className="sim-input"
+                    value={debounceInput}
+                    onChange={(e) => setDebounceInput(e.target.value)}
+                    placeholder="Type fast here..."
+                  />
+                  <div className="sim-debounce-results">
+                    <div><strong>Instant Value:</strong> "{debounceInput}"</div>
+                    <div><strong>Debounced Result (350ms):</strong> "{debouncedDisplay}"</div>
+                  </div>
+                </div>
+              )}
+
+              {activeSnippetKey === "clamp" && (
+                <div className="simulator-box">
+                  <h4>Fluid Clamp Simulator</h4>
+                  <p>Drag the slider to simulate viewport resizing and witness fluid typography scale dynamically:</p>
+                  <div className="slider-row">
+                    <label>Viewport: {viewportSlider}px</label>
+                    <input
+                      type="range"
+                      min="320"
+                      max="1440"
+                      value={viewportSlider}
+                      onChange={(e) => setViewportSlider(Number(e.target.value))}
+                      className="sim-slider"
+                    />
+                  </div>
+                  <div
+                    className="sim-fluid-preview"
+                    style={{
+                      fontSize: `${Math.max(1.2, Math.min(2.5, 1.2 + (viewportSlider - 320) * 0.0013))}rem`,
+                    }}
+                  >
+                    Fluid Heading Scale Test
+                  </div>
+                  <span className="sim-output-label">Calculated font size: ~{(1.2 + (viewportSlider - 320) * 0.0013).toFixed(2)}rem</span>
+                </div>
+              )}
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA for Project Discussion */}
+      <section className="skills-cta-banner">
+        <h3>Have a Specific Technology Requirement?</h3>
+        <p>
+          Pratham specializes in React 19, custom CSS architecture, responsive design, and sub-second web performance for clients across Ahmedabad and internationally.
+        </p>
+        <div className="skills-cta-btns">
+          <Link to="/contact" className="btn btn-primary">
+            Hire Pratham Panchal
+          </Link>
+          <Link to="/projects" className="btn btn-outline">
+            Browse All 9 Live Applications
+          </Link>
+          <Link to="/insights" className="btn btn-secondary">
+            Read Architectural Case Studies
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

@@ -49,6 +49,9 @@ function Navbar() {
           <NavLink to="/projects" onClick={closeMenu}>
             Projects
           </NavLink>
+          <NavLink to="/insights" onClick={closeMenu}>
+            Insights
+          </NavLink>
           <NavLink to="/contact" onClick={closeMenu}>
             Contact
           </NavLink>

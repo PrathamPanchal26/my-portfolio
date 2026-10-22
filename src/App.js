@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
+import Insights from "./pages/Insights";
 import DemoViewer from "./demos/DemoViewer";
 import ScrollToTop from "./components/ScrollToTop";
 import DevTerminal from "./components/DevTerminal";
@@ -31,6 +32,10 @@ const ROUTE_META = {
   "/projects": {
     title: "Projects & Live Applications — Pratham Panchal | React Portfolio Ahmedabad",
     description: "Explore 9 interactive in-browser applications built by Pratham Panchal: Kanha Construction & Interior, Kanha Admin Portal, Spotify Bollywood, TaskMaster Pro, and Inventory System."
+  },
+  "/insights": {
+    title: "Technical Case Studies & Insights — Pratham Panchal | React Engineering Ahmedabad",
+    description: "Explore in-depth technical case studies by Pratham Panchal: Kanha Construction 99 Lighthouse performance, Web Audio API harmonic synthesis, state persistence, and Google SEO ranking."
   },
   "/contact": {
     title: "Contact & Hire Pratham Panchal | Frontend Developer in Ahmedabad, India",
@@ -75,6 +80,7 @@ function AppContent() {
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/insights" element={<Insights />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/demos/:demoId" element={<DemoViewer />} />
         </Routes>

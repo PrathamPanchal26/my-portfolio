@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ProjectEstimator from "../components/ProjectEstimator";
 import FAQSection from "../components/FAQSection";
+import { INSIGHTS } from "../data/insightsData";
 
 const SERVICES = [
   {
@@ -266,6 +267,44 @@ function Home() {
               >
                 Launch Demo ↗
               </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Engineering Case Studies & Architecture Deep Dives */}
+      <section className="home-case-studies-section">
+        <div className="home-featured-header">
+          <div>
+            <span className="section-tag-sm">Technical Authority</span>
+            <h3>Engineering Case Studies &amp; Architecture Deep Dives</h3>
+          </div>
+          <Link to="/insights" className="link-view-all">
+            Read all case studies →
+          </Link>
+        </div>
+
+        <div className="home-insights-grid">
+          {INSIGHTS.slice(0, 3).map((item) => (
+            <div className="home-insight-card" key={item.id}>
+              <div className="insight-card-meta">
+                <span className="insight-cat-badge">{item.category}</span>
+                <span className="insight-read-time">{item.readTime}</span>
+              </div>
+              <h4>
+                <Link to="/insights">{item.title}</Link>
+              </h4>
+              <p>{item.subtitle}</p>
+              <div className="home-insight-metrics">
+                {item.metrics.slice(0, 2).map((m, idx) => (
+                  <span className="mini-metric-pill" key={idx}>
+                    <strong>{m.value}</strong> {m.label}
+                  </span>
+                ))}
+              </div>
+              <Link to="/insights" className="home-insight-link">
+                Read Breakdown →
+              </Link>
             </div>
           ))}
         </div>
