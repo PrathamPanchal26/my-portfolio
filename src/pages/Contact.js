@@ -191,6 +191,25 @@ function Contact() {
             </a>
           </div>
 
+          {/* Quick 15-Min Discovery Call Box */}
+          <div className="discovery-call-card">
+            <div className="call-card-badge">
+              <span className="pulse-dot-green"></span> 15-Min Discovery Call
+            </div>
+            <h4>Prefer a Direct Conversation?</h4>
+            <p>
+              Let's do a quick intro chat via Google Meet or WhatsApp to explore your project ideas, scope, timeline, and tech stack.
+            </p>
+            <a
+              href="https://wa.me/919638561264?text=Hi%20Pratham,%20I%20would%20like%20to%20schedule%20a%2015-minute%20intro%20call%20for%20my%20project."
+              target="_blank"
+              rel="noreferrer"
+              className="btn-call-schedule"
+            >
+              <span>📅</span> Book 15-Min Intro Call
+            </a>
+          </div>
+
           <div className="contact-socials">
             <a
               href="https://github.com/PrathamPanchal26"

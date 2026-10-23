@@ -9,11 +9,13 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import Insights from "./pages/Insights";
+import NotFound from "./pages/NotFound";
 import DemoViewer from "./demos/DemoViewer";
 import ScrollToTop from "./components/ScrollToTop";
 import DevTerminal from "./components/DevTerminal";
 import GlobalSearch from "./components/GlobalSearch";
 import ResumeModal from "./components/ResumeModal";
+import QuickContactDock from "./components/QuickContactDock";
 import "./App.css";
 
 const ROUTE_META = {
@@ -62,7 +64,7 @@ function AppContent() {
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute("content", meta.description);
       } else {
-        document.title = "Pratham Panchal — Frontend Developer & React Specialist";
+        document.title = "404 Page Not Found — Pratham Panchal Portfolio";
       }
     }
 
@@ -83,6 +85,7 @@ function AppContent() {
           <Route path="/insights" element={<Insights />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/demos/:demoId" element={<DemoViewer />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {!isDemoRoute && <Footer />}
@@ -90,6 +93,7 @@ function AppContent() {
       {!isDemoRoute && <DevTerminal />}
       <GlobalSearch />
       <ResumeModal />
+      {!isDemoRoute && <QuickContactDock />}
     </div>
   );
 }

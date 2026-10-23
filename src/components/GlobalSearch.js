@@ -47,7 +47,16 @@ const SEARCH_DATABASE = [
     title: "Contact & Hire Pratham",
     description: "Direct contact form, phone +91 9638561264, WhatsApp link, and email prathampanchal1515@gmail.com.",
     path: "/contact",
-    keywords: ["contact", "hire", "email", "phone", "whatsapp", "reach", "freelance", "message"],
+    keywords: ["contact", "hire", "email", "phone", "whatsapp", "reach", "freelance", "message", "call", "schedule"],
+  },
+  {
+    id: "page-insights",
+    type: "Pages",
+    icon: "📖",
+    title: "Engineering Insights & Case Studies",
+    description: "Deep dive technical case studies on Kanha Construction 99 Lighthouse score, Web Audio API synthesis, React state, and Google SEO.",
+    path: "/insights",
+    keywords: ["insights", "articles", "case studies", "blogs", "architecture", "lighthouse", "web audio", "seo", "technical"],
   },
 
   // --- Projects & Live Demos ---
