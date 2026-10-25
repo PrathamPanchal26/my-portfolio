@@ -17,6 +17,8 @@ function Footer() {
           <Link to="/projects">Projects</Link>
           <Link to="/insights">Insights</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+          <Link to="/terms">Terms of Service</Link>
         </div>
         <p className="footer-copy">
           © {year} Pratham Panchal — Frontend Developer &amp; React Specialist · Ahmedabad, India.

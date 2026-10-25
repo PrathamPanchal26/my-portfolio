@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import {
+  trackEvent,
+  trackWhatsAppClick,
+  trackEmailClick,
+} from "../utils/analytics";
 
 const API_URL = "/api/contact";
 const INBOX_EMAIL = "prathampanchal1515@gmail.com";
@@ -78,6 +83,12 @@ function Contact() {
 
       if (mailOk) {
         setSubmitted(true);
+        trackEvent("generate_lead", {
+          method: "Contact Form",
+          lead_source: "contact_page",
+          event_category: "Conversion",
+          event_label: formData.subject || "General Inquiry",
+        });
       } else {
         setError(
           mailData.message ||
@@ -133,7 +144,11 @@ function Contact() {
                     {copiedField === "email" ? "Copied! ✓" : "Copy"}
                   </button>
                 </div>
-                <a href={`mailto:${INBOX_EMAIL}`} className="contact-val-link">
+                <a
+                  href={`mailto:${INBOX_EMAIL}`}
+                  className="contact-val-link"
+                  onClick={() => trackEmailClick("contact_page")}
+                >
                   {INBOX_EMAIL}
                 </a>
               </div>
@@ -186,6 +201,7 @@ function Contact() {
               target="_blank"
               rel="noreferrer"
               className="btn-whatsapp"
+              onClick={() => trackWhatsAppClick("contact_page")}
             >
               <span className="wa-icon">💬</span> Chat Directly on WhatsApp
             </a>

@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import ProjectEstimator from "../components/ProjectEstimator";
 import FAQSection from "../components/FAQSection";
 import { INSIGHTS } from "../data/insightsData";
+import {
+  trackResumeView,
+  trackWhatsAppClick,
+  trackDemoLaunch,
+} from "../utils/analytics";
 
 const SERVICES = [
   {
@@ -90,14 +95,21 @@ const TESTIMONIALS = [
 
 const SEO_TOPICS = [
   "Pratham Panchal",
+  "Pratham Panchal Portfolio",
   "Frontend Developer Ahmedabad",
   "React Developer Gujarat",
+  "Web Developer Nikol Ahmedabad",
+  "Pratham Panchal GitHub",
+  "Pratham Panchal Resume",
   "Kanha Construction Website",
   "Web Designer Ahmedabad",
   "Spotify Bollywood React",
   "TaskMaster Pro Suite",
   "Cloth Inventory System",
-  "Hire React Specialist India",
+  "Hire React Developer Ahmedabad",
+  "Best Frontend Developer Ahmedabad",
+  "Freelance Web Developer Gujarat",
+  "React 19 Developer India",
   "Turnkey Web Solutions",
   "Modern UI/UX Design",
   "Sub-Second Core Web Vitals",
@@ -138,7 +150,10 @@ function Home() {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-resume-modal"))}
+              onClick={() => {
+                trackResumeView("hero_button");
+                window.dispatchEvent(new CustomEvent("open-resume-modal"));
+              }}
               title="View & Download Pratham's Resume"
             >
               📄 View Resume
@@ -152,6 +167,7 @@ function Home() {
               rel="noreferrer"
               className="btn btn-whatsapp-hero"
               title="Chat directly on WhatsApp"
+              onClick={() => trackWhatsAppClick("hero_button")}
             >
               <span>💬</span> WhatsApp
             </a>
@@ -264,6 +280,7 @@ function Home() {
                 target="_blank"
                 rel="noreferrer"
                 className="preview-demo-link"
+                onClick={() => trackDemoLaunch(item.title, item.link)}
               >
                 Launch Demo ↗
               </a>

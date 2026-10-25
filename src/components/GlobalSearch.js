@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import {
+  trackSearchQuery,
+  trackWhatsAppClick,
+  trackResumeView,
+} from "../utils/analytics";
 
 const SEARCH_DATABASE = [
   // --- Pages ---
@@ -388,10 +393,15 @@ export default function GlobalSearch() {
 
   const handleSelectItem = (item) => {
     setIsOpen(false);
+    if (query) {
+      trackSearchQuery(query);
+    }
 
     if (item.action === "open-resume") {
+      trackResumeView("global_search");
       window.dispatchEvent(new CustomEvent("open-resume-modal"));
     } else if (item.action === "whatsapp") {
+      trackWhatsAppClick("global_search");
       window.open(
         "https://wa.me/919638561264?text=Hi%20Pratham,%20I%20found%20your%20portfolio%20via%20search%20and%20would%20like%20to%20connect!",
         "_blank"

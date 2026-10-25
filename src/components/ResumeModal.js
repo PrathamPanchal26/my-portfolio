@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { trackResumeDownload } from "../utils/analytics";
 
 export default function ResumeModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +44,7 @@ Portfolio: https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/`;
   };
 
   const handlePrint = () => {
+    trackResumeDownload();
     window.print();
   };
 
@@ -82,6 +84,7 @@ Portfolio: https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/`;
               download="Pratham_Panchal_Resume.jpg"
               className="resume-btn resume-btn-primary"
               title="Download original resume file"
+              onClick={trackResumeDownload}
             >
               💾 Download Original
             </a>

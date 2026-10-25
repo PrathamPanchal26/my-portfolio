@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  trackWhatsAppClick,
+  trackEmailClick,
+  trackResumeView,
+} from "../utils/analytics";
 
 const WHATSAPP_URL =
   "https://wa.me/919638561264?text=Hi%20Pratham,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!";
@@ -31,6 +36,7 @@ export default function QuickContactDock() {
   };
 
   const handleOpenResume = () => {
+    trackResumeView("quick_dock");
     window.dispatchEvent(new CustomEvent("open-resume-modal"));
   };
 
@@ -83,6 +89,7 @@ export default function QuickContactDock() {
               rel="noreferrer"
               className="dock-action-btn dock-whatsapp"
               title="Chat on WhatsApp"
+              onClick={() => trackWhatsAppClick("quick_dock")}
             >
               <span>💬</span> WhatsApp
             </a>
@@ -90,6 +97,7 @@ export default function QuickContactDock() {
               href={EMAIL_URL}
               className="dock-action-btn dock-email"
               title="Send an Email"
+              onClick={() => trackEmailClick("quick_dock")}
             >
               <span>✉️</span> Email
             </a>

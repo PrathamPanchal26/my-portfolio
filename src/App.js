@@ -10,21 +10,24 @@ import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import Insights from "./pages/Insights";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import DemoViewer from "./demos/DemoViewer";
 import ScrollToTop from "./components/ScrollToTop";
 import DevTerminal from "./components/DevTerminal";
 import GlobalSearch from "./components/GlobalSearch";
 import ResumeModal from "./components/ResumeModal";
 import QuickContactDock from "./components/QuickContactDock";
+import { trackPageView } from "./utils/analytics";
 import "./App.css";
 
 const ROUTE_META = {
   "/": {
-    title: "Pratham Panchal — Frontend Developer & React Specialist | Official Portfolio Ahmedabad",
-    description: "Official portfolio of Pratham Panchal, Frontend Developer & React Specialist based in Ahmedabad, Gujarat, India. Discover high-performance React web applications, modern UI/UX design, interactive demos, and client portals."
+    title: "Pratham Panchal — Portfolio | Frontend Developer & React Specialist Ahmedabad",
+    description: "Official portfolio of Pratham Panchal — Frontend Developer & React Specialist based in Ahmedabad, Gujarat, India. Discover 9+ live interactive React applications, Kanha Construction studio, technical case studies, resume, GitHub projects, and modern UI/UX engineering."
   },
   "/about": {
-    title: "About Pratham Panchal | Frontend Developer & React Engineer Ahmedabad India",
+    title: "About Pratham Panchal | Frontend Developer & React Engineer Ahmedabad Gujarat",
     description: "Learn about Pratham Panchal: professional background, IT engineering diploma, frontend skills, client testimonials, and web engineering experience in Ahmedabad, Gujarat."
   },
   "/skills": {
@@ -43,6 +46,14 @@ const ROUTE_META = {
     title: "Contact & Hire Pratham Panchal | Frontend Developer in Ahmedabad, India",
     description: "Contact Pratham Panchal for freelance contracts, React development, UI design, or full-time roles. Call/WhatsApp +91 9638561264 or email prathampanchal1515@gmail.com."
   },
+  "/privacy": {
+    title: "Privacy Policy | Pratham Panchal Portfolio",
+    description: "Privacy policy for Pratham Panchal portfolio: detailing Google Analytics 4, cookie usage, data protection, and visitor rights."
+  },
+  "/terms": {
+    title: "Terms of Service | Pratham Panchal Portfolio",
+    description: "Terms of service for Pratham Panchal portfolio: intellectual property, project estimation guidelines, and service agreements."
+  },
 };
 
 function AppContent() {
@@ -50,23 +61,30 @@ function AppContent() {
   const isDemoRoute = location.pathname.startsWith("/demos");
 
   useEffect(() => {
+    let currentTitle = document.title;
     if (location.pathname.startsWith("/demos/")) {
       const demoSlug = location.pathname.replace("/demos/", "");
       const formatted = demoSlug
         .split("-")
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(" ");
-      document.title = `${formatted} Demo | Pratham Panchal Portfolio`;
+      currentTitle = `${formatted} Demo | Pratham Panchal Portfolio`;
+      document.title = currentTitle;
     } else {
       const meta = ROUTE_META[location.pathname];
       if (meta) {
-        document.title = meta.title;
+        currentTitle = meta.title;
+        document.title = currentTitle;
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute("content", meta.description);
       } else {
-        document.title = "404 Page Not Found — Pratham Panchal Portfolio";
+        currentTitle = "404 Page Not Found — Pratham Panchal Portfolio";
+        document.title = currentTitle;
       }
     }
+
+    // Fire Google Analytics 4 virtual page_view on every route navigation
+    trackPageView(location.pathname, currentTitle);
 
     try {
       window.scrollTo(0, 0);
@@ -84,6 +102,8 @@ function AppContent() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
           <Route path="/demos/:demoId" element={<DemoViewer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
