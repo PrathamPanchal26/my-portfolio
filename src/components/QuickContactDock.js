@@ -5,6 +5,7 @@ import {
   trackEmailClick,
   trackResumeView,
 } from "../utils/analytics";
+import { YOUTUBE_URL, INSTAGRAM_URL } from "./DevCreatorHub";
 
 const WHATSAPP_URL =
   "https://wa.me/919638561264?text=Hi%20Pratham,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!";
@@ -116,6 +117,30 @@ export default function QuickContactDock() {
             >
               <span>🚀</span> Talk
             </Link>
+          </div>
+
+          <div className="dock-creator-row">
+            <span className="dock-creator-label">Creator Channels:</span>
+            <div className="dock-creator-links">
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="dock-creator-pill yt"
+                title="Watch Pratham Coding World on YouTube"
+              >
+                <span>▶</span> YouTube
+              </a>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="dock-creator-pill ig"
+                title="Follow @devbypratham on Instagram"
+              >
+                <span>📸</span> Instagram
+              </a>
+            </div>
           </div>
         </div>
       )}

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
+import { YOUTUBE_URL, INSTAGRAM_URL } from "./DevCreatorHub";
 
 const INITIAL_GREETING = [
   "💻 Pratham Panchal Developer Console [v2.4.0]",
@@ -52,7 +53,10 @@ function DevTerminal() {
           "  bio          - Overview of Pratham Panchal & background",
           "  skills       - Core technical stack and frameworks",
           "  projects     - List of interactive live demo applications",
-          "  contact      - Direct WhatsApp, email, and location info",
+          "  youtube      - Open & view YouTube channel (@prathamcodingworld)",
+          "  instagram    - Open & view Instagram reels profile (@devbypratham)",
+          "  creator      - Explore Tech Content Creator Hub & stats",
+          "  contact      - Direct WhatsApp, email, and social info",
           "  quote        - Jump to project cost & timeline estimator",
           "  theme        - Toggle between dark mode and light mode",
           "  clear        - Clear the terminal console",
@@ -95,11 +99,46 @@ function DevTerminal() {
 
       case "contact":
         responseLines = [
-          "📫 Get In Touch:",
+          "📫 Get In Touch & Follow Along:",
           "  • Email: prathampanchal1515@gmail.com",
           "  • Phone/WhatsApp: +91 9638561264",
+          "  • YouTube: https://youtube.com/@prathamcodingworld",
+          "  • Instagram: https://www.instagram.com/devbypratham",
           "  • GitHub: https://github.com/PrathamPanchal26",
           "  • Location: Ahmedabad, Gujarat, India (Remote & Hybrid)"
+        ];
+        break;
+
+      case "youtube":
+        responseLines = [
+          "▶ Pratham Coding World — YouTube Channel",
+          "  • Channel: @prathamcodingworld",
+          "  • URL: https://youtube.com/@prathamcodingworld?si=xZ94QAp_jyFStvts",
+          "  • Focus: React 19 Architectures, CSS Micro-Animations, Web Audio API, Full Builds",
+          "  • Status: Opening channel in a new tab..."
+        ];
+        window.open(YOUTUBE_URL, "_blank");
+        break;
+
+      case "instagram":
+        responseLines = [
+          "📸 Dev By Pratham — Instagram Creator",
+          "  • Handle: @devbypratham",
+          "  • URL: https://www.instagram.com/devbypratham?vrfl=MTV2cmMzeGN3czV1eQ==",
+          "  • Focus: Daily 60s Dev Reels, Frontend Hacks, Clean Code, UI/UX breakdowns",
+          "  • Status: Opening Instagram profile in a new tab..."
+        ];
+        window.open(INSTAGRAM_URL, "_blank");
+        break;
+
+      case "creator":
+        responseLines = [
+          "🌟 Tech Content Creator & Educator Hub:",
+          "  1. YouTube: Pratham Coding World (@prathamcodingworld)",
+          "     Step-by-step masterclasses, React 19 apps, CSS animations.",
+          "  2. Instagram: @devbypratham",
+          "     Daily 60s dev reels, UI design breakdowns, frontend tips.",
+          "  👉 Type 'youtube' or 'instagram' to launch immediately!"
         ];
         break;
 

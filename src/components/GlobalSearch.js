@@ -6,6 +6,7 @@ import {
   trackWhatsAppClick,
   trackResumeView,
 } from "../utils/analytics";
+import { YOUTUBE_URL, INSTAGRAM_URL } from "./DevCreatorHub";
 
 const SEARCH_DATABASE = [
   // --- Pages ---
@@ -240,6 +241,33 @@ const SEARCH_DATABASE = [
     action: "toggle-theme",
     keywords: ["theme", "dark", "light", "mode", "color", "contrast", "appearance"],
   },
+  {
+    id: "act-creator-hub",
+    type: "Creator Hub",
+    icon: "🎥",
+    title: "Tech Creator Hub & Video Tutorials",
+    description: "Explore YouTube tutorials (@prathamcodingworld) and daily developer reels (@devbypratham) with copyable code snippets.",
+    action: "scroll-creator",
+    keywords: ["creator", "youtube", "instagram", "tutorials", "reels", "snippets", "coding videos", "pratham coding world", "devbypratham"],
+  },
+  {
+    id: "act-youtube",
+    type: "Social & Creator",
+    icon: "▶️",
+    title: "Pratham Coding World (@prathamcodingworld) — YouTube",
+    description: "Watch free coding masterclasses: React 19 architecture, CSS glassmorphism, and Web Audio API synthesizers.",
+    action: "open-youtube",
+    keywords: ["youtube", "pratham coding world", "channel", "subscribe", "video", "react tutorial", "css tutorial", "web dev"],
+  },
+  {
+    id: "act-instagram",
+    type: "Social & Creator",
+    icon: "📸",
+    title: "Dev By Pratham (@devbypratham) — Instagram",
+    description: "Follow daily 60-second frontend reels, design teardowns, UI/UX tips, and developer setups.",
+    action: "open-instagram",
+    keywords: ["instagram", "devbypratham", "reels", "insta", "tips", "hacks", "daily", "developer"],
+  },
 
   // --- Frequently Asked Questions ---
   {
@@ -432,6 +460,21 @@ export default function GlobalSearch() {
         const el = document.getElementById("faq-knowledge-section");
         if (el) el.scrollIntoView({ behavior: "smooth" });
       }
+    } else if (item.action === "scroll-creator") {
+      if (window.location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          const el = document.getElementById("creator-hub");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      } else {
+        const el = document.getElementById("creator-hub");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (item.action === "open-youtube") {
+      window.open(YOUTUBE_URL, "_blank");
+    } else if (item.action === "open-instagram") {
+      window.open(INSTAGRAM_URL, "_blank");
     } else if (item.path) {
       navigate(item.path);
     }

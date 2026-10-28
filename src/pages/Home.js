@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ProjectEstimator from "../components/ProjectEstimator";
 import FAQSection from "../components/FAQSection";
+import DevCreatorHub, { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
 import { INSIGHTS } from "../data/insightsData";
 import {
   trackResumeView,
@@ -95,6 +96,10 @@ const TESTIMONIALS = [
 
 const SEO_TOPICS = [
   "Pratham Panchal",
+  "Pratham Coding World",
+  "Pratham Coding World YouTube",
+  "@devbypratham Instagram",
+  "Coding Tutorials Ahmedabad",
   "Pratham Panchal Portfolio",
   "Frontend Developer Ahmedabad",
   "React Developer Gujarat",
@@ -186,10 +191,28 @@ function Home() {
               href="https://github.com/PrathamPanchal26"
               target="_blank"
               rel="noreferrer"
-              className="social-link"
-              title="GitHub"
+              className="social-link social-link-gh"
+              title="GitHub Profile"
             >
               GH
+            </a>
+            <a
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="social-link social-link-yt"
+              title="YouTube Channel: @prathamcodingworld"
+            >
+              YT
+            </a>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="social-link social-link-ig"
+              title="Instagram: @devbypratham"
+            >
+              IG
             </a>
             <a
               href="https://linkedin.com/in/pratham"
@@ -369,6 +392,9 @@ function Home() {
           <span className="metric-caption">Lighthouse Score Target</span>
         </div>
       </section>
+
+      {/* Dev Creator Hub — YouTube & Instagram Tutorials Showcase */}
+      <DevCreatorHub />
 
       {/* Client Recommendations & Social Proof Section */}
       <section className="home-testimonials-section">

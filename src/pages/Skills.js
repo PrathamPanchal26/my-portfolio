@@ -206,6 +206,19 @@ const SKILLS_DATA = [
     ],
   },
   {
+    name: "Tech Content & Dev Education",
+    icon: "🎥",
+    category: "Developer Tools & Cloud",
+    proficiency: 95,
+    level: "Expert",
+    experience: "Active Creator",
+    summary: "Video coding tutorials, 60s dev reels, architecture breakdowns, and open-source snippets on YouTube & Instagram.",
+    usedIn: [
+      { name: "YouTube (@prathamcodingworld)", url: "https://youtube.com/@prathamcodingworld?si=xZ94QAp_jyFStvts" },
+      { name: "Instagram (@devbypratham)", url: "https://www.instagram.com/devbypratham?vrfl=MTV2cmMzeGN3czV1eQ==" },
+    ],
+  },
+  {
     name: "WordPress & Headless CMS",
     icon: "📝",
     category: "Developer Tools & Cloud",

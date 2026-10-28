@@ -4,6 +4,7 @@ import {
   trackWhatsAppClick,
   trackEmailClick,
 } from "../utils/analytics";
+import { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
 
 const API_URL = "/api/contact";
 const INBOX_EMAIL = "prathampanchal1515@gmail.com";
@@ -226,15 +227,64 @@ function Contact() {
             </a>
           </div>
 
+          {/* Tech Creator & Social Channels Card */}
+          <div className="creator-connect-card">
+            <div className="creator-connect-badge">
+              <span>🎥</span> Creator &amp; Educator
+            </div>
+            <h4>Follow Tutorials &amp; Daily Dev Tips</h4>
+            <p>
+              I share practical frontend guides, React architectures, and project builds on YouTube &amp; Instagram.
+            </p>
+            <div className="creator-connect-buttons">
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-creator-sub yt"
+                title="Watch Pratham Coding World on YouTube"
+              >
+                <span>▶</span> YouTube (@prathamcodingworld)
+              </a>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-creator-sub ig"
+                title="Follow @devbypratham on Instagram"
+              >
+                <span>📸</span> Instagram (@devbypratham)
+              </a>
+            </div>
+          </div>
+
           <div className="contact-socials">
             <a
               href="https://github.com/PrathamPanchal26"
               target="_blank"
               rel="noreferrer"
-              className="social-link"
+              className="social-link social-link-gh"
               title="GitHub Profile"
             >
               GH
+            </a>
+            <a
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="social-link social-link-yt"
+              title="YouTube: @prathamcodingworld"
+            >
+              YT
+            </a>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="social-link social-link-ig"
+              title="Instagram: @devbypratham"
+            >
+              IG
             </a>
             <a
               href="https://linkedin.com/in/pratham"

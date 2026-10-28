@@ -146,6 +146,8 @@ function About() {
           <div className="about-tags">
             <span className="tag">Pratham Panchal</span>
             <span className="tag">React Specialist</span>
+            <span className="tag">Tech Creator (@prathamcodingworld)</span>
+            <span className="tag">Dev Educator (@devbypratham)</span>
             <span className="tag">Frontend Developer</span>
             <span className="tag">Ahmedabad, India</span>
             <span className="tag">JavaScript ES6+</span>
