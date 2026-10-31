@@ -52,8 +52,8 @@
 }
 
 .demo-back-btn:hover {
-  background: rgba(224, 122, 61, 0.2);
-  border-color: #e07a3d;
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
   color: #ff9d66;
 }
 
@@ -114,12 +114,12 @@
 }
 
 .demo-switch-select:focus {
-  border-color: #e07a3d;
+  border-color: #6366f1;
 }
 
 .demo-source-btn {
   padding: 6px 14px;
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
   border-radius: 8px;
   font-size: 0.85rem;
@@ -2576,7 +2576,7 @@
 }
 
 .ecom-announcement {
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
   text-align: center;
   font-size: 0.82rem;
@@ -2607,7 +2607,7 @@
 
 .ecom-brand span {
   font-size: 0.75rem;
-  color: #e07a3d;
+  color: #6366f1;
 }
 
 .ecom-nav-categories {
@@ -2624,7 +2624,7 @@
 }
 
 .ecom-cat-link.active {
-  color: #e07a3d;
+  color: #6366f1;
   font-weight: 700;
 }
 
@@ -2643,7 +2643,7 @@
 }
 
 .ecom-cart-badge {
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
   font-size: 0.72rem;
   padding: 2px 8px;
@@ -2652,12 +2652,12 @@
 
 .ecom-hero {
   padding: 60px 24px;
-  background: radial-gradient(circle at 70% 30%, rgba(224, 122, 61, 0.15), transparent 60%);
+  background: radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.15), transparent 60%);
   text-align: center;
 }
 
 .ecom-hero-tag {
-  color: #e07a3d;
+  color: #6366f1;
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -2704,9 +2704,9 @@
 }
 
 .ecom-pill-btn.active {
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
-  border-color: #e07a3d;
+  border-color: #6366f1;
 }
 
 .ecom-grid {
@@ -2740,7 +2740,7 @@
   top: 12px;
   left: 12px;
   padding: 4px 10px;
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -2756,7 +2756,7 @@
 
 .ecom-card-category {
   font-size: 0.75rem;
-  color: #e07a3d;
+  color: #6366f1;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -2804,8 +2804,8 @@
 }
 
 .ecom-add-btn:hover {
-  background: #e07a3d;
-  border-color: #e07a3d;
+  background: #6366f1;
+  border-color: #6366f1;
 }
 
 /* Cart Drawer */
@@ -2886,7 +2886,7 @@
 
 .ecom-cart-item-price {
   font-size: 0.85rem;
-  color: #e07a3d;
+  color: #6366f1;
   font-weight: 700;
   margin: 4px 0;
 }
@@ -2973,7 +2973,7 @@
 .ecom-checkout-btn {
   width: 100%;
   padding: 12px;
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -3245,7 +3245,7 @@
 }
 
 .folio-logo span {
-  color: #e07a3d;
+  color: #6366f1;
 }
 
 .folio-links {
@@ -3262,7 +3262,7 @@
 
 .folio-contact-btn {
   padding: 6px 16px;
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff !important;
   border-radius: 999px;
   font-weight: 600;
@@ -3279,7 +3279,7 @@
 }
 
 .folio-badge {
-  color: #e07a3d;
+  color: #6366f1;
   font-size: 0.85rem;
   font-weight: 700;
   display: block;
@@ -3315,7 +3315,7 @@
 }
 
 .folio-btn-primary {
-  background: #e07a3d;
+  background: #6366f1;
   color: #ffffff;
 }
 
@@ -3334,7 +3334,7 @@
   height: 200px;
   border-radius: 50%;
   background: #1d1a16;
-  border: 2px solid rgba(224, 122, 61, 0.3);
+  border: 2px solid rgba(99, 102, 241, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3428,7 +3428,7 @@
 
 .folio-form input:focus,
 .folio-form textarea:focus {
-  border-color: #e07a3d;
+  border-color: #6366f1;
 }
 
 .folio-success-toast {

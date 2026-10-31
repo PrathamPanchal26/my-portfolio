@@ -5,6 +5,9 @@ import {
   trackEmailClick,
 } from "../utils/analytics";
 import { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
+import { soundFX } from "../utils/soundEffects";
+import { downloadVCard } from "../utils/vcard";
+import LiveClockStatus from "../components/LiveClockStatus";
 
 const API_URL = "/api/contact";
 const INBOX_EMAIL = "prathampanchal1515@gmail.com";
@@ -29,6 +32,7 @@ function Contact() {
   };
 
   const handleCopy = (text, fieldName) => {
+    soundFX.playSuccess();
     try {
       navigator.clipboard.writeText(text);
       setCopiedField(fieldName);
@@ -39,6 +43,7 @@ function Contact() {
   };
 
   const handleQuickTemplate = (topic) => {
+    soundFX.playPop();
     setFormData((prev) => ({
       ...prev,
       subject: topic,
@@ -195,17 +200,37 @@ function Contact() {
             </div>
           </div>
 
-          {/* Quick WhatsApp Action Button */}
+          {/* Quick WhatsApp & vCard Action Buttons */}
           <div className="whatsapp-action-box">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
               className="btn-whatsapp"
-              onClick={() => trackWhatsAppClick("contact_page")}
+              onClick={() => {
+                soundFX.playClick();
+                trackWhatsAppClick("contact_page");
+              }}
             >
               <span className="wa-icon">💬</span> Chat Directly on WhatsApp
             </a>
+
+            <button
+              type="button"
+              className="btn-vcard-contact"
+              onClick={() => {
+                soundFX.playSuccess();
+                downloadVCard();
+              }}
+              title="Download Pratham's vCard Contact file for your mobile contacts"
+            >
+              <span>📇</span> Save Contact Card (.vcf)
+            </button>
+          </div>
+
+          {/* Local IST Live Time Card */}
+          <div className="contact-live-clock-card">
+            <LiveClockStatus />
           </div>
 
           {/* Quick 15-Min Discovery Call Box */}

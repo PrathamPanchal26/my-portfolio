@@ -14,7 +14,6 @@ function Insights() {
   const [selectedCategory, setSelectedCategory] = useState("All Insights");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeArticle, setActiveArticle] = useState(null);
-  const [copiedSnippet, setCopiedSnippet] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
   const filteredArticles = useMemo(() => {
@@ -35,14 +34,6 @@ function Insights() {
   const featuredArticle = useMemo(() => {
     return INSIGHTS.find((i) => i.featured) || INSIGHTS[0];
   }, []);
-
-  const handleCopyCode = (code) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(code);
-      setCopiedSnippet(true);
-      setTimeout(() => setCopiedSnippet(false), 2000);
-    }
-  };
 
   const handleCopyArticleLink = (slug) => {
     const url = `${window.location.origin}/insights#${slug}`;
@@ -320,25 +311,6 @@ function Insights() {
                   ))}
                 </ul>
               </div>
-
-              {/* Code Snippet Lab */}
-              {activeArticle.codeSnippet && (
-                <div className="article-section">
-                  <div className="code-header">
-                    <h4>Production Code Architecture</h4>
-                    <button
-                      type="button"
-                      className="copy-snippet-btn"
-                      onClick={() => handleCopyCode(activeArticle.codeSnippet)}
-                    >
-                      {copiedSnippet ? "✓ Copied to Clipboard!" : "📋 Copy Code Snippet"}
-                    </button>
-                  </div>
-                  <pre className="code-block">
-                    <code>{activeArticle.codeSnippet}</code>
-                  </pre>
-                </div>
-              )}
 
               {/* Key Learnings */}
               <div className="article-section">

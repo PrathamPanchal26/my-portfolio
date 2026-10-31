@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { soundFX } from "../utils/soundEffects";
+import { downloadVCard } from "../utils/vcard";
 
 const EXPERIENCE = [
   {
@@ -259,17 +261,31 @@ function About() {
           <p>Let's collaborate to build something fast, beautiful, and tailored to your goals.</p>
         </div>
         <div className="cta-banner-actions">
-          <Link to="/contact" className="btn btn-primary">
+          <Link to="/contact" className="btn btn-primary" onClick={() => soundFX.playClick()}>
             Get in Touch →
           </Link>
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-resume-modal"))}
+            onClick={() => {
+              soundFX.playPop();
+              window.dispatchEvent(new CustomEvent("open-resume-modal"));
+            }}
           >
             📄 View Full Resume
           </button>
-          <Link to="/projects" className="btn btn-secondary">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              soundFX.playSuccess();
+              downloadVCard();
+            }}
+            title="Download Pratham's vCard Contact"
+          >
+            📇 Save Contact Card
+          </button>
+          <Link to="/projects" className="btn btn-secondary" onClick={() => soundFX.playClick()}>
             Explore Projects
           </Link>
         </div>

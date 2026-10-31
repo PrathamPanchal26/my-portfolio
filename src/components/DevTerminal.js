@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { YOUTUBE_URL, INSTAGRAM_URL } from "./DevCreatorHub";
+import { soundFX } from "../utils/soundEffects";
+import { downloadVCard } from "../utils/vcard";
 
 const INITIAL_GREETING = [
   "💻 Pratham Panchal Developer Console [v2.4.0]",
@@ -53,11 +55,15 @@ function DevTerminal() {
           "  bio          - Overview of Pratham Panchal & background",
           "  skills       - Core technical stack and frameworks",
           "  projects     - List of interactive live demo applications",
+          "  lab          - Scroll to the Interactive UI & Physics Sandbox",
+          "  vcard        - Download Pratham's vCard contact directly",
+          "  hire         - Instant WhatsApp connection for projects",
           "  youtube      - Open & view YouTube channel (@prathamcodingworld)",
           "  instagram    - Open & view Instagram reels profile (@devbypratham)",
           "  creator      - Explore Tech Content Creator Hub & stats",
           "  contact      - Direct WhatsApp, email, and social info",
           "  quote        - Jump to project cost & timeline estimator",
+          "  matrix       - Enter the developer matrix simulation",
           "  theme        - Toggle between dark mode and light mode",
           "  clear        - Clear the terminal console",
           "  exit         - Close the terminal"
@@ -142,6 +148,46 @@ function DevTerminal() {
         ];
         break;
 
+      case "hire":
+        responseLines = [
+          "⚡ Initializing direct WhatsApp line to Pratham Panchal...",
+          "📱 Phone: +91 9638561264",
+          "💬 Opening WhatsApp chat..."
+        ];
+        window.open(
+          "https://wa.me/919638561264?text=Hi%20Pratham,%20I%20saw%20your%20portfolio%20terminal%20and%20would%20like%20to%20hire%20you!",
+          "_blank"
+        );
+        break;
+
+      case "vcard":
+        downloadVCard();
+        responseLines = [
+          "📇 Generated & downloaded Pratham_Panchal_Frontend_Developer.vcf",
+          "Added phone (+91 9638561264), email, and portfolio to contact card."
+        ];
+        break;
+
+      case "lab":
+      case "playground":
+        responseLines = [
+          "⚡ Jumping to the Interactive UI & Micro-Interaction Playground..."
+        ];
+        setTimeout(() => {
+          const el = document.getElementById("playground");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+        break;
+
+      case "matrix":
+        responseLines = [
+          "01010000 01110010 01100001 01110100 01101000 01100001 01101101",
+          "Wake up, Neo... The matrix has you.",
+          "Follow the white rabbit. 🐇",
+          "Knock, knock, Neo."
+        ];
+        break;
+
       case "quote":
         responseLines = [
           "💰 Scrolling to the interactive Project Estimator..."
@@ -184,6 +230,7 @@ function DevTerminal() {
   const onSubmit = (e) => {
     e.preventDefault();
     if (inputVal.trim() !== "") {
+      soundFX.playClick();
       handleCommand(inputVal);
       setInputVal("");
     }

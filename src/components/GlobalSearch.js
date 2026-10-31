@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import { soundFX } from "../utils/soundEffects";
+import { downloadVCard } from "../utils/vcard";
 import {
   trackSearchQuery,
   trackWhatsAppClick,
@@ -196,6 +198,24 @@ const SEARCH_DATABASE = [
   },
 
   // --- Quick Actions ---
+  {
+    id: "act-playground",
+    type: "Quick Actions",
+    icon: "⚡",
+    title: "Interactive UI & Micro-Interaction Playground",
+    description: "Live browser sandbox to test glassmorphism blur, button physics, and copy modern CSS tokens.",
+    action: "scroll-playground",
+    keywords: ["playground", "lab", "sandbox", "glassmorphism", "buttons", "css generator", "micro-interactions"],
+  },
+  {
+    id: "act-vcard",
+    type: "Quick Actions",
+    icon: "📇",
+    title: "Download Contact Card (vCard .vcf)",
+    description: "Directly save Pratham Panchal's phone, email, and portfolio link to your mobile device contacts.",
+    action: "download-vcard",
+    keywords: ["vcard", "contact", "vcf", "address book", "phonebook", "save contact", "recruiter"],
+  },
   {
     id: "act-resume",
     type: "Quick Actions",
@@ -425,7 +445,22 @@ export default function GlobalSearch() {
       trackSearchQuery(query);
     }
 
-    if (item.action === "open-resume") {
+    if (item.action === "download-vcard") {
+      soundFX.playSuccess();
+      downloadVCard();
+    } else if (item.action === "scroll-playground") {
+      soundFX.playClick();
+      if (window.location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          const el = document.getElementById("playground");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      } else {
+        const el = document.getElementById("playground");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (item.action === "open-resume") {
       trackResumeView("global_search");
       window.dispatchEvent(new CustomEvent("open-resume-modal"));
     } else if (item.action === "whatsapp") {

@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import { soundFX } from "../utils/soundEffects";
+import ThreeDTiltCard from "../components/ThreeDTiltCard";
 
 const projects = [
   {
@@ -270,7 +272,10 @@ function Projects() {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => {
+                  soundFX.playPop();
+                  setActiveCategory(cat);
+                }}
                 className={`projects-filter-btn ${
                   activeCategory === cat ? "active" : ""
                 }`}
@@ -305,7 +310,11 @@ function Projects() {
       ) : (
         <div className="projects-grid">
           {filteredProjects.map((project, index) => (
-            <div className="project-card" key={project.title}>
+            <ThreeDTiltCard
+              key={project.title}
+              className="project-card three-d-card-interactive"
+              maxTilt={10}
+            >
               <div className="project-card-top">
                 <div className="project-emoji">{project.emoji}</div>
                 <div className="project-card-badges">
@@ -333,7 +342,10 @@ function Projects() {
                 <button
                   type="button"
                   className="project-quickview-btn"
-                  onClick={() => setSelectedModalProject(project)}
+                  onClick={() => {
+                    soundFX.playPop();
+                    setSelectedModalProject(project);
+                  }}
                 >
                   Quick Overview ℹ️
                 </button>
@@ -344,12 +356,13 @@ function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     className="project-link project-link-live"
+                    onClick={() => soundFX.playClick()}
                   >
                     Live Demo ↗
                   </a>
                 </div>
               </div>
-            </div>
+            </ThreeDTiltCard>
           ))}
         </div>
       )}

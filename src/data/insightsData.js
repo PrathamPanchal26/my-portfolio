@@ -28,23 +28,6 @@ export const INSIGHTS = [
       "PIN-authenticated Admin CMS (/demos/kanha-admin) with real-time leads filtering and status tags.",
       "Schema.org LocalBusiness structured data embedded for local Ahmedabad search dominance."
     ],
-    codeSnippet: `// PIN Authentication Guard & Telemetry Pipeline
-export const useAdminAuth = (inputPin, authorizedPin = "1234") => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [attempts, setAttempts] = useState(0);
-
-  const verifyPin = useCallback((pin) => {
-    if (pin.trim() === authorizedPin) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem("kanha_admin_token", "auth_valid_session");
-      return { success: true };
-    }
-    setAttempts((prev) => prev + 1);
-    return { success: false, message: "Invalid Security PIN" };
-  }, [authorizedPin]);
-
-  return { isAuthenticated, verifyPin, attempts };
-};`,
     keyLearnings: [
       "Semantic HTML5 combined with Schema.org JSON-LD delivers immediate indexing gains for local businesses.",
       "Custom CSS variables perform significantly better than heavy runtime CSS-in-JS libraries on mobile devices.",
@@ -82,24 +65,6 @@ export const useAdminAuth = (inputPin, authorizedPin = "1234") => {
       "High-precision requestAnimationFrame playback loop for sub-millisecond lyric synchronization.",
       "Faithful Spotify desktop & mobile responsive UI with sidebar, search, and queue drawer."
     ],
-    codeSnippet: `// Real-Time Harmonic Oscillator Synth Node
-const playHarmonicChord = (audioCtx, rootFreq, duration = 1.2) => {
-  const masterGain = audioCtx.createGain();
-  masterGain.connect(audioCtx.destination);
-  masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-  masterGain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
-  masterGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-
-  // Polyphonic triad: Root + Major Third + Perfect Fifth
-  [1, 1.25, 1.5].forEach((interval) => {
-    const osc = audioCtx.createOscillator();
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(rootFreq * interval, audioCtx.currentTime);
-    osc.connect(masterGain);
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
-  });
-};`,
     keyLearnings: [
       "Web Audio API provides infinite creative potential for games, web instruments, and interactive portfolios.",
       "Linear and exponential gain ramps prevent annoying speaker 'pops' during audio node start and stop cycles.",
@@ -136,31 +101,6 @@ const playHarmonicChord = (audioCtx, rootFreq, duration = 1.2) => {
       "Sound feedback synthesizer triggering positive high-frequency beeps on scan and low buzzes on low stock alerts.",
       "Export & import capabilities allowing inventory managers to download JSON backups."
     ],
-    codeSnippet: `// Type-Safe LocalStorage Hook with Multi-Tab Broadcast
-export function useSyncedStorage(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.warn("Storage read error", error);
-      return initialValue;
-    }
-  });
-
-  const setValue = useCallback((value) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      window.dispatchEvent(new Event("storage_sync_" + key));
-    } catch (error) {
-      console.error("Storage write error", error);
-    }
-  }, [key, storedValue]);
-
-  return [storedValue, setValue];
-}`,
     keyLearnings: [
       "Offline-first client architectures build trust and deliver unmatched speed.",
       "Using standard Web Storage events enables multi-window tab synchronization effortlessly.",
@@ -198,33 +138,6 @@ export function useSyncedStorage(key, initialValue) {
       "Regional geographic coordinate tags (geo.region, geo.placename, ICBM) signaling local relevance to Google Maps and regional search algorithms.",
       "Automated XML sitemap with prioritized crawl frequencies and strict caching headers via vercel.json."
     ],
-    codeSnippet: `<!-- Schema.org Multi-Entity JSON-LD Knowledge Graph -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/#person",
-      "name": "Pratham Panchal",
-      "jobTitle": "Frontend Developer",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ahmedabad",
-        "addressRegion": "Gujarat",
-        "addressCountry": "India"
-      },
-      "knowsAbout": ["React.js", "JavaScript", "Tailwind CSS", "Technical SEO"]
-    },
-    {
-      "@type": "LocalBusiness",
-      "name": "Pratham Panchal — Frontend & React Web Development",
-      "address": { "@type": "PostalAddress", "addressLocality": "Ahmedabad", "addressRegion": "Gujarat" },
-      "priceRange": "$$"
-    }
-  ]
-}
-</script>`,
     keyLearnings: [
       "Schema.org FAQPage structured data is the fastest way to gain expandable question snippets directly on Google's search result page.",
       "Local SEO signals (geo tags, explicit city mentions, client testimonials with locations) are essential to outranking generic global portfolios.",

@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import ProjectEstimator from "../components/ProjectEstimator";
 import FAQSection from "../components/FAQSection";
 import DevCreatorHub, { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
+import InteractivePlayground from "../components/InteractivePlayground";
+import GithubActivityPulse from "../components/GithubActivityPulse";
+import LiveClockStatus from "../components/LiveClockStatus";
+import ThreeDHeroCanvas from "../components/ThreeDHeroCanvas";
+import ThreeDTiltCard from "../components/ThreeDTiltCard";
+import ThreeDTechCube from "../components/ThreeDTechCube";
 import { INSIGHTS } from "../data/insightsData";
+import { soundFX } from "../utils/soundEffects";
+import { downloadVCard } from "../utils/vcard";
 import {
   trackResumeView,
   trackWhatsAppClick,
@@ -13,23 +21,27 @@ import {
 const SERVICES = [
   {
     icon: "⚛️",
+    badge: "Engineering",
     title: "Custom React Applications",
-    desc: "Single-page applications engineered with React 19, modern hooks, robust state management, and reusable component libraries.",
+    desc: "Single-page applications engineered with React 19, modern hooks, robust state management, and modular reusable component architecture.",
   },
   {
     icon: "🏛️",
-    title: "Turnkey Client Websites",
-    desc: "Full-cycle digital web presence for businesses, studios, and enterprises — inspired by the real Kanha Construction platform.",
+    badge: "Full-Cycle",
+    title: "Turnkey Client Platforms",
+    desc: "High-trust digital web presence for businesses, studios, and enterprises — inspired by the real Kanha Construction platform.",
   },
   {
     icon: "🎨",
-    title: "UI/UX Design & Prototyping",
-    desc: "Aesthetic, clean, and modern user interfaces crafted with tailored color systems, fluid typography, and dark/light themes.",
+    badge: "UI / UX",
+    title: "Modern UI/UX & Prototyping",
+    desc: "Bento grid architectures, glassmorphism, fluid typography, dark/light design systems, and silky 60fps micro-interactions.",
   },
   {
     icon: "🚀",
+    badge: "Core Vitals",
     title: "Performance & SEO Optimization",
-    desc: "Sub-second load times, Core Web Vitals optimization, semantic HTML5 structure, and search-ranking metadata.",
+    desc: "Sub-second load times, 95+ Core Web Vitals, rich Schema.org structured data, and dominant regional Google search ranking.",
   },
 ];
 
@@ -40,6 +52,7 @@ const FEATURED_HIGHLIGHTS = [
     tag: "Full-Stack Task Suite",
     desc: "MERN-inspired project planner with priority queues, categories, sprint analytics, and real-time persistence.",
     link: "/demos/taskmaster-pro",
+    stack: ["React", "LocalStorage", "Analytics"],
   },
   {
     emoji: "🏛️",
@@ -47,6 +60,7 @@ const FEATURED_HIGHLIGHTS = [
     tag: "Turnkey Studio",
     desc: "Architectural civil design and interior showcase studio with inquiry estimation and project galleries.",
     link: "/demos/kanha-portfolio",
+    stack: ["React SPA", "Architecture", "Estimation"],
   },
   {
     emoji: "🔐",
@@ -54,6 +68,7 @@ const FEATURED_HIGHLIGHTS = [
     tag: "Security CMS",
     desc: "Restricted PIN-authenticated dashboard with project CMS publisher and real-time leads tracker.",
     link: "/demos/kanha-admin",
+    stack: ["PIN Auth", "CMS Studio", "Leads Telemetry"],
   },
   {
     emoji: "🎵",
@@ -61,6 +76,7 @@ const FEATURED_HIGHLIGHTS = [
     tag: "Audio Streaming",
     desc: "Web Audio API synthesizer with trending Bollywood tracks, synchronized lyrics, and seekbar.",
     link: "/demos/spotify-bollywood",
+    stack: ["Web Audio API", "Lyrics Sync", "Playback"],
   },
 ];
 
@@ -96,59 +112,89 @@ const TESTIMONIALS = [
 
 const SEO_TOPICS = [
   "Pratham Panchal",
+  "Pratham Panchal Portfolio",
+  "Pratham Panchal Website",
+  "Best Frontend Developer Ahmedabad",
+  "Top React Developer Ahmedabad",
+  "React JS Developer Ahmedabad",
+  "Frontend Developer Nikol Ahmedabad",
+  "Web Developer Ahmedabad",
+  "Web Designer Ahmedabad",
+  "Website Designer Nikol Ahmedabad",
+  "Hire React Developer Ahmedabad",
+  "Hire Frontend Developer Ahmedabad",
+  "Freelance Web Developer Gujarat",
+  "Pratham Panchal GitHub",
+  "Pratham Panchal Resume",
+  "PrathamPanchal26",
   "Pratham Coding World",
   "Pratham Coding World YouTube",
   "@devbypratham Instagram",
-  "Coding Tutorials Ahmedabad",
-  "Pratham Panchal Portfolio",
-  "Frontend Developer Ahmedabad",
-  "React Developer Gujarat",
-  "Web Developer Nikol Ahmedabad",
-  "Pratham Panchal GitHub",
-  "Pratham Panchal Resume",
   "Kanha Construction Website",
-  "Web Designer Ahmedabad",
+  "Kanha Admin Portal CMS",
   "Spotify Bollywood React",
-  "TaskMaster Pro Suite",
-  "Cloth Inventory System",
-  "Hire React Developer Ahmedabad",
-  "Best Frontend Developer Ahmedabad",
-  "Freelance Web Developer Gujarat",
+  "TaskMaster Pro Productivity",
+  "Cloth Inventory System React",
   "React 19 Developer India",
-  "Turnkey Web Solutions",
-  "Modern UI/UX Design",
+  "Modern 3D Portfolio Website",
+  "Turnkey Web Solutions Ahmedabad",
+  "Modern UI/UX Design Ahmedabad",
   "Sub-Second Core Web Vitals",
+  "Technical SEO React Developer",
+  "JavaScript ES6+ Specialist",
+  "Tailwind CSS Developer Ahmedabad",
+  "Responsive Web Designer Nikol",
+  "Single Page Applications SPA",
+  "Commercial Admin Portals",
+  "Lighthouse 100 Performance",
+  "Coding Tutorials Ahmedabad",
+  "Full Stack Developer Ahmedabad",
+  "Web Development Services Gujarat",
 ];
 
 function Home() {
+  const scrollToPlayground = () => {
+    soundFX.playPop();
+    const el = document.getElementById("playground");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleDownloadCard = () => {
+    soundFX.playSuccess();
+    downloadVCard();
+  };
+
   return (
     <div className="page hero-page">
-      {/* Hero Section */}
-      <div className="hero">
-        <div className="hero-copy">
-          <div className="hero-badge">
-            <span className="pulse-dot-green"></span> Available for freelance work &amp; full-time roles
+      {/* Trending Bento Hero Section */}
+      <div className="bento-hero-wrapper">
+        <div className="bento-hero-main">
+          {/* Live Clock & Working Status Pill */}
+          <div className="hero-top-row">
+            <LiveClockStatus />
+            <div className="hero-mini-pill">
+              <span className="sparkle-icon">✨</span> Trending UI/UX 2026
+            </div>
           </div>
 
-          <h1>
+          <h1 className="hero-title">
             Hi, I'm <span className="name-highlight">Pratham Panchal</span>
           </h1>
 
           <p className="hero-subtitle">
-            <span className="role">Frontend Developer</span>
-            <span className="dot">·</span>
-            React Specialist
-            <span className="dot">·</span>
-            Web Designer
-            <span className="dot">·</span>
-            Ahmedabad, India
+            <span className="role-tag">Frontend Developer</span>
+            <span className="dot-sep">·</span>
+            <span className="role-tag">React Specialist</span>
+            <span className="dot-sep">·</span>
+            <span className="role-tag">UI/UX Designer</span>
+            <span className="dot-sep">·</span>
+            <span className="loc-tag">Ahmedabad, India</span>
           </p>
 
           <p className="hero-description">
-            Welcome to the official portfolio of Pratham Panchal. I craft clean,
-            responsive, and high-performance web experiences — pairing thoughtful UI
-            design with modern React engineering. Let's turn an idea into a site
-            that feels considered, fast, and distinctive.
+            Crafting high-impact web applications that merge thoughtful UI/UX aesthetics with modern React engineering. Sub-second performance, responsive layouts across every phone and desktop, and zero compromises on code quality.
           </p>
 
           <div className="hero-buttons">
@@ -156,6 +202,7 @@ function Home() {
               type="button"
               className="btn btn-primary"
               onClick={() => {
+                soundFX.playClick();
                 trackResumeView("hero_button");
                 window.dispatchEvent(new CustomEvent("open-resume-modal"));
               }}
@@ -163,26 +210,45 @@ function Home() {
             >
               📄 View Resume
             </button>
-            <Link to="/contact" className="btn btn-secondary">
-              Let's Talk
+
+            <Link
+              to="/projects"
+              className="btn btn-secondary"
+              onClick={() => soundFX.playClick()}
+            >
+              💼 Explore Work
             </Link>
+
+            <button
+              type="button"
+              className="btn btn-tertiary"
+              onClick={scrollToPlayground}
+              title="Jump to Interactive UI Lab"
+            >
+              ⚡ Interactive Lab
+            </button>
+
             <a
               href="https://wa.me/919638561264?text=Hi%20Pratham,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!"
               target="_blank"
               rel="noreferrer"
               className="btn btn-whatsapp-hero"
               title="Chat directly on WhatsApp"
-              onClick={() => trackWhatsAppClick("hero_button")}
+              onClick={() => {
+                soundFX.playClick();
+                trackWhatsAppClick("hero_button");
+              }}
             >
               <span>💬</span> WhatsApp
             </a>
+
             <button
               type="button"
-              className="btn btn-search-hero"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-site-search"))}
-              title="Search all website (Ctrl + K)"
+              className="btn btn-vcard-hero"
+              onClick={handleDownloadCard}
+              title="Save Contact to Phone"
             >
-              <span>🔍</span> Search Site <kbd>Ctrl+K</kbd>
+              <span>📇</span> Save vCard
             </button>
           </div>
 
@@ -193,8 +259,9 @@ function Home() {
               rel="noreferrer"
               className="social-link social-link-gh"
               title="GitHub Profile"
+              onClick={() => soundFX.playClick()}
             >
-              GH
+              GitHub
             </a>
             <a
               href={YOUTUBE_URL}
@@ -202,8 +269,9 @@ function Home() {
               rel="noreferrer"
               className="social-link social-link-yt"
               title="YouTube Channel: @prathamcodingworld"
+              onClick={() => soundFX.playClick()}
             >
-              YT
+              YouTube
             </a>
             <a
               href={INSTAGRAM_URL}
@@ -211,8 +279,9 @@ function Home() {
               rel="noreferrer"
               className="social-link social-link-ig"
               title="Instagram: @devbypratham"
+              onClick={() => soundFX.playClick()}
             >
-              IG
+              Instagram
             </a>
             <a
               href="https://linkedin.com/in/pratham"
@@ -220,42 +289,55 @@ function Home() {
               rel="noreferrer"
               className="social-link"
               title="LinkedIn"
+              onClick={() => soundFX.playClick()}
             >
-              in
-            </a>
-            <a
-              href="https://twitter.com/pratham"
-              target="_blank"
-              rel="noreferrer"
-              className="social-link"
-              title="Twitter"
-            >
-              X
+              LinkedIn
             </a>
             <a
               href="mailto:prathampanchal1515@gmail.com"
               className="social-link"
               title="Email"
+              onClick={() => soundFX.playClick()}
             >
-              @
+              Email
             </a>
           </div>
         </div>
 
-        <aside className="hero-panel">
-          <div className="hero-panel-card">
-            <p className="hero-panel-kicker">Currently</p>
-            <h2>Building interfaces people actually enjoy using.</h2>
-            <ul>
-              <li>React 19 &amp; modern CSS architectures</li>
-              <li>Responsive, accessible, zero-glitch layouts</li>
-              <li>Interactive live demos directly in-browser</li>
-              <li>Client web platforms &amp; admin dashboards</li>
-            </ul>
-            <Link to="/projects" className="hero-panel-link">
-              View all 9 live applications →
+        {/* Hero Aside 3D Bento Card */}
+        <aside className="bento-hero-side">
+          <ThreeDTiltCard className="bento-glass-card three-d-hero-glass-card" maxTilt={8} glare={true}>
+            <div className="bento-card-top">
+              <span className="bento-pulse-beacon"></span>
+              <span className="bento-status-text">Interactive 3D Workspace</span>
+            </div>
+
+            {/* Hardware-Accelerated 3D Holographic Canvas */}
+            <ThreeDHeroCanvas />
+
+            <div className="bento-metrics-mini">
+              <div className="mini-metric">
+                <strong>9+</strong>
+                <span>Live Apps</span>
+              </div>
+              <div className="mini-metric">
+                <strong>60 FPS</strong>
+                <span>3D Canvas</span>
+              </div>
+              <div className="mini-metric">
+                <strong>95+</strong>
+                <span>Lighthouse</span>
+              </div>
+            </div>
+
+            <Link
+              to="/projects"
+              className="bento-card-cta"
+              onClick={() => soundFX.playClick()}
+            >
+              Explore All Projects →
             </Link>
-          </div>
+          </ThreeDTiltCard>
         </aside>
       </div>
 
@@ -263,16 +345,26 @@ function Home() {
       <section className="home-services-section">
         <div className="section-header-compact">
           <span className="section-tag-sm">Core Capabilities</span>
-          <h3>What I Bring to Your Team</h3>
+          <h3>What I Bring to Your Next Project</h3>
+          <p className="section-header-sub">
+            Bridging pixel-perfect UI design with battle-tested frontend engineering.
+          </p>
         </div>
 
         <div className="services-grid">
           {SERVICES.map((s) => (
-            <div className="service-card" key={s.title}>
-              <div className="service-icon">{s.icon}</div>
+            <ThreeDTiltCard
+              key={s.title}
+              className="service-card bento-glass-surface three-d-card-interactive"
+              maxTilt={10}
+            >
+              <div className="service-card-top">
+                <div className="service-icon">{s.icon}</div>
+                <span className="service-badge">{s.badge}</span>
+              </div>
               <h4>{s.title}</h4>
               <p>{s.desc}</p>
-            </div>
+            </ThreeDTiltCard>
           ))}
         </div>
       </section>
@@ -281,35 +373,89 @@ function Home() {
       <section className="home-featured-section">
         <div className="home-featured-header">
           <div>
-            <span className="section-tag-sm">Live Work</span>
-            <h3>Featured In-Browser Applications</h3>
+            <span className="section-tag-sm">Live Applications</span>
+            <h3>Featured In-Browser Demos</h3>
+            <p className="featured-sub">
+              Full functional apps engineered with state persistence, Web Audio, and responsive UI.
+            </p>
           </div>
-          <Link to="/projects" className="link-view-all">
-            Browse all 9 demos →
+          <Link
+            to="/projects"
+            className="link-view-all"
+            onClick={() => soundFX.playClick()}
+          >
+            Browse all 9 applications →
           </Link>
         </div>
 
         <div className="featured-cards-grid">
           {FEATURED_HIGHLIGHTS.map((item) => (
-            <div className="featured-preview-card" key={item.title}>
+            <ThreeDTiltCard
+              key={item.title}
+              className="featured-preview-card bento-glass-surface three-d-card-interactive"
+              maxTilt={12}
+            >
               <div className="preview-top">
                 <span className="preview-emoji">{item.emoji}</span>
                 <span className="preview-tag">{item.tag}</span>
               </div>
               <h4>{item.title}</h4>
               <p>{item.desc}</p>
+              <div className="card-stack-pills">
+                {item.stack.map((st) => (
+                  <span className="stack-pill-sm" key={st}>
+                    {st}
+                  </span>
+                ))}
+              </div>
               <a
                 href={item.link}
                 target="_blank"
                 rel="noreferrer"
                 className="preview-demo-link"
-                onClick={() => trackDemoLaunch(item.title, item.link)}
+                onClick={() => {
+                  soundFX.playClick();
+                  trackDemoLaunch(item.title, item.link);
+                }}
               >
                 Launch Demo ↗
               </a>
-            </div>
+            </ThreeDTiltCard>
           ))}
         </div>
+      </section>
+
+      {/* NEW FEATURE: Interactive UI & Micro-Interaction Playground */}
+      <InteractivePlayground />
+
+      {/* NEW 3D FEATURE: Interactive 3D Tech Cube */}
+      <section className="home-3d-cube-wrapper">
+        <ThreeDTechCube />
+      </section>
+
+      {/* Quick Stats Strip */}
+      <section className="home-metrics-strip bento-glass-surface">
+        <div className="metric-box">
+          <span className="metric-digit">9+</span>
+          <span className="metric-caption">Interactive Live Demos</span>
+        </div>
+        <div className="metric-box">
+          <span className="metric-digit">100%</span>
+          <span className="metric-caption">Mobile Responsive</span>
+        </div>
+        <div className="metric-box">
+          <span className="metric-digit">&lt;24h</span>
+          <span className="metric-caption">Response Time</span>
+        </div>
+        <div className="metric-box">
+          <span className="metric-digit">95+</span>
+          <span className="metric-caption">Lighthouse Score</span>
+        </div>
+      </section>
+
+      {/* NEW FEATURE: GitHub Activity Pulse & Engineering Momentum */}
+      <section className="home-github-pulse-section">
+        <GithubActivityPulse />
       </section>
 
       {/* Featured Engineering Case Studies & Architecture Deep Dives */}
@@ -319,20 +465,26 @@ function Home() {
             <span className="section-tag-sm">Technical Authority</span>
             <h3>Engineering Case Studies &amp; Architecture Deep Dives</h3>
           </div>
-          <Link to="/insights" className="link-view-all">
+          <Link
+            to="/insights"
+            className="link-view-all"
+            onClick={() => soundFX.playClick()}
+          >
             Read all case studies →
           </Link>
         </div>
 
         <div className="home-insights-grid">
           {INSIGHTS.slice(0, 3).map((item) => (
-            <div className="home-insight-card" key={item.id}>
+            <div className="home-insight-card bento-glass-surface" key={item.id}>
               <div className="insight-card-meta">
                 <span className="insight-cat-badge">{item.category}</span>
                 <span className="insight-read-time">{item.readTime}</span>
               </div>
               <h4>
-                <Link to="/insights">{item.title}</Link>
+                <Link to="/insights" onClick={() => soundFX.playClick()}>
+                  {item.title}
+                </Link>
               </h4>
               <p>{item.subtitle}</p>
               <div className="home-insight-metrics">
@@ -342,7 +494,11 @@ function Home() {
                   </span>
                 ))}
               </div>
-              <Link to="/insights" className="home-insight-link">
+              <Link
+                to="/insights"
+                className="home-insight-link"
+                onClick={() => soundFX.playClick()}
+              >
                 Read Breakdown →
               </Link>
             </div>
@@ -351,10 +507,10 @@ function Home() {
       </section>
 
       {/* Quick Search Website Omnibox Strip */}
-      <section className="home-search-banner">
+      <section className="home-search-banner bento-glass-surface">
         <div className="search-banner-inner">
           <div className="search-banner-text">
-            <span className="section-tag-sm">Quick Search Everything</span>
+            <span className="section-tag-sm">Omnibar Search</span>
             <h3>Looking for a specific skill, demo, or question?</h3>
             <p>
               Search all 9 applications, React architecture, pricing estimates, resume, and contact details instantly.
@@ -363,33 +519,16 @@ function Home() {
           <button
             type="button"
             className="search-banner-trigger-btn"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-site-search"))}
+            onClick={() => {
+              soundFX.playClick();
+              window.dispatchEvent(new CustomEvent("open-site-search"));
+            }}
             title="Open Site Search"
           >
             <span className="banner-btn-icon">🔍</span>
-            <span className="banner-btn-text">Search all the website...</span>
+            <span className="banner-btn-text">Search all website...</span>
             <kbd className="banner-kbd">Ctrl + K</kbd>
           </button>
-        </div>
-      </section>
-
-      {/* Quick Stats Strip */}
-      <section className="home-metrics-strip">
-        <div className="metric-box">
-          <span className="metric-digit">9+</span>
-          <span className="metric-caption">Interactive Live Demos</span>
-        </div>
-        <div className="metric-box">
-          <span className="metric-digit">100%</span>
-          <span className="metric-caption">Responsive Tested</span>
-        </div>
-        <div className="metric-box">
-          <span className="metric-digit">&lt;24h</span>
-          <span className="metric-caption">Response Time</span>
-        </div>
-        <div className="metric-box">
-          <span className="metric-digit">95+</span>
-          <span className="metric-caption">Lighthouse Score Target</span>
         </div>
       </section>
 
@@ -408,7 +547,7 @@ function Home() {
 
         <div className="testimonials-grid">
           {TESTIMONIALS.map((t, index) => (
-            <div className="home-testimonial-card" key={index}>
+            <div className="home-testimonial-card bento-glass-surface" key={index}>
               <div className="testimonial-top">
                 <span className="testimonial-stars" aria-label="5 out of 5 stars">{t.stars}</span>
                 <span className="testimonial-tag">{t.tag}</span>
@@ -434,7 +573,7 @@ function Home() {
       <FAQSection />
 
       {/* SEO Regional & Core Keyword Authority Section */}
-      <section className="home-seo-keywords-strip">
+      <section className="home-seo-keywords-strip bento-glass-surface">
         <div className="seo-strip-header">
           <span className="pulse-dot-green"></span>
           <h4>Popular Search Keywords &amp; Regional Specializations</h4>
@@ -449,6 +588,7 @@ function Home() {
               type="button"
               className="seo-keyword-tag"
               onClick={() => {
+                soundFX.playPop();
                 window.dispatchEvent(new CustomEvent("open-site-search"));
               }}
               title={`Search for "${topic}" in site`}

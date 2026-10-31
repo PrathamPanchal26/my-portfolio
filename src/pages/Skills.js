@@ -1,5 +1,6 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { soundFX } from "../utils/soundEffects";
 
 const SKILL_CATEGORIES = [
   "All Skills",
@@ -212,7 +213,7 @@ const SKILLS_DATA = [
     proficiency: 95,
     level: "Expert",
     experience: "Active Creator",
-    summary: "Video coding tutorials, 60s dev reels, architecture breakdowns, and open-source snippets on YouTube & Instagram.",
+    summary: "Video coding tutorials, 60s dev reels, architecture breakdowns, and open-source engineering resources on YouTube & Instagram.",
     usedIn: [
       { name: "YouTube (@prathamcodingworld)", url: "https://youtube.com/@prathamcodingworld?si=xZ94QAp_jyFStvts" },
       { name: "Instagram (@devbypratham)", url: "https://www.instagram.com/devbypratham?vrfl=MTV2cmMzeGN3czV1eQ==" },
@@ -264,7 +265,7 @@ const SKILLS_DATA = [
     proficiency: 96,
     level: "Master",
     experience: "3+ Years",
-    summary: "JSON-LD structured data, Google Knowledge Graph, FAQPage snippets, sitemaps, and local Ahmedabad SEO.",
+    summary: "JSON-LD structured data, Google Knowledge Graph, FAQPage rich results, sitemaps, and local Ahmedabad SEO.",
     usedIn: [
       { name: "Official Portfolio", url: "/" },
       { name: "Insights Guide", url: "/insights" },
@@ -272,102 +273,9 @@ const SKILLS_DATA = [
   },
 ];
 
-// Interactive Code Snippet Lab Demos
-const CODE_SNIPPETS = {
-  storage: {
-    id: "storage",
-    title: "1. useSyncedStorage (Custom React Hook)",
-    desc: "A production-grade hook that wraps localStorage with type safety, error boundaries, and reactive cross-tab sync.",
-    code: `function useSyncedStorage(key, initialValue) {
-  const [val, setVal] = useState(() => {
-    try {
-      const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
-
-  const update = (newVal) => {
-    setVal(newVal);
-    localStorage.setItem(key, JSON.stringify(newVal));
-  };
-
-  return [val, update];
-}`,
-  },
-  synth: {
-    id: "synth",
-    title: "2. WebAudio Harmonic Synth (AudioNodes)",
-    desc: "Synthesize pleasant polyphonic chords in real-time without hosting audio MP3 files, as engineered in Spotify Bollywood.",
-    code: `const playChord = () => {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const gain = ctx.createGain();
-  gain.connect(ctx.destination);
-  gain.gain.setValueAtTime(0.18, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-
-  // C Major Chord: 261.6Hz (C4), 329.6Hz (E4), 392.0Hz (G4)
-  [261.63, 329.63, 392.00].forEach(freq => {
-    const osc = ctx.createOscillator();
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    osc.connect(gain);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.6);
-  });
-};`,
-  },
-  debounce: {
-    id: "debounce",
-    title: "3. useDebounce Search Optimizer",
-    desc: "Prevents excessive re-renders and API hits when users type quickly into search inputs and filtering widgets.",
-    code: `function useDebounce(value, delay = 300) {
-  const [debounced, setDebounced] = useState(value);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setDebounced(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debounced;
-}`,
-  },
-  clamp: {
-    id: "clamp",
-    title: "4. Responsive CSS Fluid Clamp System",
-    desc: "Calculates perfect fluid typography without media-query bloat across mobile, tablet, and 4K displays.",
-    code: `/* Fluid Typography Token */
-:root {
-  --fluid-h1: clamp(2rem, 1.2rem + 3.8vw, 4rem);
-  --fluid-body: clamp(0.95rem, 0.88rem + 0.35vw, 1.15rem);
-  --fluid-card-pad: clamp(1rem, 0.8rem + 1vw, 2rem);
-}`,
-  },
-};
-
 function Skills() {
   const [selectedCategory, setSelectedCategory] = useState("All Skills");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeSnippetKey, setActiveSnippetKey] = useState("storage");
-  const [copiedSnippet, setCopiedSnippet] = useState(false);
-
-  // Interactive Live Playground State
-  const [demoStorageValue, setDemoStorageValue] = useState("Ahmedabad Developer");
-  const [savedStorageDisplay, setSavedStorageDisplay] = useState("Ahmedabad Developer");
-  const [debounceInput, setDebounceInput] = useState("");
-  const [debouncedDisplay, setDebouncedDisplay] = useState("");
-  const [viewportSlider, setViewportSlider] = useState(768);
-  const [audioStatus, setAudioStatus] = useState("Click to hear browser synthesizer");
-
-  // Debounce interactive simulator
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedDisplay(debounceInput);
-    }, 350);
-    return () => clearTimeout(timer);
-  }, [debounceInput]);
-
   const filteredSkills = useMemo(() => {
     return SKILLS_DATA.filter((skill) => {
       const matchCat =
@@ -381,44 +289,6 @@ function Skills() {
       return matchCat && matchQuery;
     });
   }, [selectedCategory, searchQuery]);
-
-  // Audio Synth Player Trigger
-  const handleTestAudioSynth = () => {
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) {
-        setAudioStatus("Web Audio API not supported in this browser.");
-        return;
-      }
-      const ctx = new AudioContext();
-      const gain = ctx.createGain();
-      gain.connect(ctx.destination);
-      gain.gain.setValueAtTime(0.18, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-
-      // C Major Triad
-      [261.63, 329.63, 392.0].forEach((freq) => {
-        const osc = ctx.createOscillator();
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        osc.connect(gain);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.6);
-      });
-      setAudioStatus("🎵 Playing C-Major synthesized triad via Web Audio API!");
-      setTimeout(() => setAudioStatus("Click to hear browser synthesizer"), 2000);
-    } catch (e) {
-      setAudioStatus("AudioContext gesture locked. Click again!");
-    }
-  };
-
-  const handleCopySnippet = (code) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(code);
-      setCopiedSnippet(true);
-      setTimeout(() => setCopiedSnippet(false), 2000);
-    }
-  };
 
   return (
     <div className="page skills-page">
@@ -461,7 +331,10 @@ function Skills() {
               key={cat}
               type="button"
               className={`skills-tab-btn ${selectedCategory === cat ? "active" : ""}`}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => {
+                soundFX.playPop();
+                setSelectedCategory(cat);
+              }}
             >
               {cat}
             </button>
@@ -574,161 +447,6 @@ function Skills() {
           ))
         )}
       </div>
-
-      {/* ========================================================
-          INTERACTIVE CODE SNIPPET PLAYGROUND & RUNNER
-      ======================================================== */}
-      <section className="code-playground-section" aria-label="Interactive Code Lab">
-        <div className="playground-header">
-          <div className="playground-badge">⚡ Interactive Lab</div>
-          <h3>Live Frontend Patterns &amp; React Snippet Lab</h3>
-          <p>
-            Inspect and test live code architectures engineered by Pratham. Select a pattern, test its execution in real-time, or copy to your clipboard.
-          </p>
-        </div>
-
-        {/* Snippet Selection Tabs */}
-        <div className="playground-tabs-bar">
-          {Object.keys(CODE_SNIPPETS).map((key) => {
-            const snip = CODE_SNIPPETS[key];
-            return (
-              <button
-                key={key}
-                type="button"
-                className={`playground-tab-btn ${activeSnippetKey === key ? "active" : ""}`}
-                onClick={() => setActiveSnippetKey(key)}
-              >
-                {snip.title}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Playground Container */}
-        <div className="playground-workbench">
-          {/* Code Viewer Column */}
-          <div className="playground-code-col">
-            <div className="workbench-bar">
-              <span className="workbench-title">{CODE_SNIPPETS[activeSnippetKey].title}</span>
-              <button
-                type="button"
-                className="btn-copy-code"
-                onClick={() => handleCopySnippet(CODE_SNIPPETS[activeSnippetKey].code)}
-              >
-                {copiedSnippet ? "✓ Copied!" : "📋 Copy Code"}
-              </button>
-            </div>
-            <pre className="playground-pre">
-              <code>{CODE_SNIPPETS[activeSnippetKey].code}</code>
-            </pre>
-            <p className="workbench-desc">{CODE_SNIPPETS[activeSnippetKey].desc}</p>
-          </div>
-
-          {/* Live Interactive Simulator Column */}
-          <div className="playground-live-col">
-            <div className="workbench-bar">
-              <span className="workbench-title">⚡ Live Browser Execution Test</span>
-              <span className="workbench-tag">Client Runtime</span>
-            </div>
-
-            <div className="workbench-interactive-card">
-              {activeSnippetKey === "storage" && (
-                <div className="simulator-box">
-                  <h4>Test LocalStorage Wrapper</h4>
-                  <p>Type a value to simulate saving and reading from browser storage:</p>
-                  <div className="simulator-input-row">
-                    <input
-                      type="text"
-                      className="sim-input"
-                      value={demoStorageValue}
-                      onChange={(e) => setDemoStorageValue(e.target.value)}
-                      placeholder="Enter test value..."
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-sm"
-                      onClick={() => setSavedStorageDisplay(demoStorageValue)}
-                    >
-                      Commit to Storage
-                    </button>
-                  </div>
-                  <div className="sim-output-box">
-                    <span className="sim-output-label">localStorage.getItem('pratham_demo_key'):</span>
-                    <code>"{savedStorageDisplay}"</code>
-                  </div>
-                </div>
-              )}
-
-              {activeSnippetKey === "synth" && (
-                <div className="simulator-box">
-                  <h4>Test Web Audio API Synthesizer</h4>
-                  <p>Click below to generate real polyphonic harmonic frequencies natively in your browser with zero audio files:</p>
-                  <div className="simulator-btn-row">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={handleTestAudioSynth}
-                    >
-                      ▶ Play C-Major Harmonic Chord
-                    </button>
-                  </div>
-                  <div className="sim-audio-status">
-                    <span>Status:</span> {audioStatus}
-                  </div>
-                  <p className="sim-subtext">
-                    Engineered for the Spotify Bollywood web player at <Link to="/demos/spotify-bollywood">Spotify Bollywood Demo</Link>.
-                  </p>
-                </div>
-              )}
-
-              {activeSnippetKey === "debounce" && (
-                <div className="simulator-box">
-                  <h4>Test useDebounce Optimization</h4>
-                  <p>Type rapidly below to see the debouncer delay updates by 350ms:</p>
-                  <input
-                    type="text"
-                    className="sim-input"
-                    value={debounceInput}
-                    onChange={(e) => setDebounceInput(e.target.value)}
-                    placeholder="Type fast here..."
-                  />
-                  <div className="sim-debounce-results">
-                    <div><strong>Instant Value:</strong> "{debounceInput}"</div>
-                    <div><strong>Debounced Result (350ms):</strong> "{debouncedDisplay}"</div>
-                  </div>
-                </div>
-              )}
-
-              {activeSnippetKey === "clamp" && (
-                <div className="simulator-box">
-                  <h4>Fluid Clamp Simulator</h4>
-                  <p>Drag the slider to simulate viewport resizing and witness fluid typography scale dynamically:</p>
-                  <div className="slider-row">
-                    <label>Viewport: {viewportSlider}px</label>
-                    <input
-                      type="range"
-                      min="320"
-                      max="1440"
-                      value={viewportSlider}
-                      onChange={(e) => setViewportSlider(Number(e.target.value))}
-                      className="sim-slider"
-                    />
-                  </div>
-                  <div
-                    className="sim-fluid-preview"
-                    style={{
-                      fontSize: `${Math.max(1.2, Math.min(2.5, 1.2 + (viewportSlider - 320) * 0.0013))}rem`,
-                    }}
-                  >
-                    Fluid Heading Scale Test
-                  </div>
-                  <span className="sim-output-label">Calculated font size: ~{(1.2 + (viewportSlider - 320) * 0.0013).toFixed(2)}rem</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Bottom CTA for Project Discussion */}
       <section className="skills-cta-banner">

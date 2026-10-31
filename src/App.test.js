@@ -4,7 +4,7 @@ import App from './App';
 test('renders the portfolio home page', () => {
   render(<App />);
   expect(screen.getByText(/Hi, I'm/i)).toBeInTheDocument();
-  expect(screen.getByText(/Frontend Developer/i)).toBeInTheDocument();
+  expect(screen.getAllByText(/Frontend Developer/i)[0]).toBeInTheDocument();
 });
 
 test('renders projects including Kanha Construction, Admin Portal, and Spotify Bollywood', () => {
@@ -14,4 +14,3 @@ test('renders projects including Kanha Construction, Admin Portal, and Spotify B
   expect(screen.getByText(/Kanha Admin Portal/i)).toBeInTheDocument();
   expect(screen.getByText(/Spotify Bollywood/i)).toBeInTheDocument();
 });
-
