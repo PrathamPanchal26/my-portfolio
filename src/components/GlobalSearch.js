@@ -244,15 +244,6 @@ const SEARCH_DATABASE = [
     keywords: ["estimate", "calculator", "cost", "price", "budget", "quote", "timeline", "rates"],
   },
   {
-    id: "act-terminal",
-    type: "Quick Actions",
-    icon: "💻",
-    title: "Open Interactive DevTerminal CLI",
-    description: "Launch built-in developer terminal with interactive commands: help, skills, projects, contact, clear.",
-    action: "open-terminal",
-    keywords: ["terminal", "cli", "command", "bash", "developer", "console", "matrix", "easter egg"],
-  },
-  {
     id: "act-theme",
     type: "Quick Actions",
     icon: "🌗",

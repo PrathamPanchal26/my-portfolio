@@ -3,15 +3,9 @@ import { Link } from "react-router-dom";
 import ProjectEstimator from "../components/ProjectEstimator";
 import FAQSection from "../components/FAQSection";
 import DevCreatorHub, { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
-import InteractivePlayground from "../components/InteractivePlayground";
-import GithubActivityPulse from "../components/GithubActivityPulse";
-import LiveClockStatus from "../components/LiveClockStatus";
-import ThreeDHeroCanvas from "../components/ThreeDHeroCanvas";
 import ThreeDTiltCard from "../components/ThreeDTiltCard";
-import ThreeDTechCube from "../components/ThreeDTechCube";
 import { INSIGHTS } from "../data/insightsData";
 import { soundFX } from "../utils/soundEffects";
-import { downloadVCard } from "../utils/vcard";
 import {
   trackResumeView,
   trackWhatsAppClick,
@@ -110,72 +104,16 @@ const TESTIMONIALS = [
   },
 ];
 
-const SEO_TOPICS = [
-  "Pratham Panchal",
-  "Pratham Panchal Portfolio",
-  "Pratham Panchal Website",
-  "Best Frontend Developer Ahmedabad",
-  "Top React Developer Ahmedabad",
-  "React JS Developer Ahmedabad",
-  "Frontend Developer Nikol Ahmedabad",
-  "Web Developer Ahmedabad",
-  "Web Designer Ahmedabad",
-  "Website Designer Nikol Ahmedabad",
-  "Hire React Developer Ahmedabad",
-  "Hire Frontend Developer Ahmedabad",
-  "Freelance Web Developer Gujarat",
-  "Pratham Panchal GitHub",
-  "Pratham Panchal Resume",
-  "PrathamPanchal26",
-  "Pratham Coding World",
-  "Pratham Coding World YouTube",
-  "@devbypratham Instagram",
-  "Kanha Construction Website",
-  "Kanha Admin Portal CMS",
-  "Spotify Bollywood React",
-  "TaskMaster Pro Productivity",
-  "Cloth Inventory System React",
-  "React 19 Developer India",
-  "Modern 3D Portfolio Website",
-  "Turnkey Web Solutions Ahmedabad",
-  "Modern UI/UX Design Ahmedabad",
-  "Sub-Second Core Web Vitals",
-  "Technical SEO React Developer",
-  "JavaScript ES6+ Specialist",
-  "Tailwind CSS Developer Ahmedabad",
-  "Responsive Web Designer Nikol",
-  "Single Page Applications SPA",
-  "Commercial Admin Portals",
-  "Lighthouse 100 Performance",
-  "Coding Tutorials Ahmedabad",
-  "Full Stack Developer Ahmedabad",
-  "Web Development Services Gujarat",
-];
-
 function Home() {
-  const scrollToPlayground = () => {
-    soundFX.playPop();
-    const el = document.getElementById("playground");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleDownloadCard = () => {
-    soundFX.playSuccess();
-    downloadVCard();
-  };
-
   return (
     <div className="page hero-page">
-      {/* Trending Bento Hero Section */}
+      {/* Bento Hero Section */}
       <div className="bento-hero-wrapper">
         <div className="bento-hero-main">
-          {/* Live Clock & Working Status Pill */}
+          {/* Working Status Pill */}
           <div className="hero-top-row">
-            <LiveClockStatus />
-            <div className="hero-mini-pill">
-              <span className="sparkle-icon">✨</span> Trending UI/UX 2026
+            <div className="hero-status-pill">
+              <span className="pulse-dot-green"></span> Available for Hire &amp; Client Projects
             </div>
           </div>
 
@@ -198,9 +136,17 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
+            <Link
+              to="/projects"
+              className="btn btn-primary"
+              onClick={() => soundFX.playClick()}
+            >
+              💼 Explore Work
+            </Link>
+
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-secondary"
               onClick={() => {
                 soundFX.playClick();
                 trackResumeView("hero_button");
@@ -209,23 +155,6 @@ function Home() {
               title="View & Download Pratham's Resume"
             >
               📄 View Resume
-            </button>
-
-            <Link
-              to="/projects"
-              className="btn btn-secondary"
-              onClick={() => soundFX.playClick()}
-            >
-              💼 Explore Work
-            </Link>
-
-            <button
-              type="button"
-              className="btn btn-tertiary"
-              onClick={scrollToPlayground}
-              title="Jump to Interactive UI Lab"
-            >
-              ⚡ Interactive Lab
             </button>
 
             <a
@@ -241,15 +170,6 @@ function Home() {
             >
               <span>💬</span> WhatsApp
             </a>
-
-            <button
-              type="button"
-              className="btn btn-vcard-hero"
-              onClick={handleDownloadCard}
-              title="Save Contact to Phone"
-            >
-              <span>📇</span> Save vCard
-            </button>
           </div>
 
           <div className="social-links">
@@ -304,16 +224,30 @@ function Home() {
           </div>
         </div>
 
-        {/* Hero Aside 3D Bento Card */}
+        {/* Hero Aside Spotlight Card */}
         <aside className="bento-hero-side">
           <ThreeDTiltCard className="bento-glass-card three-d-hero-glass-card" maxTilt={8} glare={true}>
             <div className="bento-card-top">
               <span className="bento-pulse-beacon"></span>
-              <span className="bento-status-text">Interactive 3D Workspace</span>
+              <span className="bento-status-text">Frontend Engineer Profile</span>
             </div>
 
-            {/* Hardware-Accelerated 3D Holographic Canvas */}
-            <ThreeDHeroCanvas />
+            <div className="hero-profile-spotlight">
+              <div className="profile-spotlight-avatar">
+                <span className="avatar-monogram">PP</span>
+                <span className="avatar-status-badge" title="Active & Ready to Build"></span>
+              </div>
+              <h3 className="profile-spotlight-name">Pratham Panchal</h3>
+              <p className="profile-spotlight-title">React Specialist &amp; UI/UX Engineer</p>
+              <p className="profile-spotlight-loc">📍 Nikol, Ahmedabad, Gujarat, India</p>
+
+              <div className="profile-highlight-pills">
+                <span className="highlight-pill">⚡ React 19</span>
+                <span className="highlight-pill">🎨 Modern UI/UX</span>
+                <span className="highlight-pill">🚀 Core Web Vitals</span>
+                <span className="highlight-pill">🏛️ Kanha Studio</span>
+              </div>
+            </div>
 
             <div className="bento-metrics-mini">
               <div className="mini-metric">
@@ -321,8 +255,8 @@ function Home() {
                 <span>Live Apps</span>
               </div>
               <div className="mini-metric">
-                <strong>60 FPS</strong>
-                <span>3D Canvas</span>
+                <strong>100%</strong>
+                <span>Mobile Ready</span>
               </div>
               <div className="mini-metric">
                 <strong>95+</strong>
@@ -425,14 +359,6 @@ function Home() {
         </div>
       </section>
 
-      {/* NEW FEATURE: Interactive UI & Micro-Interaction Playground */}
-      <InteractivePlayground />
-
-      {/* NEW 3D FEATURE: Interactive 3D Tech Cube */}
-      <section className="home-3d-cube-wrapper">
-        <ThreeDTechCube />
-      </section>
-
       {/* Quick Stats Strip */}
       <section className="home-metrics-strip bento-glass-surface">
         <div className="metric-box">
@@ -451,11 +377,6 @@ function Home() {
           <span className="metric-digit">95+</span>
           <span className="metric-caption">Lighthouse Score</span>
         </div>
-      </section>
-
-      {/* NEW FEATURE: GitHub Activity Pulse & Engineering Momentum */}
-      <section className="home-github-pulse-section">
-        <GithubActivityPulse />
       </section>
 
       {/* Featured Engineering Case Studies & Architecture Deep Dives */}
@@ -571,33 +492,6 @@ function Home() {
 
       {/* Interactive FAQ Knowledge Section */}
       <FAQSection />
-
-      {/* SEO Regional & Core Keyword Authority Section */}
-      <section className="home-seo-keywords-strip bento-glass-surface">
-        <div className="seo-strip-header">
-          <span className="pulse-dot-green"></span>
-          <h4>Popular Search Keywords &amp; Regional Specializations</h4>
-        </div>
-        <p className="seo-strip-desc">
-          Official engineering portfolio of <strong>Pratham Panchal</strong>, Frontend Developer and React Specialist based in <strong>Ahmedabad, Gujarat, India</strong>. Specialized in turnkey platforms, custom React web apps, modern UI/UX design, and SEO-optimized architecture.
-        </p>
-        <div className="seo-keywords-cloud">
-          {SEO_TOPICS.map((topic, i) => (
-            <button
-              key={i}
-              type="button"
-              className="seo-keyword-tag"
-              onClick={() => {
-                soundFX.playPop();
-                window.dispatchEvent(new CustomEvent("open-site-search"));
-              }}
-              title={`Search for "${topic}" in site`}
-            >
-              #{topic}
-            </button>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }

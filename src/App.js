@@ -13,7 +13,6 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ScrollToTop from "./components/ScrollToTop";
-import DevTerminal from "./components/DevTerminal";
 import GlobalSearch from "./components/GlobalSearch";
 import ResumeModal from "./components/ResumeModal";
 import QuickContactDock from "./components/QuickContactDock";
@@ -60,39 +59,109 @@ const ROUTE_META = {
   },
 };
 
+const DEMO_META = {
+  "taskmaster-pro": {
+    title: "TaskMaster Pro Productivity Suite Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of TaskMaster Pro: MERN-inspired task planner with priority queues, categories, sprint analytics, and real-time state persistence by Pratham Panchal."
+  },
+  "kanha-portfolio": {
+    title: "Kanha Construction & Interior Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of Kanha Construction & Interior studio website in Nikol, Ahmedabad: architectural design showcases, cost estimator, and modern responsive UI."
+  },
+  "kanha-admin": {
+    title: "Kanha Admin Portal CMS Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of Kanha Admin Portal: PIN-authenticated security dashboard, project CMS manager, and lead telemetry system by Pratham Panchal."
+  },
+  "spotify-bollywood": {
+    title: "Spotify Bollywood Music Player Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of Spotify Bollywood: Web Audio API harmonic sound synthesizer, synchronized lyrics, playlists, and responsive player by Pratham Panchal."
+  },
+  "inventory-system": {
+    title: "Cloth Inventory & Barcode System Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of ClothWare: warehouse inventory management system with live barcode scanner simulation and stock tracking by Pratham Panchal."
+  },
+  "travel-website": {
+    title: "WanderLuxe Travel Expeditions Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of WanderLuxe Travel Expeditions: destination discovery, itinerary booking, and fluid responsive travel portal by Pratham Panchal."
+  },
+  "currency-converter": {
+    title: "Universal Currency Exchange Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of Universal Currency Exchange: real-time multi-currency conversions and financial rate charts by Pratham Panchal."
+  },
+  "ecommerce-ui": {
+    title: "Aurora Studio E-Commerce Store Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of Aurora Studio: complete e-commerce user experience featuring product filter grids, dynamic cart, and checkout flow by Pratham Panchal."
+  },
+  "weather-dashboard": {
+    title: "SkyPulse Real-Time Weather Demo | Pratham Panchal Portfolio",
+    description: "Interactive demo of SkyPulse: weather telemetry dashboard with multi-city weather forecasts and atmospheric analytics by Pratham Panchal."
+  }
+};
+
+const updateMetaTag = (selector, attr, value) => {
+  try {
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  } catch (e) { }
+};
+
+const updateCanonical = (url) => {
+  try {
+    const link = document.querySelector('link[rel="canonical"]');
+    if (link) link.setAttribute("href", url);
+  } catch (e) { }
+};
+
 function AppContent() {
   const location = useLocation();
   const isDemoRoute = location.pathname.startsWith("/demos");
 
   useEffect(() => {
-    let currentTitle = document.title;
+    let currentTitle = ROUTE_META["/"]?.title;
+    let currentDesc = ROUTE_META["/"]?.description;
+
     if (location.pathname.startsWith("/demos/")) {
       const demoSlug = location.pathname.replace("/demos/", "");
-      const formatted = demoSlug
-        .split("-")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
-      currentTitle = `${formatted} Demo | Pratham Panchal Portfolio`;
-      document.title = currentTitle;
-    } else {
-      const meta = ROUTE_META[location.pathname];
-      if (meta) {
-        currentTitle = meta.title;
-        document.title = currentTitle;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute("content", meta.description);
+      if (DEMO_META[demoSlug]) {
+        currentTitle = DEMO_META[demoSlug].title;
+        currentDesc = DEMO_META[demoSlug].description;
       } else {
-        currentTitle = "404 Page Not Found — Pratham Panchal Portfolio";
-        document.title = currentTitle;
+        const formatted = demoSlug
+          .split("-")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ");
+        currentTitle = `${formatted} Demo | Pratham Panchal Portfolio`;
+        currentDesc = `Interactive live in-browser demo of ${formatted} built with React by Pratham Panchal.`;
       }
+    } else if (ROUTE_META[location.pathname]) {
+      currentTitle = ROUTE_META[location.pathname].title;
+      currentDesc = ROUTE_META[location.pathname].description;
+    } else {
+      currentTitle = "404 Page Not Found — Pratham Panchal Portfolio";
+      currentDesc = "The requested page could not be found. Explore Pratham Panchal's React projects, live demos, and case studies.";
     }
+
+    // Set page title
+    document.title = currentTitle;
+
+    // Update SEO & Social OpenGraph / Twitter metadata dynamically
+    updateMetaTag('meta[name="title"]', "content", currentTitle);
+    updateMetaTag('meta[name="description"]', "content", currentDesc);
+    updateMetaTag('meta[property="og:title"]', "content", currentTitle);
+    updateMetaTag('meta[property="og:description"]', "content", currentDesc);
+    updateMetaTag('meta[name="twitter:title"]', "content", currentTitle);
+    updateMetaTag('meta[name="twitter:description"]', "content", currentDesc);
+
+    const canonicalUrl = `https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app${location.pathname === "/" ? "/" : location.pathname}`;
+    updateMetaTag('meta[property="og:url"]', "content", canonicalUrl);
+    updateCanonical(canonicalUrl);
 
     // Fire Google Analytics 4 virtual page_view on every route navigation
     trackPageView(location.pathname, currentTitle);
 
     try {
       window.scrollTo(0, 0);
-    } catch (e) {}
+    } catch (e) { }
   }, [location.pathname]);
 
   return (
@@ -117,7 +186,6 @@ function AppContent() {
       </main>
       {!isDemoRoute && <Footer />}
       <ScrollToTop />
-      {!isDemoRoute && <DevTerminal />}
       <GlobalSearch />
       <ResumeModal />
       {!isDemoRoute && <QuickContactDock />}

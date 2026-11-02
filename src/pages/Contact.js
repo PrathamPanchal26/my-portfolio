@@ -7,7 +7,6 @@ import {
 import { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
 import { soundFX } from "../utils/soundEffects";
 import { downloadVCard } from "../utils/vcard";
-import LiveClockStatus from "../components/LiveClockStatus";
 
 const API_URL = "/api/contact";
 const INBOX_EMAIL = "prathampanchal1515@gmail.com";
@@ -228,9 +227,15 @@ function Contact() {
             </button>
           </div>
 
-          {/* Local IST Live Time Card */}
-          <div className="contact-live-clock-card">
-            <LiveClockStatus />
+          {/* Availability Status Card */}
+          <div className="contact-availability-card">
+            <div className="contact-avail-header">
+              <span className="pulse-dot-green"></span>
+              <strong>Active &amp; Ready for Projects</strong>
+            </div>
+            <p className="contact-avail-detail">
+              Based in <strong>Ahmedabad, India (IST)</strong> · Available for Remote Worldwide, On-Site &amp; Hybrid Projects.
+            </p>
           </div>
 
           {/* Quick 15-Min Discovery Call Box */}

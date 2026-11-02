@@ -7,7 +7,6 @@ import { downloadVCard } from "../utils/vcard";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [soundActive, setSoundActive] = useState(() => soundFX.isEnabled());
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -33,11 +32,6 @@ function Navbar() {
   const closeMenu = () => {
     soundFX.playClick();
     setMenuOpen(false);
-  };
-
-  const handleToggleSound = () => {
-    const nextState = soundFX.toggleSound();
-    setSoundActive(nextState);
   };
 
   const handleToggleTheme = () => {
@@ -90,13 +84,6 @@ function Navbar() {
               >
                 📇 Save Contact Card
               </button>
-              <button
-                type="button"
-                className="mobile-sound-btn"
-                onClick={handleToggleSound}
-              >
-                {soundActive ? "🔊 Sound On" : "🔇 Sound Off"}
-              </button>
             </div>
             <div className="mobile-drawer-socials">
               <a
@@ -120,17 +107,6 @@ function Navbar() {
         </div>
 
         <div className="nav-actions">
-          {/* Sound FX Toggle */}
-          <button
-            type="button"
-            className={`nav-icon-btn ${soundActive ? "sound-active" : ""}`}
-            onClick={handleToggleSound}
-            title={soundActive ? "Mute interactive UI audio" : "Enable interactive UI audio effects"}
-            aria-label={soundActive ? "Mute sound" : "Enable sound"}
-          >
-            <span aria-hidden="true">{soundActive ? "🔊" : "🔇"}</span>
-          </button>
-
           {/* Quick vCard Download */}
           <button
             type="button"

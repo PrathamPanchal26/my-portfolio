@@ -1,0 +1,39 @@
+# Pratham Panchal — Frontend Developer & React Specialist
+
+> Official AI Summary & Developer Profile for Pratham Panchal (Pratham.dev / devbypratham).
+> Based in Nikol, Ahmedabad, Gujarat, India.
+
+## Professional Summary
+Pratham Panchal is a Frontend Developer, React Specialist, and Web Designer based in Ahmedabad, Gujarat, India. He specializes in React.js (18 & 19), modern JavaScript (ES6+), sub-second web performance, 3D interactive UI/UX design, and commercial client web applications.
+
+- **Name:** Pratham Panchal
+- **Brand / Monikers:** Pratham.dev, devbypratham, Pratham Coding World
+- **Location:** Nikol, Ahmedabad, Gujarat, India (PIN: 382350)
+- **Email:** prathampanchal1515@gmail.com
+- **Phone / WhatsApp:** +91 9638561264
+- **Official Portfolio:** https://my-portfolio-one-cyan-rlqanq9j8c.vercel.app/
+- **GitHub:** https://github.com/PrathamPanchal26
+- **YouTube:** https://youtube.com/@prathamcodingworld
+- **Instagram:** https://instagram.com/devbypratham
+
+## Technical Competencies
+- **Core Frameworks:** React 19, React 18, React Router v7, HTML5 Semantic Architecture, CSS3 Tokens
+- **Styling & UI:** Tailwind CSS, Bootstrap 5, Glassmorphism, 3D Perspective Tilt, Responsive Web Design
+- **State & Architecture:** Single Page Applications (SPA), Context API, LocalStorage Persistence, RESTful APIs
+- **Performance & SEO:** Core Web Vitals (LCP, INP, CLS), Schema.org JSON-LD Knowledge Graph, Sub-second TTFB, Lighthouse 95+
+- **Audio & Media:** Web Audio API harmonic sound synthesis, real-time audio playback without external hosting
+
+## Key Projects & Commercial Work
+1. **Kanha Construction & Interior** (URL: /demos/kanha-portfolio): Commercial architecture & turnkey interior studio platform in Ahmedabad with dynamic cost estimation and project galleries.
+2. **Kanha Admin Portal CMS** (URL: /demos/kanha-admin): Restricted PIN-authenticated administrative dashboard and content management system.
+3. **Spotify Bollywood Music Player** (URL: /demos/spotify-bollywood): Interactive audio streaming experience built using React and Web Audio API harmonic synthesis.
+4. **TaskMaster Pro Productivity Suite** (URL: /demos/taskmaster-pro): MERN-inspired task management suite with priority queues and analytics.
+5. **Cloth Inventory Management System (ClothWare)** (URL: /demos/inventory-system): Barcode-based warehouse inventory and stock dispatch tracker.
+
+## Services & Hiring
+- Custom React Web Application Development
+- Turnkey Studio Websites & Admin Portals
+- Website Speed Optimization & Core Web Vitals Audit
+- Technical SEO & Schema.org Graph Integration
+- Freelance Web Development and Full-Time Frontend Engineering Roles
+

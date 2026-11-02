@@ -1,8 +1,14 @@
 {
-  "short_name": "Pratham Panchal",
+  "short_name": "Pratham.dev",
   "name": "Pratham Panchal — Frontend Developer & React Specialist Portfolio",
-  "description": "Official portfolio of Pratham Panchal, Frontend Developer & React Specialist based in Ahmedabad, India.",
+  "description": "Official portfolio of Pratham Panchal, Frontend Developer & React Specialist based in Ahmedabad, Gujarat, India.",
   "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
@@ -21,6 +27,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#161411",
-  "background_color": "#161411"
+  "theme_color": "#14120f",
+  "background_color": "#14120f"
 }
