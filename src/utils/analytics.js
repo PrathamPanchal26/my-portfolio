@@ -73,3 +73,20 @@ export const trackSearchQuery = (query) => {
     });
   }
 };
+
+// Core Web Vitals Speed Performance Tracking (LCP, FID, CLS, FCP, TTFB)
+export const trackWebVital = (metric) => {
+  try {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", metric.name, {
+        value: Math.round(metric.name === "CLS" ? metric.value * 1000 : metric.value),
+        event_category: "Web Vitals",
+        event_label: metric.id,
+        non_interaction: true,
+      });
+    }
+  } catch (err) {
+    // Silent fail
+  }
+};
+
