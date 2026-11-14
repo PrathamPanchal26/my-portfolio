@@ -1,13 +1,23 @@
-// Google Analytics 4 (GA4) Tracking Utility for React SPA
+// Google Analytics 4 (GA4) & Google Tag Manager (GTM) Tracking Utility for React SPA
 
 export const trackPageView = (path, title) => {
   try {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "page_view", {
-        page_title: title || document.title,
-        page_path: path || window.location.pathname,
-        page_location: window.location.href,
+    const pageData = {
+      page_title: title || (typeof document !== "undefined" ? document.title : ""),
+      page_path: path || (typeof window !== "undefined" ? window.location.pathname : ""),
+      page_location: typeof window !== "undefined" ? window.location.href : "",
+    };
+
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "page_view",
+        ...pageData,
       });
+
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "page_view", pageData);
+      }
     }
   } catch (err) {
     // Silent fail if analytics blocked by adblock
@@ -16,8 +26,16 @@ export const trackPageView = (path, title) => {
 
 export const trackEvent = (action, params = {}) => {
   try {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", action, params);
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: action,
+        ...params,
+      });
+
+      if (typeof window.gtag === "function") {
+        window.gtag("event", action, params);
+      }
     }
   } catch (err) {
     // Silent fail
