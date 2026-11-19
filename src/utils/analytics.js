@@ -72,7 +72,7 @@ export const trackResumeDownload = () => {
   trackEvent("download_resume", {
     event_category: "Key Event",
     event_label: "Pratham Panchal Resume Download",
-    file_name: "Resum.JPG",
+    file_name: "Pratham_Panchal_Resume.jpg",
   });
 };
 
@@ -107,4 +107,3 @@ export const trackWebVital = (metric) => {
     // Silent fail
   }
 };
-

@@ -3423,6 +3423,42 @@ body::before {
   border-radius: 20px;
 }
 
+.resume-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.resume-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.resume-toggle-btn:hover {
+  color: var(--text);
+}
+
+.resume-toggle-btn.active {
+  background: var(--bg-elevated);
+  color: var(--accent);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
 .resume-doc-title {
   font-size: 0.88rem;
   font-weight: 600;
@@ -3485,6 +3521,32 @@ body::before {
 .resume-btn-close:hover {
   background: var(--bg-muted);
   color: var(--text);
+}
+
+.resume-visual-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.resume-visual-wrapper {
+  max-width: 720px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.resume-visual-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border);
+  display: block;
 }
 
 .resume-sheet {
@@ -3705,10 +3767,12 @@ body::before {
     visibility: hidden;
   }
   .resume-sheet,
-  .resume-sheet * {
+  .resume-sheet *,
+  .resume-visual-img {
     visibility: visible;
   }
-  .resume-sheet {
+  .resume-sheet,
+  .resume-visual-container {
     position: absolute;
     left: 0;
     top: 0;

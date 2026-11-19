@@ -5,6 +5,19 @@ import { downloadVCard } from "../utils/vcard";
 
 const EXPERIENCE = [
   {
+    role: "Frontend Developer",
+    company: "Spalon Pro · IT Company",
+    period: "2.5 Months Professional Experience",
+    location: "Ahmedabad, India",
+    description:
+      "Contributing to SpalonPro, a live salon-industry SaaS platform, through responsive frontend implementation, mobile layout optimization, and interactive feature development using HTML, CSS, JavaScript, React, and Tailwind CSS.",
+    achievements: [
+      "Engineered responsive user interfaces and enhanced mobile layouts for the live SpalonPro SaaS platform.",
+      "Developed modular UI components utilizing React.js and Tailwind CSS for optimized rendering speed.",
+      "Collaborated closely with engineering team on client-facing features and cross-browser consistency.",
+    ],
+  },
+  {
     role: "Freelance Frontend Developer & React Specialist",
     company: "Self-Employed · Client Solutions",
     period: "2023 — Present",
@@ -35,20 +48,20 @@ const EXPERIENCE = [
 
 const EDUCATION = [
   {
-    degree: "Diploma in Information Technology / Computer Engineering",
+    degree: "Bachelor's Degree in Computer Engineering / IT",
+    institution: "Gandhinagar University",
+    period: "Pursuing · Expected 2028",
+    location: "Gandhinagar / Ahmedabad, Gujarat, India",
+    details:
+      "Relevant coursework includes Algorithms, Databases, Computer Networks, Object-Oriented Software Design, and Web Systems.",
+  },
+  {
+    degree: "Diploma in Computer Engineering",
     institution: "Ahmedabad Technical Education Board",
-    period: "2021 — 2024",
+    period: "Completed",
     location: "Ahmedabad, Gujarat, India",
     details:
       "Core coursework in Data Structures, Object-Oriented Programming, Web Technologies, Database Management, and Software Engineering methodologies.",
-  },
-  {
-    degree: "Advanced Frontend Engineering & React Specialization",
-    institution: "Independent Professional Curriculum & Certifications",
-    period: "2022 — 2023",
-    location: "Online / Self-Paced",
-    details:
-      "Comprehensive mastery of React 18/19, JavaScript (ES6+), Responsive Web Design, REST APIs, and modern CSS architecture.",
   },
 ];
 
@@ -115,9 +128,8 @@ function About() {
 
           <p>
             I’m a passionate frontend developer and web designer based in
-            Ahmedabad, Gujarat, India. I specialize in turning complex problems into
-            clean, elegant, and high-performance digital products. My core focus is
-            React.js, modern JavaScript (ES6+), and responsive CSS engineering.
+            Ahmedabad, Gujarat, India. Currently working as a Frontend Developer at Spalon Pro on a live SaaS platform while pursuing my Bachelor’s degree at Gandhinagar University. My core focus is
+            React.js, Tailwind CSS, modern JavaScript (ES6+), and responsive web engineering.
           </p>
 
           <p>
