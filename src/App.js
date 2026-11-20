@@ -18,7 +18,7 @@ import ResumeModal from "./components/ResumeModal";
 import QuickContactDock from "./components/QuickContactDock";
 import MobileBottomNav from "./components/MobileBottomNav";
 import ThreeDSpaceBackground from "./components/ThreeDSpaceBackground";
-import { trackPageView } from "./utils/analytics";
+import { trackPageView, initEngagementTracking } from "./utils/analytics";
 import "./App.css";
 
 // Lazy-loaded Demo Suite (Splits 105KB demos.css and 9 interactive apps from initial bundle)
@@ -159,9 +159,16 @@ function AppContent() {
     // Fire Google Analytics 4 virtual page_view on every route navigation
     trackPageView(location.pathname, currentTitle);
 
+    // Initialize automated scroll depth and engagement interval telemetry
+    const cleanupEngagement = initEngagementTracking();
+
     try {
       window.scrollTo(0, 0);
     } catch (e) { }
+
+    return () => {
+      cleanupEngagement();
+    };
   }, [location.pathname]);
 
   return (

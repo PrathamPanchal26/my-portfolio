@@ -249,3 +249,54 @@ export const trackWebVital = (metric) => {
     // Silent fail
   }
 };
+
+// 20. Automated Scroll Depth & Time-on-Page Engagement Multiplier
+export const initEngagementTracking = () => {
+  if (typeof window === "undefined") return () => {};
+
+  const firedDepths = new Set();
+  const timeFired = new Set();
+  const startTime = Date.now();
+
+  const handleScroll = () => {
+    try {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight <= 0) return;
+      const scrollPercent = Math.round((window.scrollY / scrollHeight) * 100);
+
+      const milestones = [25, 50, 75, 90];
+      milestones.forEach((milestone) => {
+        if (scrollPercent >= milestone && !firedDepths.has(milestone)) {
+          firedDepths.add(milestone);
+          trackEvent("scroll", {
+            percent_scrolled: milestone,
+            page_path: window.location.pathname,
+          });
+        }
+      });
+    } catch (e) {}
+  };
+
+  const timerInterval = setInterval(() => {
+    try {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const intervals = [10, 30, 60, 120];
+      intervals.forEach((sec) => {
+        if (elapsed >= sec && !timeFired.has(sec)) {
+          timeFired.add(sec);
+          trackEvent("engagement_milestone", {
+            time_seconds: sec,
+            page_path: window.location.pathname,
+          });
+        }
+      });
+    } catch (e) {}
+  }, 5000);
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    clearInterval(timerInterval);
+  };
+};
