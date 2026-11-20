@@ -42,57 +42,199 @@ export const trackEvent = (action, params = {}) => {
   }
 };
 
-// High-Value Key Conversion Events (GA4 Key Events)
+// ============================================================================
+// GA4 HIGH-VALUE KEY EVENTS (CONVERSIONS)
+// Mark these as "Key Event" in GA4 Admin > Data display > Events
+// ============================================================================
+
+// 1. Lead Generation: WhatsApp conversation initiation
 export const trackWhatsAppClick = (source = "general") => {
   trackEvent("generate_lead", {
     method: "WhatsApp",
     lead_source: source,
-    event_category: "Contact",
+    event_category: "Conversion",
     event_label: `WhatsApp from ${source}`,
+    value: 10,
+    currency: "USD",
   });
 };
 
+// 2. Lead Generation: Direct email click / inquiry
 export const trackEmailClick = (source = "general") => {
   trackEvent("generate_lead", {
     method: "Email",
     lead_source: source,
-    event_category: "Contact",
+    event_category: "Conversion",
     event_label: `Email from ${source}`,
+    value: 10,
+    currency: "USD",
   });
 };
 
+// 3. Lead Generation: Direct phone call click
+export const trackPhoneClick = (source = "general") => {
+  trackEvent("generate_lead", {
+    method: "Phone Call",
+    lead_source: source,
+    event_category: "Conversion",
+    event_label: `Phone from ${source}`,
+    value: 15,
+    currency: "USD",
+  });
+};
+
+// 4. Lead Generation: 15-Minute Discovery Call booking request
+export const trackDiscoveryCallClick = (source = "general") => {
+  trackEvent("generate_lead", {
+    method: "Discovery Call",
+    lead_source: source,
+    event_category: "Conversion",
+    event_label: `15-Min Discovery Call from ${source}`,
+    value: 20,
+    currency: "USD",
+  });
+};
+
+// 5. Lead Generation: Contact Form Submission
+export const trackContactFormSubmission = (subject = "General Inquiry", name = "") => {
+  trackEvent("generate_lead", {
+    method: "Contact Form",
+    lead_source: "contact_page",
+    event_category: "Conversion",
+    event_label: subject,
+    client_name: name,
+    value: 25,
+    currency: "USD",
+  });
+};
+
+// 6. Resume Engagement: Modal Opened
 export const trackResumeView = (source = "general") => {
   trackEvent("view_resume", {
     event_category: "Engagement",
+    source: source,
     event_label: `Viewed resume modal via ${source}`,
   });
 };
 
-export const trackResumeDownload = () => {
+// 7. Resume Conversion: Download Official File
+export const trackResumeDownload = (fileName = "Pratham_Panchal_Resume.jpg") => {
   trackEvent("download_resume", {
     event_category: "Key Event",
     event_label: "Pratham Panchal Resume Download",
-    file_name: "Pratham_Panchal_Resume.jpg",
+    file_name: fileName,
+    file_extension: fileName.split(".").pop() || "jpg",
+    value: 5,
+    currency: "USD",
   });
 };
 
-export const trackDemoLaunch = (demoTitle, demoSlug) => {
+// 8. Resume Print / Save as PDF
+export const trackResumePrint = () => {
+  trackEvent("resume_print", {
+    event_category: "Key Event",
+    event_label: "Printed or Saved Resume as PDF",
+  });
+};
+
+// 9. Resume View Mode Switch (Visual vs ATS Text)
+export const trackResumeViewToggle = (viewMode = "visual") => {
+  trackEvent("resume_toggle_view", {
+    event_category: "Engagement",
+    view_mode: viewMode,
+  });
+};
+
+// 10. Contact Details Copied to Clipboard
+export const trackCopyContact = (contactType = "email", source = "general") => {
+  trackEvent("copy_contact_info", {
+    event_category: "Engagement",
+    contact_type: contactType,
+    source: source,
+  });
+};
+
+// 11. vCard (.vcf) Mobile Contact Saved
+export const trackContactCardDownload = (source = "general") => {
+  trackEvent("download_vcard", {
+    event_category: "Conversion",
+    lead_source: source,
+    event_label: "Downloaded Pratham.vcf Contact Card",
+    value: 5,
+    currency: "USD",
+  });
+};
+
+// 12. Interactive Demo Launch (Select Content)
+export const trackDemoLaunch = (demoTitle, demoSlug, category = "demo") => {
   trackEvent("select_content", {
     content_type: "demo_application",
     item_id: demoSlug,
     item_name: demoTitle,
+    item_category: category,
+  });
+  // Also dispatch custom launch_demo event for GA4 Custom Dimensions
+  trackEvent("launch_demo", {
+    demo_name: demoTitle,
+    demo_slug: demoSlug,
+    demo_category: category,
   });
 };
 
-export const trackSearchQuery = (query) => {
+// 13. Project Quick Overview Modal
+export const trackProjectOverview = (projectTitle, category = "project") => {
+  trackEvent("view_item", {
+    content_type: "project_overview",
+    item_name: projectTitle,
+    item_category: category,
+  });
+};
+
+// 14. Outbound Channel Clicks (GitHub, YouTube, Instagram, LinkedIn, etc.)
+export const trackOutboundClick = (platform = "External", url = "", source = "general") => {
+  trackEvent("outbound_click", {
+    event_category: "Outbound",
+    platform: platform,
+    destination: url,
+    source: source,
+    event_label: `${platform} profile clicked from ${source}`,
+  });
+};
+
+// 15. Search Queries (Omnibar & Project Search)
+export const trackSearchQuery = (query, source = "global_search") => {
   if (query && query.trim()) {
     trackEvent("search", {
       search_term: query.trim(),
+      search_source: source,
     });
   }
 };
 
-// Core Web Vitals Speed Performance Tracking (LCP, FID, CLS, FCP, TTFB)
+// 16. Category & Filter Changes
+export const trackFilterContent = (filterType = "category", filterValue = "All") => {
+  trackEvent("filter_content", {
+    filter_type: filterType,
+    filter_value: filterValue,
+  });
+};
+
+// 17. Theme Toggle (Dark / Light Mode)
+export const trackThemeChange = (newTheme = "dark") => {
+  trackEvent("theme_change", {
+    theme: newTheme,
+  });
+};
+
+// 18. Quick Message Template Selection
+export const trackTemplateSelect = (topic = "General") => {
+  trackEvent("select_template", {
+    event_category: "Engagement",
+    topic: topic,
+  });
+};
+
+// 19. Core Web Vitals Speed Performance Tracking (LCP, FID, CLS, FCP, TTFB)
 export const trackWebVital = (metric) => {
   try {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {

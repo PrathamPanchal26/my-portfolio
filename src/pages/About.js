@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { soundFX } from "../utils/soundEffects";
 import { downloadVCard } from "../utils/vcard";
+import { trackResumeView, trackContactCardDownload } from "../utils/analytics";
 
 const EXPERIENCE = [
   {
@@ -281,6 +282,7 @@ function About() {
             className="btn btn-secondary"
             onClick={() => {
               soundFX.playPop();
+              trackResumeView("about_page");
               window.dispatchEvent(new CustomEvent("open-resume-modal"));
             }}
           >
@@ -291,6 +293,7 @@ function About() {
             className="btn btn-secondary"
             onClick={() => {
               soundFX.playSuccess();
+              trackContactCardDownload("about_page");
               downloadVCard();
             }}
             title="Download Pratham's vCard Contact"

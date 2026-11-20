@@ -3,6 +3,12 @@ import { NavLink } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { soundFX } from "../utils/soundEffects";
 import { downloadVCard } from "../utils/vcard";
+import {
+  trackContactCardDownload,
+  trackThemeChange,
+  trackOutboundClick,
+  trackWhatsAppClick,
+} from "../utils/analytics";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,11 +42,14 @@ function Navbar() {
 
   const handleToggleTheme = () => {
     soundFX.playThemeToggle();
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    trackThemeChange(nextTheme);
     toggleTheme();
   };
 
   const handleDownloadCard = () => {
     soundFX.playSuccess();
+    trackContactCardDownload("navbar");
     downloadVCard();
   };
 
@@ -91,6 +100,7 @@ function Navbar() {
                 target="_blank"
                 rel="noreferrer"
                 className="drawer-social-wa"
+                onClick={() => trackWhatsAppClick("navbar_drawer")}
               >
                 💬 WhatsApp
               </a>
@@ -99,6 +109,13 @@ function Navbar() {
                 target="_blank"
                 rel="noreferrer"
                 className="drawer-social-gh"
+                onClick={() =>
+                  trackOutboundClick(
+                    "GitHub",
+                    "https://github.com/PrathamPanchal26",
+                    "navbar_drawer"
+                  )
+                }
               >
                 GitHub
               </a>

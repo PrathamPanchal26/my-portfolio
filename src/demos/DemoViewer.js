@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { trackDemoLaunch } from "../utils/analytics";
 import KanhaPortfolioDemo from "./KanhaPortfolioDemo";
 import KanhaAdminDemo from "./KanhaAdminDemo";
 import SpotifyBollywoodDemo from "./SpotifyBollywoodDemo";
@@ -86,7 +87,12 @@ export default function DemoViewer() {
   const DemoComponent = demoMeta.component;
 
   const handleSwitchDemo = (e) => {
-    navigate(`/demos/${e.target.value}`);
+    const nextKey = e.target.value;
+    const targetMeta = demoDirectory[nextKey];
+    if (targetMeta) {
+      trackDemoLaunch(targetMeta.title, `/demos/${nextKey}`, targetMeta.category);
+    }
+    navigate(`/demos/${nextKey}`);
   };
 
   return (

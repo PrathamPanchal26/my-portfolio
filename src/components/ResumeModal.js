@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { trackResumeDownload } from "../utils/analytics";
+import {
+  trackResumeDownload,
+  trackResumePrint,
+  trackResumeViewToggle,
+  trackCopyContact,
+} from "../utils/analytics";
 
 export default function ResumeModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,13 +47,19 @@ Current Experience: Frontend Developer at Spalon Pro (Live SaaS Platform)
 Education: Bachelor's Degree (Pursuing · Gandhinagar University) | Diploma in Computer Engineering (Completed)`;
     navigator.clipboard.writeText(contactText).then(() => {
       setCopied(true);
+      trackCopyContact("full_resume_contact", "resume_modal");
       setTimeout(() => setCopied(false), 2500);
     });
   };
 
   const handlePrint = () => {
-    trackResumeDownload();
+    trackResumePrint();
     window.print();
+  };
+
+  const handleModeSwitch = (mode) => {
+    setViewMode(mode);
+    trackResumeViewToggle(mode);
   };
 
   if (!isOpen) return null;
@@ -75,7 +86,7 @@ Education: Bachelor's Degree (Pursuing · Gandhinagar University) | Diploma in C
               <button
                 type="button"
                 className={`resume-toggle-btn ${viewMode === "visual" ? "active" : ""}`}
-                onClick={() => setViewMode("visual")}
+                onClick={() => handleModeSwitch("visual")}
                 title="View graphical resume"
               >
                 🖼️ Visual Resume
@@ -83,7 +94,7 @@ Education: Bachelor's Degree (Pursuing · Gandhinagar University) | Diploma in C
               <button
                 type="button"
                 className={`resume-toggle-btn ${viewMode === "ats" ? "active" : ""}`}
-                onClick={() => setViewMode("ats")}
+                onClick={() => handleModeSwitch("ats")}
                 title="View ATS-optimized text sheet"
               >
                 📄 ATS Text

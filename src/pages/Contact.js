@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import {
-  trackEvent,
   trackWhatsAppClick,
   trackEmailClick,
+  trackPhoneClick,
+  trackDiscoveryCallClick,
+  trackContactFormSubmission,
+  trackCopyContact,
+  trackContactCardDownload,
+  trackTemplateSelect,
 } from "../utils/analytics";
 import { YOUTUBE_URL, INSTAGRAM_URL } from "../components/DevCreatorHub";
 import { soundFX } from "../utils/soundEffects";
@@ -35,6 +40,7 @@ function Contact() {
     try {
       navigator.clipboard.writeText(text);
       setCopiedField(fieldName);
+      trackCopyContact(fieldName, "contact_page");
       setTimeout(() => setCopiedField(""), 2200);
     } catch (err) {
       console.error("Clipboard copy failed:", err);
@@ -43,6 +49,7 @@ function Contact() {
 
   const handleQuickTemplate = (topic) => {
     soundFX.playPop();
+    trackTemplateSelect(topic);
     setFormData((prev) => ({
       ...prev,
       subject: topic,
@@ -88,12 +95,7 @@ function Contact() {
 
       if (mailOk) {
         setSubmitted(true);
-        trackEvent("generate_lead", {
-          method: "Contact Form",
-          lead_source: "contact_page",
-          event_category: "Conversion",
-          event_label: formData.subject || "General Inquiry",
-        });
+        trackContactFormSubmission(formData.subject || "General Inquiry", formData.name);
       } else {
         setError(
           mailData.message ||
@@ -174,7 +176,11 @@ function Contact() {
                     {copiedField === "phone" ? "Copied! ✓" : "Copy"}
                   </button>
                 </div>
-                <a href={`tel:${PHONE_NUMBER}`} className="contact-val-link">
+                <a
+                  href={`tel:${PHONE_NUMBER}`}
+                  className="contact-val-link"
+                  onClick={() => trackPhoneClick("contact_page")}
+                >
                   +91 9638561264
                 </a>
               </div>
@@ -219,6 +225,7 @@ function Contact() {
               className="btn-vcard-contact"
               onClick={() => {
                 soundFX.playSuccess();
+                trackContactCardDownload("contact_page");
                 downloadVCard();
               }}
               title="Download Pratham's vCard Contact file for your mobile contacts"
@@ -252,6 +259,10 @@ function Contact() {
               target="_blank"
               rel="noreferrer"
               className="btn-call-schedule"
+              onClick={() => {
+                soundFX.playClick();
+                trackDiscoveryCallClick("contact_page");
+              }}
             >
               <span>📅</span> Book 15-Min Intro Call
             </a>

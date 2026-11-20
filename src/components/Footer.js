@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { YOUTUBE_URL, INSTAGRAM_URL } from "./DevCreatorHub";
+import { trackOutboundClick } from "../utils/analytics";
 
 function Footer() {
   const year = new Date().getFullYear();
@@ -29,6 +30,13 @@ function Footer() {
             rel="noreferrer"
             className="footer-social-pill footer-gh"
             title="GitHub: PrathamPanchal26"
+            onClick={() =>
+              trackOutboundClick(
+                "GitHub",
+                "https://github.com/PrathamPanchal26",
+                "footer"
+              )
+            }
           >
             <span>🐙</span> GitHub
           </a>
@@ -38,6 +46,9 @@ function Footer() {
             rel="noreferrer"
             className="footer-social-pill footer-yt"
             title="YouTube: @prathamcodingworld"
+            onClick={() =>
+              trackOutboundClick("YouTube", YOUTUBE_URL, "footer")
+            }
           >
             <span>▶</span> YouTube (@prathamcodingworld)
           </a>
@@ -47,6 +58,9 @@ function Footer() {
             rel="noreferrer"
             className="footer-social-pill footer-ig"
             title="Instagram: @devbypratham"
+            onClick={() =>
+              trackOutboundClick("Instagram", INSTAGRAM_URL, "footer")
+            }
           >
             <span>📸</span> Instagram (@devbypratham)
           </a>
@@ -56,6 +70,13 @@ function Footer() {
             rel="noreferrer"
             className="footer-social-pill footer-li"
             title="LinkedIn"
+            onClick={() =>
+              trackOutboundClick(
+                "LinkedIn",
+                "https://linkedin.com/in/pratham",
+                "footer"
+              )
+            }
           >
             <span>💼</span> LinkedIn
           </a>

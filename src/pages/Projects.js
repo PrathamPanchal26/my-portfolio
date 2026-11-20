@@ -1,6 +1,12 @@
 import React, { useState, useMemo } from "react";
 import { soundFX } from "../utils/soundEffects";
 import ThreeDTiltCard from "../components/ThreeDTiltCard";
+import {
+  trackDemoLaunch,
+  trackProjectOverview,
+  trackFilterContent,
+  trackSearchQuery,
+} from "../utils/analytics";
 
 const projects = [
   {
@@ -244,7 +250,12 @@ function Projects() {
             className="projects-search-input"
             placeholder="Search projects by name, technology (e.g. React, Audio, API)..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              if (e.target.value.length > 2) {
+                trackSearchQuery(e.target.value, "projects_page");
+              }
+            }}
           />
           {searchQuery && (
             <button
@@ -275,6 +286,7 @@ function Projects() {
                 onClick={() => {
                   soundFX.playPop();
                   setActiveCategory(cat);
+                  trackFilterContent("projects_category", cat);
                 }}
                 className={`projects-filter-btn ${
                   activeCategory === cat ? "active" : ""
@@ -344,6 +356,7 @@ function Projects() {
                   className="project-quickview-btn"
                   onClick={() => {
                     soundFX.playPop();
+                    trackProjectOverview(project.title, project.category);
                     setSelectedModalProject(project);
                   }}
                 >
@@ -356,7 +369,10 @@ function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     className="project-link project-link-live"
-                    onClick={() => soundFX.playClick()}
+                    onClick={() => {
+                      soundFX.playClick();
+                      trackDemoLaunch(project.title, project.live, project.category);
+                    }}
                   >
                     Live Demo ↗
                   </a>
@@ -436,6 +452,13 @@ function Projects() {
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
+                onClick={() => {
+                  trackDemoLaunch(
+                    selectedModalProject.title,
+                    selectedModalProject.live,
+                    selectedModalProject.category
+                  );
+                }}
               >
                 Launch Live Demo ↗
               </a>
